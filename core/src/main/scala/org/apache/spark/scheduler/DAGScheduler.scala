@@ -472,6 +472,46 @@ class DAGScheduler(
   }
 
   /**
+   * This is like getMissingParentStages, but with additional logs.
+   * We did not add the logs there because it is called multiple times.
+   */
+  private def printStage(stage: Stage): List[Stage] = {
+    val missing = new HashSet[Stage]
+    val visited = new HashSet[RDD[_]]
+    // We are manually maintaining a stack here to prevent StackOverflowError
+    // caused by recursively visiting
+    val waitingForVisit = new Stack[RDD[_]]
+    def visit(rdd: RDD[_]) {
+      if (!visited(rdd)) {
+        logInfo("DAGINFO Rdd_" + rdd.id)
+        logInfo("DAGINFO Dependencies List")
+        visited += rdd
+        for (dep <- rdd.dependencies) {
+          dep match {
+             case shufDep: ShuffleDependency[_, _, _] =>
+               logInfo("DAGINFO shuffle "  + dep.rdd.id)
+               val mapStage = getOrCreateShuffleMapStage(shufDep, stage.firstJobId)
+               if (!mapStage.isAvailable) {
+                 missing += mapStage
+               }
+             case narrowDep: NarrowDependency[_] =>
+               logInfo("DAGINFO "  + dep.rdd.id)
+               waitingForVisit.push(narrowDep.rdd)
+          }
+        }
+        logInfo("DAGINFO End of Dependencies List")
+      }
+    }
+    logInfo("DAGINFO Stage_" + stage.id + " (" + stage.rdd + ")")
+    waitingForVisit.push(stage.rdd)
+    while (waitingForVisit.nonEmpty) {
+      visit(waitingForVisit.pop())
+    }
+    logInfo("DAGINFO End of Stage_" + stage.id + " (" + stage.rdd + ")")
+    missing.toList
+  }
+
+  /**
    * Registers the given jobId among the jobs that need the given stage and
    * all of that stage's ancestors.
    */
@@ -927,6 +967,7 @@ class DAGScheduler(
         logDebug("missing: " + missing)
         if (missing.isEmpty) {
           logInfo("Submitting " + stage + " (" + stage.rdd + "), which has no missing parents")
+          printStage(stage)
           submitMissingTasks(stage, jobId.get)
         } else {
           for (parent <- missing) {
