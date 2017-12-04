@@ -483,33 +483,42 @@ class DAGScheduler(
     val waitingForVisit = new Stack[RDD[_]]
     def visit(rdd: RDD[_]) {
       if (!visited(rdd)) {
-        logInfo("DAGINFO Rdd_" + rdd.id)
-        logInfo("DAGINFO Dependencies List")
+        logDag("      {id: " + rdd.id + ",")
+        logDag("       name: " + rdd + ",")
+        logDag("       deps: [ ")
         visited += rdd
         for (dep <- rdd.dependencies) {
           dep match {
              case shufDep: ShuffleDependency[_, _, _] =>
-               logInfo("DAGINFO shuffle "  + dep.rdd.id)
+               logDag("         {type: shuffle, rddid :" + dep.rdd.id + "}")
                val mapStage = getOrCreateShuffleMapStage(shufDep, stage.firstJobId)
                if (!mapStage.isAvailable) {
                  missing += mapStage
                }
              case narrowDep: NarrowDependency[_] =>
-               logInfo("DAGINFO "  + dep.rdd.id)
+               logDag("         {type: narrow, rddid :" + dep.rdd.id + "}")
                waitingForVisit.push(narrowDep.rdd)
           }
         }
-        logInfo("DAGINFO End of Dependencies List")
+        logDag("       ]")
+        logDag("      }")
       }
     }
-    logInfo("DAGINFO Stage_" + stage.id + " (" + stage.rdd + ")")
+    logDag("Stage: {")
+    logDag("  id: " + stage.id + ",")
+    logDag("  name: " + stage + ",")
+    logDag("  rdds: [")
     waitingForVisit.push(stage.rdd)
+    var first = true
     while (waitingForVisit.nonEmpty) {
       visit(waitingForVisit.pop())
     }
-    logInfo("DAGINFO End of Stage_" + stage.id + " (" + stage.rdd + ")")
+    logDag("  ]")
+    logDag("}")
     missing.toList
   }
+
+  private def logDag(str: _) = logInfo("DAGINFO: " + str)
 
   /**
    * Registers the given jobId among the jobs that need the given stage and
