@@ -485,6 +485,8 @@ class DAGScheduler(
       if (!visited(rdd)) {
         logDag("    {id: " + rdd.id + ",")
         logDag("     name: " + rdd + ",")
+        logDag("     storageLevel: " + rdd.getStorageLevel + ",")
+        logDag("     partitions_number: " + rdd.getNumPartitions + ",")
         logDag("     deps: [ ")
         visited += rdd
         for (i <- 0 to (rdd.dependencies.length-1)) {
@@ -507,9 +509,15 @@ class DAGScheduler(
         logDag("    }" + lastrdd)
       }
     }
-    logDag("Stage: {")
+    val stageType = stage match {
+        case _ : ResultStage => "ResultStage"
+        case _ : ShuffleMapStage => "ShuffleMapStage"
+    }
+    logDag("{")
     logDag("  id: " + stage.id + ",")
     logDag("  name: " + stage + ",")
+    logDag("  final_rdd_id: " + stage.rdd.id + ",")
+    logDag("  stage type: " + stageType + ",")
     logDag("  rdds: [")
     waitingForVisit.push(stage.rdd)
     var first = true
@@ -521,7 +529,7 @@ class DAGScheduler(
     missing.toList
   }
 
-  private def logDag(str: String) = logInfo("DAGINFO: " + str)
+  private def logDag(str: String) = logWarning("|| DAGINFO || " + str)
 
   /**
    * Registers the given jobId among the jobs that need the given stage and
