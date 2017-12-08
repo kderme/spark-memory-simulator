@@ -1,0 +1,845 @@
+17/12/08 18:12:57 WARN DAGScheduler: || DAGINFO || {
+17/12/08 18:12:57 WARN DAGScheduler: || DAGINFO ||   id: 0,
+17/12/08 18:12:57 WARN DAGScheduler: || DAGINFO ||   name: ResultStage 0,
+17/12/08 18:12:57 WARN DAGScheduler: || DAGINFO ||   final_rdd_id: 2,
+17/12/08 18:12:57 WARN DAGScheduler: || DAGINFO ||   stage type: ResultStage,
+17/12/08 18:12:57 WARN DAGScheduler: || DAGINFO ||   rdds: [
+17/12/08 18:12:57 WARN DAGScheduler: || DAGINFO ||     {id: 2,
+17/12/08 18:12:57 WARN DAGScheduler: || DAGINFO ||      name: GraphLoader.edgeListFile - edges (data/graphx/followers.txt) MapPartitionsRDD[2] at mapPartitionsWithIndex at GraphLoader.scala:75,
+17/12/08 18:12:57 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(memory, deserialized, 1 replicas),
+17/12/08 18:12:57 WARN DAGScheduler: || DAGINFO ||      partitions_number: 2,
+17/12/08 18:12:57 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/08 18:12:57 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 1}
+17/12/08 18:12:57 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/08 18:12:57 WARN DAGScheduler: || DAGINFO ||     },
+17/12/08 18:12:57 WARN DAGScheduler: || DAGINFO ||     {id: 1,
+17/12/08 18:12:57 WARN DAGScheduler: || DAGINFO ||      name: data/graphx/followers.txt MapPartitionsRDD[1] at textFile at GraphLoader.scala:73,
+17/12/08 18:12:57 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/08 18:12:57 WARN DAGScheduler: || DAGINFO ||      partitions_number: 2,
+17/12/08 18:12:57 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/08 18:12:57 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 0}
+17/12/08 18:12:57 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/08 18:12:57 WARN DAGScheduler: || DAGINFO ||     },
+17/12/08 18:12:57 WARN DAGScheduler: || DAGINFO ||     {id: 0,
+17/12/08 18:12:57 WARN DAGScheduler: || DAGINFO ||      name: data/graphx/followers.txt HadoopRDD[0] at textFile at GraphLoader.scala:73,
+17/12/08 18:12:57 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/08 18:12:57 WARN DAGScheduler: || DAGINFO ||      partitions_number: 2,
+17/12/08 18:12:57 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/08 18:12:57 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/08 18:12:57 WARN DAGScheduler: || DAGINFO ||     }
+17/12/08 18:12:57 WARN DAGScheduler: || DAGINFO ||   ]
+17/12/08 18:12:57 WARN DAGScheduler: || DAGINFO || }
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO || {
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||   id: 2,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||   name: ShuffleMapStage 2,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||   final_rdd_id: 5,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||   stage type: ShuffleMapStage,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||   rdds: [
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     {id: 5,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      name: VertexRDD.createRoutingTables - vid2pid (aggregation) MapPartitionsRDD[5] at mapPartitions at VertexRDD.scala:356,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      partitions_number: 2,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 2}
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     },
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     {id: 2,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      name: GraphLoader.edgeListFile - edges (data/graphx/followers.txt), EdgeRDD, EdgeRDD MapPartitionsRDD[2] at mapPartitionsWithIndex at GraphLoader.scala:75,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(memory, deserialized, 1 replicas),
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      partitions_number: 2,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 1}
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     },
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     {id: 1,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      name: data/graphx/followers.txt MapPartitionsRDD[1] at textFile at GraphLoader.scala:73,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      partitions_number: 2,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 0}
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     },
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     {id: 0,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      name: data/graphx/followers.txt HadoopRDD[0] at textFile at GraphLoader.scala:73,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      partitions_number: 2,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     }
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||   ]
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO || }
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO || {
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||   id: 1,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||   name: ShuffleMapStage 1,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||   final_rdd_id: 11,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||   stage type: ShuffleMapStage,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||   rdds: [
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     {id: 11,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      name: MapPartitionsRDD[11] at map at GraphImpl.scala:101,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      partitions_number: 2,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 4}
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     },
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     {id: 4,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      name: EdgeRDDImpl[4] at RDD at EdgeRDD.scala:41,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(memory, deserialized, 1 replicas),
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      partitions_number: 2,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 2}
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     },
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     {id: 2,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      name: GraphLoader.edgeListFile - edges (data/graphx/followers.txt), EdgeRDD, EdgeRDD MapPartitionsRDD[2] at mapPartitionsWithIndex at GraphLoader.scala:75,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(memory, deserialized, 1 replicas),
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      partitions_number: 2,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 1}
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     },
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     {id: 1,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      name: data/graphx/followers.txt MapPartitionsRDD[1] at textFile at GraphLoader.scala:73,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      partitions_number: 2,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 0}
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     },
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     {id: 0,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      name: data/graphx/followers.txt HadoopRDD[0] at textFile at GraphLoader.scala:73,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      partitions_number: 2,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     }
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||   ]
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO || }
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO || {
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||   id: 7,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||   name: ShuffleMapStage 7,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||   final_rdd_id: 74,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||   stage type: ShuffleMapStage,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||   rdds: [
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     {id: 74,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      name: MapPartitionsRDD[74] at map at TriangleCountingExample.scala:57,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      partitions_number: 2,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 73}
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     },
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     {id: 73,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      name: data/graphx/users.txt MapPartitionsRDD[73] at textFile at TriangleCountingExample.scala:57,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      partitions_number: 2,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 72}
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     },
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     {id: 72,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      name: data/graphx/users.txt HadoopRDD[72] at textFile at TriangleCountingExample.scala:57,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      partitions_number: 2,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     }
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||   ]
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO || }
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO || {
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||   id: 3,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||   name: ShuffleMapStage 3,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||   final_rdd_id: 15,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||   stage type: ShuffleMapStage,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||   rdds: [
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     {id: 15,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      name: VertexRDD.createRoutingTables - vid2pid (aggregation) MapPartitionsRDD[15] at mapPartitions at VertexRDD.scala:356,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      partitions_number: 2,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 13}
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     },
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     {id: 13,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      name: EdgeRDD MapPartitionsRDD[13] at mapPartitionsWithIndex at GraphImpl.scala:106,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(memory, deserialized, 1 replicas),
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      partitions_number: 2,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 12}
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     },
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     {id: 12,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      name: ShuffledRDD[12] at partitionBy at GraphImpl.scala:105,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      partitions_number: 2,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||          {type: shuffle, rddid: 11}
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     }
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||   ]
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO || }
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO || {
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||   id: 4,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||   name: ShuffleMapStage 4,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||   final_rdd_id: 24,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||   stage type: ShuffleMapStage,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||   rdds: [
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     {id: 24,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      name: ReplicatedVertexView.upgrade(true, true) - shippedVerts true true (broadcast) MapPartitionsRDD[24] at mapPartitions at VertexRDDImpl.scala:247,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      partitions_number: 2,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 18}
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     },
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     {id: 18,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      name: VertexRDD ZippedPartitionsRDD2[18] at zipPartitions at VertexRDDImpl.scala:226,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(memory, deserialized, 1 replicas),
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      partitions_number: 2,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 8},
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 17}
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     },
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     {id: 17,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      name: MapPartitionsRDD[17] at mapPartitions at VertexRDD.scala:361,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      partitions_number: 2,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 16}
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     },
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     {id: 16,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      name: ShuffledRDD[16] at partitionBy at VertexRDD.scala:361,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      partitions_number: 2,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||          {type: shuffle, rddid: 15}
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     },
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     {id: 8,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      name: VertexRDD, VertexRDD MapPartitionsRDD[8] at mapPartitions at VertexRDD.scala:345,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      partitions_number: 2,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 7}
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     },
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     {id: 7,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      name: MapPartitionsRDD[7] at mapPartitions at VertexRDD.scala:361,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      partitions_number: 2,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 6}
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     },
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     {id: 6,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      name: ShuffledRDD[6] at partitionBy at VertexRDD.scala:361,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      partitions_number: 2,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||          {type: shuffle, rddid: 5}
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     }
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||   ]
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO || }
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO || {
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||   id: 5,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||   name: ShuffleMapStage 5,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||   final_rdd_id: 30,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||   stage type: ShuffleMapStage,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||   rdds: [
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     {id: 30,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      name: MapPartitionsRDD[30] at map at GraphOps.scala:306,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      partitions_number: 2,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 29}
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     },
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     {id: 29,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      name: EdgeRDDImpl[29] at RDD at EdgeRDD.scala:41,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      partitions_number: 2,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 28}
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     },
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     {id: 28,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      name: EdgeRDD MapPartitionsRDD[28] at mapPartitions at EdgeRDDImpl.scala:119,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      partitions_number: 2,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 26}
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     },
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     {id: 26,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      name: EdgeRDD ZippedPartitionsRDD2[26] at zipPartitions at ReplicatedVertexView.scala:70,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      partitions_number: 2,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 20},
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 25}
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     },
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     {id: 25,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      name: ShuffledRDD[25] at partitionBy at ReplicatedVertexView.scala:69,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      partitions_number: 2,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||          {type: shuffle, rddid: 24}
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     },
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     {id: 20,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      name: EdgeRDD MapPartitionsRDD[20] at mapPartitions at EdgeRDDImpl.scala:119,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      partitions_number: 2,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 13}
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     },
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     {id: 13,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      name: EdgeRDD MapPartitionsRDD[13] at mapPartitionsWithIndex at GraphImpl.scala:106,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(memory, deserialized, 1 replicas),
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      partitions_number: 2,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 12}
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     },
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     {id: 12,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      name: ShuffledRDD[12] at partitionBy at GraphImpl.scala:105,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      partitions_number: 2,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||          {type: shuffle, rddid: 11}
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     }
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||   ]
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO || }
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO || {
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||   id: 6,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||   name: ShuffleMapStage 6,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||   final_rdd_id: 36,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||   stage type: ShuffleMapStage,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||   rdds: [
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     {id: 36,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      name: VertexRDD.createRoutingTables - vid2pid (aggregation) MapPartitionsRDD[36] at mapPartitions at VertexRDD.scala:356,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      partitions_number: 2,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 33}
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     },
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     {id: 33,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      name: EdgeRDD, EdgeRDD MapPartitionsRDD[33] at mapPartitionsWithIndex at EdgeRDD.scala:105,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      partitions_number: 2,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 32}
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     },
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     {id: 32,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      name: MapPartitionsRDD[32] at map at GraphOps.scala:311,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      partitions_number: 2,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 31}
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     },
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     {id: 31,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      name: ShuffledRDD[31] at reduceByKey at GraphOps.scala:310,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      partitions_number: 2,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||          {type: shuffle, rddid: 30}
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     }
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||   ]
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO || }
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO || {
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||   id: 8,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||   name: ShuffleMapStage 8,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||   final_rdd_id: 44,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||   stage type: ShuffleMapStage,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||   rdds: [
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     {id: 44,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      name: GraphImpl.aggregateMessages - preAgg MapPartitionsRDD[44] at mapPartitions at GraphImpl.scala:207,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      partitions_number: 2,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 42}
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     },
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     {id: 42,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      name: EdgeRDD MapPartitionsRDD[42] at mapPartitions at EdgeRDDImpl.scala:119,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(memory, deserialized, 1 replicas),
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      partitions_number: 2,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 33}
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     },
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     {id: 33,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      name: EdgeRDD, EdgeRDD MapPartitionsRDD[33] at mapPartitionsWithIndex at EdgeRDD.scala:105,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      partitions_number: 2,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 32}
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     },
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     {id: 32,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      name: MapPartitionsRDD[32] at map at GraphOps.scala:311,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      partitions_number: 2,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 31}
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     },
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     {id: 31,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      name: ShuffledRDD[31] at reduceByKey at GraphOps.scala:310,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      partitions_number: 2,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||          {type: shuffle, rddid: 30}
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     }
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||   ]
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO || }
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO || {
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||   id: 9,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||   name: ShuffleMapStage 9,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||   final_rdd_id: 56,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||   stage type: ShuffleMapStage,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||   rdds: [
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     {id: 56,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      name: ReplicatedVertexView.upgrade(true, true) - shippedVerts true true (broadcast) MapPartitionsRDD[56] at mapPartitions at VertexRDDImpl.scala:247,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      partitions_number: 2,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 52}
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     },
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     {id: 52,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      name: VertexRDD ZippedPartitionsRDD2[52] at zipPartitions at VertexRDDImpl.scala:156,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(memory, deserialized, 1 replicas),
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      partitions_number: 2,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 39},
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 50}
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     },
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     {id: 50,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      name: VertexRDD MapPartitionsRDD[50] at mapPartitions at VertexRDDImpl.scala:96,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      partitions_number: 2,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 48}
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     },
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     {id: 48,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      name: VertexRDD ZippedPartitionsRDD2[48] at zipPartitions at VertexRDDImpl.scala:156,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      partitions_number: 2,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 39},
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 46}
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     },
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     {id: 46,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      name: VertexRDD ZippedPartitionsRDD2[46] at zipPartitions at VertexRDDImpl.scala:215,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      partitions_number: 2,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 39},
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 45}
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     },
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     {id: 45,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      name: ShuffledRDD[45] at partitionBy at VertexRDDImpl.scala:214,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      partitions_number: 2,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||          {type: shuffle, rddid: 44}
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     },
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     {id: 39,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      name: VertexRDD, VertexRDD ZippedPartitionsRDD2[39] at zipPartitions at VertexRDD.scala:322,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(memory, deserialized, 1 replicas),
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      partitions_number: 2,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 23},
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 38}
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     },
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     {id: 38,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      name: MapPartitionsRDD[38] at mapPartitions at VertexRDD.scala:361,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      partitions_number: 2,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 37}
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     },
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     {id: 37,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      name: ShuffledRDD[37] at partitionBy at VertexRDD.scala:361,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      partitions_number: 2,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||          {type: shuffle, rddid: 36}
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     },
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     {id: 23,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      name: VertexRDDImpl[23] at RDD at VertexRDD.scala:57,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      partitions_number: 2,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 22}
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     },
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     {id: 22,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      name: VertexRDD MapPartitionsRDD[22] at mapPartitions at VertexRDDImpl.scala:96,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      partitions_number: 2,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 18}
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     },
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     {id: 18,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      name: VertexRDD ZippedPartitionsRDD2[18] at zipPartitions at VertexRDDImpl.scala:226,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(memory, deserialized, 1 replicas),
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      partitions_number: 2,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 8},
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 17}
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     },
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     {id: 17,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      name: MapPartitionsRDD[17] at mapPartitions at VertexRDD.scala:361,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      partitions_number: 2,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 16}
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     },
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     {id: 16,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      name: ShuffledRDD[16] at partitionBy at VertexRDD.scala:361,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      partitions_number: 2,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||          {type: shuffle, rddid: 15}
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     },
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     {id: 8,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      name: VertexRDD, VertexRDD MapPartitionsRDD[8] at mapPartitions at VertexRDD.scala:345,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      partitions_number: 2,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 7}
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     },
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     {id: 7,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      name: MapPartitionsRDD[7] at mapPartitions at VertexRDD.scala:361,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      partitions_number: 2,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 6}
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     },
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     {id: 6,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      name: ShuffledRDD[6] at partitionBy at VertexRDD.scala:361,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      partitions_number: 2,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||          {type: shuffle, rddid: 5}
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     },
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||   ]
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO || }
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO || {
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||   id: 10,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||   name: ShuffleMapStage 10,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||   final_rdd_id: 60,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||   stage type: ShuffleMapStage,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||   rdds: [
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     {id: 60,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      name: GraphImpl.aggregateMessages - preAgg MapPartitionsRDD[60] at mapPartitions at GraphImpl.scala:207,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      partitions_number: 2,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 58}
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     },
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     {id: 58,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      name: EdgeRDD ZippedPartitionsRDD2[58] at zipPartitions at ReplicatedVertexView.scala:70,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      partitions_number: 2,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 54},
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 57}
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     },
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     {id: 57,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      name: ShuffledRDD[57] at partitionBy at ReplicatedVertexView.scala:69,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      partitions_number: 2,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||          {type: shuffle, rddid: 56}
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     },
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     {id: 54,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      name: EdgeRDD MapPartitionsRDD[54] at mapPartitions at EdgeRDDImpl.scala:119,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(memory, deserialized, 1 replicas),
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      partitions_number: 2,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 42}
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     },
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     {id: 42,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      name: EdgeRDD MapPartitionsRDD[42] at mapPartitions at EdgeRDDImpl.scala:119,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(memory, deserialized, 1 replicas),
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      partitions_number: 2,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 33}
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     },
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     {id: 33,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      name: EdgeRDD, EdgeRDD MapPartitionsRDD[33] at mapPartitionsWithIndex at EdgeRDD.scala:105,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      partitions_number: 2,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 32}
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     },
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     {id: 32,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      name: MapPartitionsRDD[32] at map at GraphOps.scala:311,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      partitions_number: 2,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 31}
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     },
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     {id: 31,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      name: ShuffledRDD[31] at reduceByKey at GraphOps.scala:310,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      partitions_number: 2,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||          {type: shuffle, rddid: 30}
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     }
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||   ]
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO || }
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO || {
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||   id: 11,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||   name: ResultStage 11,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||   final_rdd_id: 78,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||   stage type: ResultStage,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||   rdds: [
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     {id: 78,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      name: MapPartitionsRDD[78] at map at TriangleCountingExample.scala:61,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      partitions_number: 2,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 77}
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     },
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     {id: 77,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      name: MapPartitionsRDD[77] at join at TriangleCountingExample.scala:61,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      partitions_number: 2,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 76}
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     },
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     {id: 76,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      name: MapPartitionsRDD[76] at join at TriangleCountingExample.scala:61,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      partitions_number: 2,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 75}
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     },
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     {id: 75,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      name: CoGroupedRDD[75] at join at TriangleCountingExample.scala:61,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      partitions_number: 2,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||          {type: shuffle, rddid: 74},
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 69}
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     },
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     {id: 69,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      name: VertexRDDImpl[69] at RDD at VertexRDD.scala:57,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(memory, deserialized, 1 replicas),
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      partitions_number: 2,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 68}
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     },
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     {id: 68,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      name: VertexRDD ZippedPartitionsRDD2[68] at zipPartitions at VertexRDDImpl.scala:156,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(memory, deserialized, 1 replicas),
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      partitions_number: 2,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 18},
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 64}
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     },
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     {id: 64,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      name: VertexRDD ZippedPartitionsRDD2[64] at zipPartitions at VertexRDDImpl.scala:156,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(memory, deserialized, 1 replicas),
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      partitions_number: 2,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 39},
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 62}
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     },
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     {id: 62,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      name: VertexRDD ZippedPartitionsRDD2[62] at zipPartitions at VertexRDDImpl.scala:215,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      partitions_number: 2,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 52},
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 61}
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     },
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     {id: 61,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      name: ShuffledRDD[61] at partitionBy at VertexRDDImpl.scala:214,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      partitions_number: 2,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||          {type: shuffle, rddid: 60}
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     },
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     {id: 52,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      name: VertexRDD ZippedPartitionsRDD2[52] at zipPartitions at VertexRDDImpl.scala:156,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(memory, deserialized, 1 replicas),
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      partitions_number: 2,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 39},
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 50}
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     },
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     {id: 50,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      name: VertexRDD MapPartitionsRDD[50] at mapPartitions at VertexRDDImpl.scala:96,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      partitions_number: 2,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 48}
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     },
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     {id: 48,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      name: VertexRDD ZippedPartitionsRDD2[48] at zipPartitions at VertexRDDImpl.scala:156,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      partitions_number: 2,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 39},
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 46}
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     },
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     {id: 46,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      name: VertexRDD ZippedPartitionsRDD2[46] at zipPartitions at VertexRDDImpl.scala:215,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      partitions_number: 2,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 39},
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 45}
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     },
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     {id: 45,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      name: ShuffledRDD[45] at partitionBy at VertexRDDImpl.scala:214,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      partitions_number: 2,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||          {type: shuffle, rddid: 44}
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     },
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     {id: 39,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      name: VertexRDD, VertexRDD ZippedPartitionsRDD2[39] at zipPartitions at VertexRDD.scala:322,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(memory, deserialized, 1 replicas),
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      partitions_number: 2,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 23},
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 38}
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     },
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     {id: 38,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      name: MapPartitionsRDD[38] at mapPartitions at VertexRDD.scala:361,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      partitions_number: 2,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 37}
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     },
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     {id: 37,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      name: ShuffledRDD[37] at partitionBy at VertexRDD.scala:361,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      partitions_number: 2,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||          {type: shuffle, rddid: 36}
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     },
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     {id: 23,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      name: VertexRDDImpl[23] at RDD at VertexRDD.scala:57,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      partitions_number: 2,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 22}
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     },
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     {id: 22,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      name: VertexRDD MapPartitionsRDD[22] at mapPartitions at VertexRDDImpl.scala:96,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      partitions_number: 2,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 18}
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     },
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     {id: 18,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      name: VertexRDD ZippedPartitionsRDD2[18] at zipPartitions at VertexRDDImpl.scala:226,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(memory, deserialized, 1 replicas),
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      partitions_number: 2,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 8},
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 17}
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     },
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     {id: 17,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      name: MapPartitionsRDD[17] at mapPartitions at VertexRDD.scala:361,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      partitions_number: 2,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 16}
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     },
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     {id: 16,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      name: ShuffledRDD[16] at partitionBy at VertexRDD.scala:361,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      partitions_number: 2,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||          {type: shuffle, rddid: 15}
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     },
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     {id: 8,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      name: VertexRDD, VertexRDD MapPartitionsRDD[8] at mapPartitions at VertexRDD.scala:345,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      partitions_number: 2,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 7}
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     },
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     {id: 7,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      name: MapPartitionsRDD[7] at mapPartitions at VertexRDD.scala:361,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      partitions_number: 2,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 6}
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     },
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     {id: 6,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      name: ShuffledRDD[6] at partitionBy at VertexRDD.scala:361,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      partitions_number: 2,
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||          {type: shuffle, rddid: 5}
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||     },
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO ||   ]
+17/12/08 18:13:01 WARN DAGScheduler: || DAGINFO || }
