@@ -1,0 +1,55 @@
+17/12/18 18:29:51 WARN DAGScheduler: || DAGINFO || {
+17/12/18 18:29:51 WARN DAGScheduler: || DAGINFO ||   id: 0,
+17/12/18 18:29:51 WARN DAGScheduler: || DAGINFO ||   name: ResultStage 0,
+17/12/18 18:29:51 WARN DAGScheduler: || DAGINFO ||   final_rdd_id: 5,
+17/12/18 18:29:51 WARN DAGScheduler: || DAGINFO ||   stage type: ResultStage,
+17/12/18 18:29:51 WARN DAGScheduler: || DAGINFO ||   rdds: [
+17/12/18 18:29:51 WARN DAGScheduler: || DAGINFO ||     {id: 5,
+17/12/18 18:29:51 WARN DAGScheduler: || DAGINFO ||      name: MapPartitionsRDD[5] at treeAggregate at IDF.scala:54,
+17/12/18 18:29:51 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/18 18:29:51 WARN DAGScheduler: || DAGINFO ||      partitions_number: 3,
+17/12/18 18:29:51 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/18 18:29:51 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 4}
+17/12/18 18:29:51 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/18 18:29:51 WARN DAGScheduler: || DAGINFO ||     },
+17/12/18 18:29:51 WARN DAGScheduler: || DAGINFO ||     {id: 4,
+17/12/18 18:29:51 WARN DAGScheduler: || DAGINFO ||      name: MapPartitionsRDD[4] at map at IDF.scala:89,
+17/12/18 18:29:51 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/18 18:29:51 WARN DAGScheduler: || DAGINFO ||      partitions_number: 3,
+17/12/18 18:29:51 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/18 18:29:51 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 3}
+17/12/18 18:29:51 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/18 18:29:51 WARN DAGScheduler: || DAGINFO ||     },
+17/12/18 18:29:51 WARN DAGScheduler: || DAGINFO ||     {id: 3,
+17/12/18 18:29:51 WARN DAGScheduler: || DAGINFO ||      name: MapPartitionsRDD[3] at rdd at IDF.scala:89,
+17/12/18 18:29:51 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/18 18:29:51 WARN DAGScheduler: || DAGINFO ||      partitions_number: 3,
+17/12/18 18:29:51 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/18 18:29:51 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 2}
+17/12/18 18:29:51 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/18 18:29:51 WARN DAGScheduler: || DAGINFO ||     },
+17/12/18 18:29:51 WARN DAGScheduler: || DAGINFO ||     {id: 2,
+17/12/18 18:29:51 WARN DAGScheduler: || DAGINFO ||      name: MapPartitionsRDD[2] at rdd at IDF.scala:89,
+17/12/18 18:29:51 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/18 18:29:51 WARN DAGScheduler: || DAGINFO ||      partitions_number: 3,
+17/12/18 18:29:51 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/18 18:29:51 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 1}
+17/12/18 18:29:51 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/18 18:29:51 WARN DAGScheduler: || DAGINFO ||     },
+17/12/18 18:29:51 WARN DAGScheduler: || DAGINFO ||     {id: 1,
+17/12/18 18:29:51 WARN DAGScheduler: || DAGINFO ||      name: MapPartitionsRDD[1] at rdd at IDF.scala:89,
+17/12/18 18:29:51 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/18 18:29:51 WARN DAGScheduler: || DAGINFO ||      partitions_number: 3,
+17/12/18 18:29:51 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/18 18:29:51 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 0}
+17/12/18 18:29:51 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/18 18:29:51 WARN DAGScheduler: || DAGINFO ||     },
+17/12/18 18:29:51 WARN DAGScheduler: || DAGINFO ||     {id: 0,
+17/12/18 18:29:51 WARN DAGScheduler: || DAGINFO ||      name: ParallelCollectionRDD[0] at rdd at IDF.scala:89,
+17/12/18 18:29:51 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/18 18:29:51 WARN DAGScheduler: || DAGINFO ||      partitions_number: 3,
+17/12/18 18:29:51 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/18 18:29:51 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/18 18:29:51 WARN DAGScheduler: || DAGINFO ||     }
+17/12/18 18:29:51 WARN DAGScheduler: || DAGINFO ||   ]
+17/12/18 18:29:51 WARN DAGScheduler: || DAGINFO || }

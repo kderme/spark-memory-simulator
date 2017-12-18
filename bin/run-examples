@@ -1,0 +1,52 @@
+#!/usr/bin/env bash
+
+if [ -z ${SPARK_HOME+x} ];
+then 
+  echo "Warning: SPARK_HOME is not set"
+  cd ..
+  SPARK_HOME=$(eval $"pwd")
+  echo "I will try $SPARK_HOME"
+else
+  echo "Found SPARK_HOME set at $SPARK_HOME"
+fi
+
+function run {
+  ## class=$1 | sed -e "s/.scala//"
+  ##  arg=$1
+  ## name=${arg%.*}
+  ## if $1 is mlib.xyz then ex is mlib/xyz
+  path=$(eval $"echo $1 | tr . /")
+  cmd="$SPARK_HOME/bin/run-example $@"
+  echo "Running: $cmd"
+  ## logs folder is called myLogs because logs is in .gitignore
+  $cmd 2> $SPARK_HOME/dags_exported/myLogs/$path
+  if [ $? -eq 0 ]; then
+    echo "OK"
+    cmd_clean="$SPARK_HOME/bin/clean-dag.py $SPARK_HOME/dags_exported/myLogs/$path $SPARK_HOME/dags_exported/clean/$path"
+    echo "Cleaning the dag: $cmd_clean"
+    $cmd_clean
+  else
+    ## if execution failed print diagnostic logs and delete them.
+    echo "FAILED"
+    cat "$SPARK_HOME/dags_exported/myLogs/$path"
+    rm "$SPARK_HOME/dags_exported/myLogs/$path"
+  fi
+}
+
+if [[ $# -eq 0 ]];
+then 
+  # TODO: run all examples
+  EXAMPLES_DIR="examples/src/main/scala/org/apache/spark/examples"
+  lib="ml"
+  examples=$(eval $"ls $SPARK_HOME/$EXAMPLES_DIR/$lib | grep scala")
+  echo "No arguments. I will run everythin in $EXAMPLES_DIR/$lib"
+  for ex in $examples 
+  do
+    name="$lib.${ex%.*}"
+    echo $name
+    run $name
+  done
+else
+  run $@
+fi
+

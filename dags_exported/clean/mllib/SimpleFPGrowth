@@ -1,0 +1,302 @@
+17/12/18 18:19:55 WARN DAGScheduler: || DAGINFO || {
+17/12/18 18:19:55 WARN DAGScheduler: || DAGINFO ||   id: 0,
+17/12/18 18:19:55 WARN DAGScheduler: || DAGINFO ||   name: ResultStage 0,
+17/12/18 18:19:55 WARN DAGScheduler: || DAGINFO ||   final_rdd_id: 2,
+17/12/18 18:19:55 WARN DAGScheduler: || DAGINFO ||   stage type: ResultStage,
+17/12/18 18:19:55 WARN DAGScheduler: || DAGINFO ||   rdds: [
+17/12/18 18:19:55 WARN DAGScheduler: || DAGINFO ||     {id: 2,
+17/12/18 18:19:55 WARN DAGScheduler: || DAGINFO ||      name: MapPartitionsRDD[2] at map at SimpleFPGrowth.scala:37,
+17/12/18 18:19:55 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/18 18:19:55 WARN DAGScheduler: || DAGINFO ||      partitions_number: 2,
+17/12/18 18:19:55 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/18 18:19:55 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 1}
+17/12/18 18:19:55 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/18 18:19:55 WARN DAGScheduler: || DAGINFO ||     },
+17/12/18 18:19:55 WARN DAGScheduler: || DAGINFO ||     {id: 1,
+17/12/18 18:19:55 WARN DAGScheduler: || DAGINFO ||      name: data/mllib/sample_fpgrowth.txt MapPartitionsRDD[1] at textFile at SimpleFPGrowth.scala:35,
+17/12/18 18:19:55 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/18 18:19:55 WARN DAGScheduler: || DAGINFO ||      partitions_number: 2,
+17/12/18 18:19:55 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/18 18:19:55 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 0}
+17/12/18 18:19:55 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/18 18:19:55 WARN DAGScheduler: || DAGINFO ||     },
+17/12/18 18:19:55 WARN DAGScheduler: || DAGINFO ||     {id: 0,
+17/12/18 18:19:55 WARN DAGScheduler: || DAGINFO ||      name: data/mllib/sample_fpgrowth.txt HadoopRDD[0] at textFile at SimpleFPGrowth.scala:35,
+17/12/18 18:19:55 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/18 18:19:55 WARN DAGScheduler: || DAGINFO ||      partitions_number: 2,
+17/12/18 18:19:55 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/18 18:19:55 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/18 18:19:55 WARN DAGScheduler: || DAGINFO ||     }
+17/12/18 18:19:55 WARN DAGScheduler: || DAGINFO ||   ]
+17/12/18 18:19:55 WARN DAGScheduler: || DAGINFO || }
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO || {
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||   id: 1,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||   name: ShuffleMapStage 1,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||   final_rdd_id: 4,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||   stage type: ShuffleMapStage,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||   rdds: [
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||     {id: 4,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      name: MapPartitionsRDD[4] at map at FPGrowth.scala:246,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      partitions_number: 2,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 3}
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||     },
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||     {id: 3,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      name: MapPartitionsRDD[3] at flatMap at FPGrowth.scala:240,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      partitions_number: 2,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 2}
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||     },
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||     {id: 2,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      name: MapPartitionsRDD[2] at map at SimpleFPGrowth.scala:37,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      partitions_number: 2,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 1}
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||     },
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||     {id: 1,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      name: data/mllib/sample_fpgrowth.txt MapPartitionsRDD[1] at textFile at SimpleFPGrowth.scala:35,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      partitions_number: 2,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 0}
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||     },
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||     {id: 0,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      name: data/mllib/sample_fpgrowth.txt HadoopRDD[0] at textFile at SimpleFPGrowth.scala:35,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      partitions_number: 2,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||     }
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||   ]
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO || }
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO || {
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||   id: 2,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||   name: ResultStage 2,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||   final_rdd_id: 6,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||   stage type: ResultStage,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||   rdds: [
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||     {id: 6,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      name: MapPartitionsRDD[6] at filter at FPGrowth.scala:248,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      partitions_number: 10,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 5}
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||     },
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||     {id: 5,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      name: ShuffledRDD[5] at reduceByKey at FPGrowth.scala:247,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      partitions_number: 10,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||          {type: shuffle, rddid: 4}
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||     }
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||   ]
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO || }
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO || {
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||   id: 3,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||   name: ShuffleMapStage 3,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||   final_rdd_id: 7,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||   stage type: ShuffleMapStage,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||   rdds: [
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||     {id: 7,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      name: MapPartitionsRDD[7] at flatMap at FPGrowth.scala:268,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      partitions_number: 2,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 2}
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||     },
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||     {id: 2,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      name: MapPartitionsRDD[2] at map at SimpleFPGrowth.scala:37,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      partitions_number: 2,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 1}
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||     },
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||     {id: 1,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      name: data/mllib/sample_fpgrowth.txt MapPartitionsRDD[1] at textFile at SimpleFPGrowth.scala:35,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      partitions_number: 2,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 0}
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||     },
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||     {id: 0,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      name: data/mllib/sample_fpgrowth.txt HadoopRDD[0] at textFile at SimpleFPGrowth.scala:35,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      partitions_number: 2,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||     }
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||   ]
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO || }
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO || {
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||   id: 4,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||   name: ResultStage 4,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||   final_rdd_id: 10,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||   stage type: ResultStage,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||   rdds: [
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||     {id: 10,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      name: MapPartitionsRDD[10] at map at FPGrowth.scala:275,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      partitions_number: 10,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 9}
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||     },
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||     {id: 9,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      name: MapPartitionsRDD[9] at flatMap at FPGrowth.scala:273,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      partitions_number: 10,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 8}
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||     },
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||     {id: 8,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      name: ShuffledRDD[8] at aggregateByKey at FPGrowth.scala:270,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      partitions_number: 10,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||          {type: shuffle, rddid: 7}
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||     }
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||   ]
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO || }
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO || {
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||   id: 6,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||   name: ShuffleMapStage 6,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||   final_rdd_id: 11,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||   stage type: ShuffleMapStage,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||   rdds: [
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||     {id: 11,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      name: MapPartitionsRDD[11] at flatMap at AssociationRules.scala:65,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      partitions_number: 10,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 10}
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||     },
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||     {id: 10,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      name: MapPartitionsRDD[10] at map at FPGrowth.scala:275,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      partitions_number: 10,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 9}
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||     },
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||     {id: 9,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      name: MapPartitionsRDD[9] at flatMap at FPGrowth.scala:273,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      partitions_number: 10,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 8}
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||     },
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||     {id: 8,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      name: ShuffledRDD[8] at aggregateByKey at FPGrowth.scala:270,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      partitions_number: 10,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||          {type: shuffle, rddid: 7}
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||     }
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||   ]
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO || }
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO || {
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||   id: 7,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||   name: ShuffleMapStage 7,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||   final_rdd_id: 12,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||   stage type: ShuffleMapStage,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||   rdds: [
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||     {id: 12,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      name: MapPartitionsRDD[12] at map at AssociationRules.scala:77,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      partitions_number: 10,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 10}
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||     },
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||     {id: 10,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      name: MapPartitionsRDD[10] at map at FPGrowth.scala:275,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      partitions_number: 10,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 9}
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||     },
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||     {id: 9,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      name: MapPartitionsRDD[9] at flatMap at FPGrowth.scala:273,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      partitions_number: 10,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 8}
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||     },
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||     {id: 8,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      name: ShuffledRDD[8] at aggregateByKey at FPGrowth.scala:270,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      partitions_number: 10,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||          {type: shuffle, rddid: 7}
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||     }
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||   ]
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO || }
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO || {
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||   id: 8,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||   name: ResultStage 8,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||   final_rdd_id: 17,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||   stage type: ResultStage,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||   rdds: [
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||     {id: 17,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      name: MapPartitionsRDD[17] at filter at AssociationRules.scala:80,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      partitions_number: 10,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 16}
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||     },
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||     {id: 16,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      name: MapPartitionsRDD[16] at map at AssociationRules.scala:78,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      partitions_number: 10,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 15}
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||     },
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||     {id: 15,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      name: MapPartitionsRDD[15] at join at AssociationRules.scala:77,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      partitions_number: 10,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 14}
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||     },
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||     {id: 14,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      name: MapPartitionsRDD[14] at join at AssociationRules.scala:77,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      partitions_number: 10,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 13}
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||     },
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||     {id: 13,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      name: CoGroupedRDD[13] at join at AssociationRules.scala:77,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      partitions_number: 10,
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||          {type: shuffle, rddid: 11},
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||          {type: shuffle, rddid: 12}
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||      ]
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||     }
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO ||   ]
+17/12/18 18:19:56 WARN DAGScheduler: || DAGINFO || }
