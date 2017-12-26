@@ -162,11 +162,11 @@ abstract class RDD[T: ClassTag](
   type StageId = Int
   type Counter = Int
 
-  private[spark] var pathsCounter = new HashMap[JobId, HashMap[StageId, Counter]]
+  private[spark] var pathsCounter = new HashMap[JobId, HashMap[StageId, (Counter, Int)]]
 
   private[spark] var reverseDepCounters = new HashMap[JobId, HashMap[StageId, (Counter, Counter)]]
 
-  private[spark] def getPathsCounters(jobId: Int, stageId: Int): Int = {
+  private[spark] def getPathsCounters(jobId: Int, stageId: Int): (Counter, Int) = {
     pathsCounter(jobId)(stageId)
   }
 
@@ -181,9 +181,14 @@ abstract class RDD[T: ClassTag](
   private[spark] def initPaths(
     jobId: Int, stageId: Int
   ): Unit = {
-    val hs = new HashMap[StageId, Counter]
-    hs.put(stageId, 1)
-    pathsCounter.put(jobId, hs)
+    val stageIdToCounters = pathsCounter.get(jobId) match {
+      case None =>
+        val hs = new HashMap[StageId, (Counter, Int)]
+        pathsCounter.put(jobId, hs)
+        hs
+      case Some(hs) => hs
+    }
+    stageIdToCounters.put(stageId, (1, 1))
   }
 
   private[spark] def updateDepCounters(
@@ -211,19 +216,24 @@ abstract class RDD[T: ClassTag](
   private[spark] def updatePathCounters(
     jobId: Int, stageId: Int,
     n: Int
-  ): Unit = {
-    pathsCounter.get(jobId) match {
+  ): Boolean = {
+    val incrementalDeps = pathsCounter.get(jobId) match {
       case None =>
-        val stageToCounters = new HashMap [Int, Int]
-        stageToCounters.put(stageId, 0)
+        val stageToCounters = new HashMap [Int, (Int, Int)]
+        stageToCounters.put(stageId, (n, 1))
         pathsCounter.put(jobId, stageToCounters)
+        1
       case Some(stageToCounters) =>
-        val counter = stageToCounters.get(stageId) match {
-          case None => 0
-          case Some(n) => n
+        val (paths, deps) = stageToCounters.get(stageId) match {
+          case None => (0, 0)
+          case Some(t) => t
         }
-        stageToCounters.put(stageId, counter + n)
+        val incrementalDeps = deps + 1
+        stageToCounters.put(stageId, (paths + n, incrementalDeps))
+        incrementalDeps
     }
+    val narrowDep = getReverseDepCounters(jobId, stageId)._1
+    return narrowDep == incrementalDeps
   }
 
   /**

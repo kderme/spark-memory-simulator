@@ -570,14 +570,17 @@ class DAGScheduler(
       def visit(rdd: RDD[_]) {
         if (!visited(rdd)) {
           visited += rdd
-          val n = rdd.getPathsCounters(jobId, stageId)
+          val n = rdd.getPathsCounters(jobId, stageId)._1
           for (dep <- rdd.dependencies) {
             dep match {
               case shufDep: ShuffleDependency[_, _, _] =>
                 ()
               case narrowDep: NarrowDependency[_] =>
-                waitingForVisit.push(narrowDep.rdd)
-                dep.rdd.updatePathCounters(jobId, stageId, n)
+                if (dep.rdd.updatePathCounters(jobId, stageId, n)) {
+                  // Its ready For Visit only if it has the correct number of paths.
+                  // Equivalently all of its dependents have contributed with their number of paths.
+                  waitingForVisit.push(narrowDep.rdd)
+                }
             }
           }
         }
