@@ -40,6 +40,7 @@ import org.apache.spark.network.util.JavaUtils
 import org.apache.spark.partial.{ApproximateActionListener, ApproximateEvaluator, PartialResult}
 import org.apache.spark.rdd.RDD
 import org.apache.spark.rpc.RpcTimeout
+import org.apache.spark.scheduler.simulator.Simulator
 import org.apache.spark.storage._
 import org.apache.spark.storage.BlockManagerMessages.BlockManagerHeartbeat
 import org.apache.spark.util._
@@ -293,7 +294,7 @@ class DAGScheduler(
    * shuffle map stage doesn't already exist, this method will create the shuffle map stage in
    * addition to any missing ancestor shuffle map stages.
    */
-  private def getOrCreateShuffleMapStage(
+  private[scheduler] def getOrCreateShuffleMapStage(
       shuffleDep: ShuffleDependency[_, _, _],
       firstJobId: Int): ShuffleMapStage = {
     shuffleIdToMapStage.get(shuffleDep.shuffleId) match {
@@ -475,7 +476,7 @@ class DAGScheduler(
    * This is like getMissingParentStages, but with additional logs.
    * We did not add the logs there because it is called multiple times.
    */
-  private def printStage(stage: Stage): List[Stage] = {
+  private[scheduler] def printStage(stage: Stage): List[Stage] = {
     val missing = new HashSet[Stage]
     val visited = new HashSet[RDD[_]]
     // We are manually maintaining a stack here to prevent StackOverflowError
@@ -1001,6 +1002,11 @@ class DAGScheduler(
     }
   }
 
+  private def simulate(jobId: Int) = {
+    val sim = new Simulator(jobIdToActiveJob(jobId), shuffleIdToMapStage)
+    sim.run
+  }
+
   /** Called when stage's parents are available and we can now do its task. */
   private def submitMissingTasks(stage: Stage, jobId: Int) {
     logDebug("submitMissingTasks(" + stage + ")")
@@ -1023,6 +1029,7 @@ class DAGScheduler(
       case s: ResultStage =>
         outputCommitCoordinator.stageStart(
           stage = s.id, maxPartitionId = s.rdd.partitions.length - 1)
+        simulate(jobId)
     }
     val taskIdToLocations: Map[Int, Seq[TaskLocation]] = try {
       stage match {
