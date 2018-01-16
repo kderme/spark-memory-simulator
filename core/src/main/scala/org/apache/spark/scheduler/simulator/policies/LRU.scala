@@ -31,7 +31,7 @@ class LRU[C <: SizeAble] (private[simulator] val isItLRU: Boolean) extends Polic
     this(true)
   }
 
-  /** LinkedHashMap works like FIFO if flag = false and like LRU if flag = true */
+  /** LinkedHashMap works like FIFO if isItLRU = false and like LRU if isItLRU = true */
   private val entries = new LinkedHashMap[Int, C](32, 0.75f, isItLRU)
 
   override private[simulator] def get(blockId: Int): Option[C] = {
@@ -44,7 +44,7 @@ class LRU[C <: SizeAble] (private[simulator] val isItLRU: Boolean) extends Polic
   }
 
   /** This is like org.apache.spark.storage.memory.MemoryStore.evictBlocksToFreeSpace */
-  override private[simulator] def evictBlocksToFreeSpace(id: Int, space: Long): Long = {
+  override private[simulator] def evictBlocksToFreeSpace(space: Long): Long = {
     var freedMemory = 0L
     val iterator = entries.entrySet().iterator()
     val selectedBlocks = new ArrayBuffer[Int]

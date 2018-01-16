@@ -31,7 +31,7 @@ class FIFO[C <: SizeAble] extends Policy[C] {
     lru.put(blockId, content)
   }
 
-  override private[simulator] def evictBlocksToFreeSpace(id: Int, space: Long) = {
-    lru.evictBlocksToFreeSpace(id, space)
+  override private[simulator] def evictBlocksToFreeSpace(space: Long) = {
+    lru.evictBlocksToFreeSpace(space)
   }
 }

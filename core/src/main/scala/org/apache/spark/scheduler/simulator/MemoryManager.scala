@@ -24,10 +24,15 @@ import org.apache.spark.scheduler.simulator.policies._
 import org.apache.spark.storage.BlockId
 import org.apache.spark.storage.memory.MemoryEntry
 
+/*
+ * C is the parametric content of a block, which has the constraint SizeAble.
+ * This ensures that no matter what the content is, we must be able to take the
+ * size of the block from it.
+ */
 private[scheduler]
 class MemoryManager[C <: SizeAble](
    private var maxMemory: Long,
-   private val policy: Policy[C]
+   private[simulator] val policy: Policy[C]
  ) extends Logging {
 
   /** The size of the used storage memory */

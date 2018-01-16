@@ -17,15 +17,17 @@
 
 package org.apache.spark.scheduler.simulator.policies
 
+import org.apache.spark.scheduler.simulator.Simulator
 import org.apache.spark.storage.BlockId
 
 trait Policy[C] {
 
-  /*
-   * C is the parametric content of a block, which has the constraint SizeAble.
-   * This ensures that no matter what the content is, we must be able to take the
-   * size of the block from it.
+  /**
+   * Some Policies may need initialization. For those that don't a dummy default
+   * implementation is given
    */
+  private[simulator] def init(sim: Simulator): Unit = {
+  }
 
   /** Get the block from its id */
   private[simulator] def get(blockId: Int): Option[C]
@@ -33,7 +35,7 @@ trait Policy[C] {
   /** Insert a block */
   private[simulator] def put(blockId: Int, content: C): Unit
 
-  private[simulator] def evictBlocksToFreeSpace(id: Int, space: Long): Long
+  private[simulator] def evictBlocksToFreeSpace(space: Long): Long
 
 }
 

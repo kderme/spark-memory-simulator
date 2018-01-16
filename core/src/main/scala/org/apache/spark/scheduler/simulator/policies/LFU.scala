@@ -43,7 +43,7 @@ class LFU[C <: SizeAble] extends Policy[C] {
     entries.put(blockId, a)
   }
 
-  override private[simulator] def evictBlocksToFreeSpace(id: Int, space: Long) = {
+  override private[simulator] def evictBlocksToFreeSpace(space: Long) = {
     var freedMemory = 0L
     val selectedBlocks = new ArrayBuffer[Int]
     while (freedMemory < space && entries.nonEmpty) {

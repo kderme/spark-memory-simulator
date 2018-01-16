@@ -38,14 +38,15 @@ class Simulator(
             job: ActiveJob,
             shuffleIdToMapStage: HashMap[Int, ShuffleMapStage]
           ) = {
-    this(job, shuffleIdToMapStage, new MemoryManager(10L, new LRU[DefaultContent]))
+    this(job, shuffleIdToMapStage, new MemoryManager(10L, new Belady[DefaultContent](job)))
   }
 
   def this(
             dagScheduler: DAGScheduler,
             job: ActiveJob
           ) = {
-    this(job, dagScheduler.shuffleIdToMapStage, new MemoryManager(10L, new LRU[DefaultContent]))
+    this(job, dagScheduler.shuffleIdToMapStage,
+      new MemoryManager(10L, new Belady[DefaultContent](job)))
   }
 
   private var hits = 0
@@ -66,6 +67,14 @@ class Simulator(
   private[scheduler] def run = {
     logSimulation("Starting for job = " + job.jobId)
 
+
+    memory.policy.init(this)
+    // Some Policies have special needs before starting.
+    memory.policy match {
+      case b : Belady[_] =>
+          logSimulation("Belady Sequence: " + b.sequence.map(_.id))
+      case _ => ()
+    }
     submitStage(job.finalStage)
 
     logSimulation("Statistics for " + job.jobId + ":")
@@ -160,7 +169,7 @@ class Simulator(
    * This is like org.apache.spark.scheduler.Dagscheduler.getMissingParentStages,
    * which runs on Master.
    */
-  private def getMissingParentStages(stage: Stage): List[Stage] = {
+  private[simulator] def getMissingParentStages(stage: Stage): List[Stage] = {
     val missing = new HashSet[Stage]
     val visited = new HashSet[RDD[_]]
     // We are manually maintaining a stack here to prevent StackOverflowError
@@ -201,6 +210,10 @@ class Simulator(
     shuffleIdToMapStage.get(shuffleDep.shuffleId).get
   }
 
-  private[simulator] def logSimulation(msg: String): Unit = logWarning("|| SIMULATION || " ++ msg)
+  private[scheduler] def logSimulation(msg: String): Unit = logWarning("|| SIMULATION || " ++ msg)
+
+}
+
+object Simulator {
 
 }
