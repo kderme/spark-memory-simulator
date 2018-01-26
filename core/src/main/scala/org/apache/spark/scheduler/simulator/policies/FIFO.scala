@@ -17,18 +17,19 @@
 
 package org.apache.spark.scheduler.simulator.policies
 
+import org.apache.spark.rdd.RDD
 import org.apache.spark.scheduler.simulator.SizeAble
 
 class FIFO[C <: SizeAble] extends Policy[C] {
 
   private val lru = new LRU[C](false)
 
-  override private[simulator] def get(blockId: Int) = {
-    lru.get(blockId)
+  override private[simulator] def get(rdd: RDD[_]) = {
+    lru.get(rdd)
   }
 
-  override private[simulator] def put(blockId: Int, content: C) = {
-    lru.put(blockId, content)
+  override private[simulator] def put(rdd: RDD[_], content: C) = {
+    lru.put(rdd, content)
   }
 
   override private[simulator] def evictBlocksToFreeSpace(space: Long) = {

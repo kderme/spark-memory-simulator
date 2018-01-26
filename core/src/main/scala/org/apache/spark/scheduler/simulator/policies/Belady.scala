@@ -21,47 +21,48 @@ import scala.collection.mutable.{ArrayBuffer, HashMap, HashSet, MutableList}
 
 import org.apache.spark.rdd.RDD
 import org.apache.spark.scheduler.{ActiveJob, Stage}
-import org.apache.spark.scheduler.simulator.{DefaultContent, Simulator, SizeAble}
+import org.apache.spark.scheduler.simulator.{Simulator, SizeAble}
 import org.apache.spark.storage.StorageLevel
 
+class Belady [C <: SizeAble] extends Policy[C] {
 
-class Belady [C <: SizeAble] (
-    private[scheduler] val job: ActiveJob)
-  extends Policy[C] {
+  private[scheduler] var job: ActiveJob = null
 
-  val entries: HashMap[Int, C] = new HashMap[Int, C]
+  val entries: HashMap[RDD[_], C] = new HashMap[RDD[_], C]
 
   var simulator: Simulator = null
 
   /** This queue has the order of the requests */
-  private[simulator] val sequence = new MutableList[RDD[_]]
+  private[simulator] var sequence: MutableList[RDD[_]] = null
 
-  override private[simulator] def init(sim: Simulator): Unit = {
-    simulator = sim
+  override private[simulator] def init(_simulator: Simulator, _job: ActiveJob): Unit = {
+    simulator = _simulator
+    job = _job
     val predictor = new Predictor(simulator, new HashSet())
+    sequence = new MutableList[RDD[_]]
     predictor.createSeqFromStage(job.finalStage, sequence)
   }
 
   /** Get the block from its id */
-  override private[simulator] def get(blockId: Int) = {
-    entries.get(blockId)
+  override private[simulator] def get(rdd: RDD[_]) = {
+    entries.get(rdd)
   }
 
   /** Insert a block */
-  override private[simulator] def put(blockId: Int, content: C): Unit = {
-    entries.put(blockId, content)
+  override private[simulator] def put(rdd: RDD[_], content: C): Unit = {
+    entries.put(rdd, content)
   }
 
   override private[simulator] def evictBlocksToFreeSpace(space: Long) = {
     var freedMemory = 0L
     val iterator = sequence.reverse.iterator
-    val selectedBlocks = new ArrayBuffer[Int]
+    val selectedBlocks = new ArrayBuffer[RDD[_]]
     while (freedMemory < space && iterator.hasNext) {
-      val id = iterator.next().id
-      entries.get(id) match {
+      val rdd = iterator.next()
+      entries.get(rdd) match {
         case Some(content) =>
           val size = content.getSize
-          selectedBlocks += id
+          selectedBlocks += rdd
           freedMemory += size
         case None =>
       }
@@ -70,7 +71,7 @@ class Belady [C <: SizeAble] (
   }
 }
 
-private[policies] class Predictor (
+class Predictor(
   simulator: Simulator,
   set: HashSet[RDD[_]]
   ) {
@@ -89,8 +90,8 @@ private[policies] class Predictor (
   /**
    * This is like org.apache.spark.storage.rdd.Task.runTask, which runs on Workers.
    */
-  private def doCreateSeqFromStage(
-    stage: Stage, sequence: MutableList[RDD[_]]) = createSeqFromRDD(stage.rdd, sequence)
+  private def doCreateSeqFromStage(stage: Stage, sequence: MutableList[RDD[_]]) =
+    createSeqFromRDD(stage.rdd, sequence)
 
   /**
    * This is like org.apache.spark.storage.rdd.RDD.iterator, which runs on Workers.
@@ -100,8 +101,8 @@ private[policies] class Predictor (
     if (rdd.getStorageLevel != StorageLevel.NONE) {
       sequence += rdd
       if (!set.exists(rdd == _)) {
-
         set.add(rdd)
+        compute(rdd, sequence)
       }
     }
     else {

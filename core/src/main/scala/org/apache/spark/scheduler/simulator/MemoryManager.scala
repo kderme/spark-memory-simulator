@@ -20,6 +20,7 @@ package org.apache.spark.scheduler.simulator
 import java.util.LinkedHashMap
 
 import org.apache.spark.internal.Logging
+import org.apache.spark.rdd.RDD
 import org.apache.spark.scheduler.simulator.policies._
 import org.apache.spark.storage.BlockId
 import org.apache.spark.storage.memory.MemoryEntry
@@ -38,19 +39,19 @@ class MemoryManager[C <: SizeAble](
   /** The size of the used storage memory */
   private var memoryUsed: Long = 0L
 
-  private[simulator] def get(id: Int): Option[C] = policy.get(id)
+  private[simulator] def get(rdd: RDD[_]): Option[C] = policy.get(rdd)
 
-  private[simulator] def put(id: Int, content: C): Boolean = {
+  private[simulator] def put(rdd: RDD[_], content: C): Boolean = {
     val size = content.getSize
     if (!fits(size)) {
-      val evicted = policy.evictBlocksToFreeSpace(id, size)
+      val evicted = policy.evictBlocksToFreeSpace(size)
       memoryUsed -= evicted
       if (!fits(size)) {
         logError("Evicted but still doesn`t fit!")
         false
       }
     }
-    policy.put(id, content)
+    policy.put(rdd, content)
     memoryUsed += size
     true
   }

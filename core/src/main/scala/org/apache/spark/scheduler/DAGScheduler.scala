@@ -141,7 +141,8 @@ class DAGScheduler(
   private val nextStageId = new AtomicInteger(0)
 
   private[scheduler] val jobIdToStageIds = new HashMap[Int, HashSet[Int]]
-  private[scheduler] val stageIdToStage = new HashMap[Int, Stage]
+  val stageIdToStage = new HashMap[Int, Stage]
+
   /**
    * Mapping from shuffle dependency ID to the ShuffleMapStage that will generate the data for
    * that dependency. Only includes stages that are part of currently running job (when the job(s)
@@ -149,6 +150,7 @@ class DAGScheduler(
    * the shuffle data will be in the MapOutputTracker).
    */
   private[scheduler] val shuffleIdToMapStage = new HashMap[Int, ShuffleMapStage]
+  private[scheduler] val simulator = new Simulator(shuffleIdToMapStage)
   private[scheduler] val jobIdToActiveJob = new HashMap[Int, ActiveJob]
 
   // Stages we need to run whose parents aren't done
@@ -476,7 +478,7 @@ class DAGScheduler(
    * This is like getMissingParentStages, but with additional logs.
    * We did not add the logs there because it is called multiple times.
    */
-  private[scheduler] def printStage(stage: Stage): List[Stage] = {
+  private def printStage(jobId: Int, stage: Stage): List[Stage] = {
     val missing = new HashSet[Stage]
     val visited = new HashSet[RDD[_]]
     // We are manually maintaining a stack here to prevent StackOverflowError
@@ -488,6 +490,7 @@ class DAGScheduler(
         logDag("     name: " + rdd + ",")
         logDag("     storageLevel: " + rdd.getStorageLevel + ",")
         logDag("     partitions_number: " + rdd.getNumPartitions + ",")
+        logDag("     paths: " + rdd.getPathsCounters(jobId, stage.id) + ",")
         logDag("     deps: [ ")
         visited += rdd
         for (i <- 0 to (rdd.dependencies.length-1)) {
@@ -531,6 +534,67 @@ class DAGScheduler(
   }
 
   private def logDag(str: String) = logWarning("|| DAGINFO || " + str)
+
+  private def countReverseDependencies(job: ActiveJob): Unit = {
+    val jobId = job.jobId
+    val stageIds = jobIdToStageIds(jobId)
+    for (stageId <- stageIds) {
+      val stage = stageIdToStage(stageId)
+      val visited = new HashSet[RDD[_]]
+      val waitingForVisit = new Stack[RDD[_]]
+      def visit(rdd: RDD[_]) {
+        if (!visited(rdd)) {
+          visited += rdd
+          for (dep <- rdd.dependencies) {
+            dep match {
+              case shufDep: ShuffleDependency[_, _, _] =>
+                dep.rdd.updateDepCounters(jobId, stageId, true)
+              case narrowDep: NarrowDependency[_] =>
+                waitingForVisit.push(narrowDep.rdd)
+                dep.rdd.updateDepCounters(jobId, stageId, false)
+            }
+          }
+        }
+      }
+      waitingForVisit.push(stage.rdd)
+      while (waitingForVisit.nonEmpty) {
+        visit(waitingForVisit.pop())
+      }
+    }
+  }
+
+  private def countPaths(job: ActiveJob): Unit = {
+    val jobId = job.jobId
+    val stageIds = jobIdToStageIds(jobId)
+    for (stageId <- stageIds) {
+      val stage = stageIdToStage(stageId)
+      val visited = new HashSet[RDD[_]]
+      val waitingForVisit = new Stack[RDD[_]]
+      def visit(rdd: RDD[_]) {
+        if (!visited(rdd)) {
+          visited += rdd
+          val n = rdd.getPathsCounters(jobId, stageId)._1
+          for (dep <- rdd.dependencies) {
+            dep match {
+              case shufDep: ShuffleDependency[_, _, _] =>
+                ()
+              case narrowDep: NarrowDependency[_] =>
+                if (dep.rdd.updatePathCounters(jobId, stageId, n)) {
+                  // Its ready For Visit only if it has the correct number of paths.
+                  // Equivalently all of its dependents have contributed with their number of paths.
+                  waitingForVisit.push(narrowDep.rdd)
+                }
+            }
+          }
+        }
+      }
+      stage.rdd.initPaths(jobId, stageId)
+      waitingForVisit.push(stage.rdd)
+      while (waitingForVisit.nonEmpty) {
+        visit(waitingForVisit.pop())
+      }
+    }
+  }
 
   /**
    * Registers the given jobId among the jobs that need the given stage and
@@ -930,6 +994,8 @@ class DAGScheduler(
     finalStage.setActiveJob(job)
     val stageIds = jobIdToStageIds(jobId).toArray
     val stageInfos = stageIds.flatMap(id => stageIdToStage.get(id).map(_.latestInfo))
+    countReverseDependencies(job)
+    countPaths(job)
     listenerBus.post(
       SparkListenerJobStart(job.jobId, jobSubmissionTime, stageInfos, properties))
     submitStage(finalStage)
@@ -978,6 +1044,7 @@ class DAGScheduler(
     }
   }
 
+
   /** Submits stage, but first recursively submits any missing parents. */
   private def submitStage(stage: Stage) {
     val jobId = activeJobForStage(stage)
@@ -988,7 +1055,7 @@ class DAGScheduler(
         logDebug("missing: " + missing)
         if (missing.isEmpty) {
           logInfo("Submitting " + stage + " (" + stage.rdd + "), which has no missing parents")
-          printStage(stage)
+          printStage(jobId.get, stage)
           submitMissingTasks(stage, jobId.get)
         } else {
           for (parent <- missing) {
@@ -1003,8 +1070,8 @@ class DAGScheduler(
   }
 
   private def simulate(jobId: Int) = {
-    val sim = new Simulator(jobIdToActiveJob(jobId), shuffleIdToMapStage)
-    sim.run
+    // TODO check if this indeed ensures non parallelism.
+    simulator.synchronized{simulator.run(jobIdToActiveJob(jobId))}
   }
 
   /** Called when stage's parents are available and we can now do its task. */

@@ -20,7 +20,7 @@ package org.apache.spark.rdd
 import java.util.Random
 
 import scala.collection.{mutable, Map}
-import scala.collection.mutable.ArrayBuffer
+import scala.collection.mutable.{ArrayBuffer, HashMap, HashSet}
 import scala.io.Codec
 import scala.language.implicitConversions
 import scala.reflect.{classTag, ClassTag}
@@ -155,6 +155,93 @@ abstract class RDD[T: ClassTag](
   def setName(_name: String): this.type = {
     name = _name
     this
+  }
+
+  /* Some more expressive type synonyms for Int. */
+  type JobId = Int
+  type StageId = Int
+  type Counter = Int
+
+  private[spark] var pathsCounter = new HashMap[JobId, HashMap[StageId, (Counter, Int)]]
+
+  private[spark] var reverseDepCounters = new HashMap[JobId, HashMap[StageId, (Counter, Counter)]]
+
+  private[spark] var refCounters = new HashMap[JobId, Counter]
+
+  private[spark] def getPathsCounters(jobId: Int, stageId: Int): (Counter, Int) = {
+    pathsCounter(jobId)(stageId)
+  }
+
+  private[spark] def getReverseDepCounters(jobId: Int, stageId: Int): (Int, Int) = {
+    reverseDepCounters(jobId)(stageId)
+  }
+
+  /**
+   *  We assume that the first rdd of a stage has a path (of zero length) to it.
+   *  This convention is very helpful for the recursion.
+   */
+  private[spark] def initPaths(
+    jobId: Int, stageId: Int
+  ): Unit = {
+    val stageIdToCounters = pathsCounter.get(jobId) match {
+      case None =>
+        val hs = new HashMap[StageId, (Counter, Int)]
+        pathsCounter.put(jobId, hs)
+        hs
+      case Some(hs) => hs
+    }
+    stageIdToCounters.put(stageId, (1, 1))
+  }
+
+  private[spark] def updateDepCounters(
+    jobId: Int, stageId: Int, isShuffled: Boolean
+  ): Unit = {
+
+    def addOne(counters: (Int, Int)): (Int, Int) = counters match {
+      case (x, y) => if (isShuffled) (x, y + 1) else (x + 1, y)
+    }
+
+    reverseDepCounters.get(jobId) match {
+      case None =>
+        val stageToCounters = new HashMap [Int, (Int, Int)]
+        stageToCounters.put(stageId, addOne(0, 0))
+        reverseDepCounters.put(jobId, stageToCounters)
+      case Some(stageToCounters) =>
+        val counters = stageToCounters.get(stageId) match {
+          case None => (0, 0)
+          case Some(t) => t
+        }
+        stageToCounters.put(stageId, addOne(counters))
+    }
+    if (isShuffled) {
+      refCounters.get(jobId) match {
+        case None => refCounters.put(jobId, 0)
+        case Some(counter) => refCounters.put(jobId, counter + 1)
+      }
+    }
+  }
+
+  private[spark] def updatePathCounters(
+    jobId: Int, stageId: Int,
+    n: Int
+  ): Boolean = {
+    val incrementalDeps = pathsCounter.get(jobId) match {
+      case None =>
+        val stageToCounters = new HashMap [Int, (Int, Int)]
+        stageToCounters.put(stageId, (n, 1))
+        pathsCounter.put(jobId, stageToCounters)
+        1
+      case Some(stageToCounters) =>
+        val (paths, deps) = stageToCounters.get(stageId) match {
+          case None => (0, 0)
+          case Some(t) => t
+        }
+        val incrementalDeps = deps + 1
+        stageToCounters.put(stageId, (paths + n, incrementalDeps))
+        incrementalDeps
+    }
+    val narrowDep = getReverseDepCounters(jobId, stageId)._1
+    return narrowDep == incrementalDeps
   }
 
   /**

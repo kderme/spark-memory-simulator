@@ -17,6 +17,8 @@
 
 package org.apache.spark.scheduler.simulator.policies
 
+import org.apache.spark.rdd.RDD
+import org.apache.spark.scheduler.ActiveJob
 import org.apache.spark.scheduler.simulator.Simulator
 import org.apache.spark.storage.BlockId
 
@@ -26,14 +28,14 @@ trait Policy[C] {
    * Some Policies may need initialization. For those that don't a dummy default
    * implementation is given
    */
-  private[simulator] def init(sim: Simulator): Unit = {
+  private[simulator] def init(sim: Simulator, _job: ActiveJob): Unit = {
   }
 
   /** Get the block from its id */
-  private[simulator] def get(blockId: Int): Option[C]
+  private[simulator] def get(rdd: RDD[_]): Option[C]
 
   /** Insert a block */
-  private[simulator] def put(blockId: Int, content: C): Unit
+  private[simulator] def put(rdd: RDD[_], content: C): Unit
 
   private[simulator] def evictBlocksToFreeSpace(space: Long): Long
 

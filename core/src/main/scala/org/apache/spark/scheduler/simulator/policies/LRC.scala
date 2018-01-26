@@ -17,20 +17,26 @@
 
 package org.apache.spark.scheduler.simulator.policies
 
-import scala.collection.mutable._
+import scala.collection.mutable.{ArrayBuffer, HashMap}
 
 import org.apache.spark.rdd.RDD
-import org.apache.spark.scheduler.simulator.SizeAble
+import org.apache.spark.scheduler.ActiveJob
+import org.apache.spark.scheduler.simulator.{Simulator, SizeAble}
 
+class LRC [C <: SizeAble] extends Policy[C]{
 
-class LFU[C <: SizeAble] extends Policy[C] {
+  private[scheduler] var job: ActiveJob = null
 
-  private val entries = new LinkedHashMap[Int, LFUContent[C]]()
+  val entries: HashMap[Int, LRCContent[C]] = new HashMap[Int, LRCContent[C]]
 
-  override private[simulator] def get(rdd: RDD[_]): Option[C] = {
-    // entries.get(blockId).flatMap(_.content)
+  override private[simulator] def init(_simulator: Simulator, _job: ActiveJob): Unit = {
+    job = _job
+  }
+
+  /** Get the block from its id */
+  override private[simulator] def get(rdd: RDD[_]) = {
     entries.get(rdd.id) match {
-        // make this one-liner somehow.
+      // make this one-liner somehow.
       case None => None
       case Some(a) =>
         a.frequency += 1
@@ -38,8 +44,9 @@ class LFU[C <: SizeAble] extends Policy[C] {
     }
   }
 
+  /** Insert a block */
   override private[simulator] def put(rdd: RDD[_], content: C): Unit = {
-    val a = new LFUContent[C](1, content)
+    val a = new LRCContent[C](1, rdd.refCounters(job.jobId), content)
     entries.put(rdd.id, a)
   }
 
@@ -47,7 +54,7 @@ class LFU[C <: SizeAble] extends Policy[C] {
     var freedMemory = 0L
     val selectedBlocks = new ArrayBuffer[Int]
     while (freedMemory < space && entries.nonEmpty) {
-      val blockId = getLFU
+      val blockId = getLRC
       val size = entries.get(blockId).get.content.getSize
       selectedBlocks += blockId
       freedMemory += size
@@ -57,12 +64,13 @@ class LFU[C <: SizeAble] extends Policy[C] {
   }
 
   /** Will return a invalid key if entries are empty */
-  private def getLFU = {
+  private def getLRC = {
     var key = 0
-    var minFreq = Integer.MAX_VALUE
+    var minCount = Integer.MAX_VALUE
     for((k, entry) <- entries) {
-      if (entry.frequency < minFreq) {
-        minFreq = entry.frequency
+      val future = entry.references - entry.frequency
+      if (future < minCount) {
+        minCount = future
         key = k
       }
     }
@@ -70,7 +78,8 @@ class LFU[C <: SizeAble] extends Policy[C] {
   }
 }
 
-class LFUContent[C] (fr: Int, cont: C) {
+class LRCContent[C] (fr: Int, ref: Int, cont: C) {
   private[policies] var frequency = fr
+  private[policies] val references = ref
   private[policies] val content = cont
 }

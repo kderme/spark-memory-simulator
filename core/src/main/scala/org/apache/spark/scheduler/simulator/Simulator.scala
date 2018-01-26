@@ -28,25 +28,18 @@ import org.apache.spark.storage.StorageLevel
 
 private[scheduler]
 class Simulator(
-    private[scheduler] val job: ActiveJob,
     private[scheduler] val shuffleIdToMapStage: HashMap[Int, ShuffleMapStage],
     // This is inspired by, but has nothing to do with org.apache.spark.memory.MemoryManager.
     private[scheduler] val memory: MemoryManager[DefaultContent])
   extends Logging {
 
-  def this(
-            job: ActiveJob,
-            shuffleIdToMapStage: HashMap[Int, ShuffleMapStage]
-          ) = {
-    this(job, shuffleIdToMapStage, new MemoryManager(10L, new Belady[DefaultContent](job)))
+  def this(shuffleIdToMapStage: HashMap[Int, ShuffleMapStage]) = {
+    this(shuffleIdToMapStage, new MemoryManager(3L, new Belady[DefaultContent]))
   }
 
-  def this(
-            dagScheduler: DAGScheduler,
-            job: ActiveJob
-          ) = {
-    this(job, dagScheduler.shuffleIdToMapStage,
-      new MemoryManager(10L, new Belady[DefaultContent](job)))
+  def this(dagScheduler: DAGScheduler) = {
+    this(dagScheduler.shuffleIdToMapStage,
+      new MemoryManager(3L, new Belady[DefaultContent]))
   }
 
   private var hits = 0
@@ -64,11 +57,10 @@ class Simulator(
 
   private[scheduler] val waitingStages = new HashSet[Stage]
 
-  private[scheduler] def run = {
+  private[scheduler] def run(job: ActiveJob) = {
     logSimulation("Starting for job = " + job.jobId)
 
-
-    memory.policy.init(this)
+    memory.policy.init(this, job)
     // Some Policies have special needs before starting.
     memory.policy match {
       case b : Belady[_] =>
@@ -126,7 +118,7 @@ class Simulator(
    */
   private def getOrCompute(rdd: RDD[_]): Unit = {
     if (rdd.getStorageLevel.useMemory) {
-      memory.get(rdd.id) match {
+      memory.get(rdd) match {
         case Some(block) =>
           hits += 1
           return
@@ -143,7 +135,7 @@ class Simulator(
 
     if (rdd.getStorageLevel.useMemory) {
       // Assume for now size = 1
-      memory.put(rdd.id, new DefaultContent(1L))
+      memory.put(rdd, new DefaultContent(rdd.dependencies.size.toLong))
     }
     if (rdd.getStorageLevel.useDisk) {
       // This is not how it`s done in spark (when computed it`s only added in memory.
