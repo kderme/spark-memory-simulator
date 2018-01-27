@@ -34,12 +34,12 @@ class Simulator(
   extends Logging {
 
   def this(shuffleIdToMapStage: HashMap[Int, ShuffleMapStage]) = {
-    this(shuffleIdToMapStage, new MemoryManager(3L, new Belady[DefaultContent]))
+    this(shuffleIdToMapStage, new MemoryManager(3L, new LRU[DefaultContent]))
   }
 
   def this(dagScheduler: DAGScheduler) = {
     this(dagScheduler.shuffleIdToMapStage,
-      new MemoryManager(3L, new Belady[DefaultContent]))
+      new MemoryManager(3L, new LRU[DefaultContent]))
   }
 
   private var hits = 0

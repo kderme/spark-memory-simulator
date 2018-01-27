@@ -1,0 +1,1096 @@
+Using Spark's default log4j profile: org/apache/spark/log4j-defaults.properties
+18/01/26 12:20:30 INFO SparkContext: Running Spark version 2.2.2-SNAPSHOT
+18/01/26 12:20:30 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+18/01/26 12:20:30 INFO SparkContext: Submitted application: DeveloperApiExample
+18/01/26 12:20:30 INFO SecurityManager: Changing view acls to: kderment
+18/01/26 12:20:30 INFO SecurityManager: Changing modify acls to: kderment
+18/01/26 12:20:30 INFO SecurityManager: Changing view acls groups to: 
+18/01/26 12:20:30 INFO SecurityManager: Changing modify acls groups to: 
+18/01/26 12:20:30 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users  with view permissions: Set(kderment); groups with view permissions: Set(); users  with modify permissions: Set(kderment); groups with modify permissions: Set()
+18/01/26 12:20:30 INFO Utils: Successfully started service 'sparkDriver' on port 38525.
+18/01/26 12:20:30 INFO SparkEnv: Registering MapOutputTracker
+18/01/26 12:20:30 INFO SparkEnv: Registering BlockManagerMaster
+18/01/26 12:20:30 INFO BlockManagerMasterEndpoint: Using org.apache.spark.storage.DefaultTopologyMapper for getting topology information
+18/01/26 12:20:30 INFO BlockManagerMasterEndpoint: BlockManagerMasterEndpoint up
+18/01/26 12:20:30 INFO DiskBlockManager: Created local directory at /tmp/blockmgr-dd840a78-d566-4c5d-8f41-339868815661
+18/01/26 12:20:30 INFO MemoryStore: MemoryStore started with capacity 366.3 MB
+18/01/26 12:20:30 INFO SparkEnv: Registering OutputCommitCoordinator
+18/01/26 12:20:30 INFO log: Logging initialized @1202ms
+18/01/26 12:20:30 INFO Server: jetty-9.3.11.v20160721
+18/01/26 12:20:30 INFO Server: Started @1258ms
+18/01/26 12:20:30 INFO AbstractConnector: Started ServerConnector@54a3ab8f{HTTP/1.1,[http/1.1]}{0.0.0.0:4040}
+18/01/26 12:20:30 INFO Utils: Successfully started service 'SparkUI' on port 4040.
+18/01/26 12:20:30 INFO ContextHandler: Started o.e.j.s.ServletContextHandler@420bc288{/jobs,null,AVAILABLE,@Spark}
+18/01/26 12:20:30 INFO ContextHandler: Started o.e.j.s.ServletContextHandler@1556f2dd{/jobs/json,null,AVAILABLE,@Spark}
+18/01/26 12:20:30 INFO ContextHandler: Started o.e.j.s.ServletContextHandler@62577d6{/jobs/job,null,AVAILABLE,@Spark}
+18/01/26 12:20:30 INFO ContextHandler: Started o.e.j.s.ServletContextHandler@772485dd{/jobs/job/json,null,AVAILABLE,@Spark}
+18/01/26 12:20:30 INFO ContextHandler: Started o.e.j.s.ServletContextHandler@79ab3a71{/stages,null,AVAILABLE,@Spark}
+18/01/26 12:20:30 INFO ContextHandler: Started o.e.j.s.ServletContextHandler@3d829787{/stages/json,null,AVAILABLE,@Spark}
+18/01/26 12:20:30 INFO ContextHandler: Started o.e.j.s.ServletContextHandler@51bde877{/stages/stage,null,AVAILABLE,@Spark}
+18/01/26 12:20:30 INFO ContextHandler: Started o.e.j.s.ServletContextHandler@2fb68ec6{/stages/stage/json,null,AVAILABLE,@Spark}
+18/01/26 12:20:30 INFO ContextHandler: Started o.e.j.s.ServletContextHandler@3add81c4{/stages/pool,null,AVAILABLE,@Spark}
+18/01/26 12:20:30 INFO ContextHandler: Started o.e.j.s.ServletContextHandler@1c65121{/stages/pool/json,null,AVAILABLE,@Spark}
+18/01/26 12:20:30 INFO ContextHandler: Started o.e.j.s.ServletContextHandler@57dc9128{/storage,null,AVAILABLE,@Spark}
+18/01/26 12:20:30 INFO ContextHandler: Started o.e.j.s.ServletContextHandler@17ae98d7{/storage/json,null,AVAILABLE,@Spark}
+18/01/26 12:20:30 INFO ContextHandler: Started o.e.j.s.ServletContextHandler@6ac4944a{/storage/rdd,null,AVAILABLE,@Spark}
+18/01/26 12:20:30 INFO ContextHandler: Started o.e.j.s.ServletContextHandler@39fc6b2c{/storage/rdd/json,null,AVAILABLE,@Spark}
+18/01/26 12:20:30 INFO ContextHandler: Started o.e.j.s.ServletContextHandler@3ee39da0{/environment,null,AVAILABLE,@Spark}
+18/01/26 12:20:30 INFO ContextHandler: Started o.e.j.s.ServletContextHandler@7cc9ce8{/environment/json,null,AVAILABLE,@Spark}
+18/01/26 12:20:30 INFO ContextHandler: Started o.e.j.s.ServletContextHandler@c0b41d6{/executors,null,AVAILABLE,@Spark}
+18/01/26 12:20:30 INFO ContextHandler: Started o.e.j.s.ServletContextHandler@2bffa76d{/executors/json,null,AVAILABLE,@Spark}
+18/01/26 12:20:30 INFO ContextHandler: Started o.e.j.s.ServletContextHandler@6d2260db{/executors/threadDump,null,AVAILABLE,@Spark}
+18/01/26 12:20:30 INFO ContextHandler: Started o.e.j.s.ServletContextHandler@49bf29c6{/executors/threadDump/json,null,AVAILABLE,@Spark}
+18/01/26 12:20:30 INFO ContextHandler: Started o.e.j.s.ServletContextHandler@3fcdcf{/static,null,AVAILABLE,@Spark}
+18/01/26 12:20:30 INFO ContextHandler: Started o.e.j.s.ServletContextHandler@3b4ef7{/,null,AVAILABLE,@Spark}
+18/01/26 12:20:30 INFO ContextHandler: Started o.e.j.s.ServletContextHandler@5987e932{/api,null,AVAILABLE,@Spark}
+18/01/26 12:20:30 INFO ContextHandler: Started o.e.j.s.ServletContextHandler@4a8b5227{/jobs/job/kill,null,AVAILABLE,@Spark}
+18/01/26 12:20:30 INFO ContextHandler: Started o.e.j.s.ServletContextHandler@6979efad{/stages/stage/kill,null,AVAILABLE,@Spark}
+18/01/26 12:20:30 INFO SparkUI: Bound SparkUI to 0.0.0.0, and started at http://138.96.200.169:4040
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/htrace-core-3.0.4.jar at spark://138.96.200.169:38525/jars/htrace-core-3.0.4.jar with timestamp 1516965630958
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/javax.annotation-api-1.2.jar at spark://138.96.200.169:38525/jars/javax.annotation-api-1.2.jar with timestamp 1516965630959
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/spark-streaming_2.11-2.2.2-SNAPSHOT.jar at spark://138.96.200.169:38525/jars/spark-streaming_2.11-2.2.2-SNAPSHOT.jar with timestamp 1516965630959
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/osgi-resource-locator-1.0.1.jar at spark://138.96.200.169:38525/jars/osgi-resource-locator-1.0.1.jar with timestamp 1516965630959
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/avro-ipc-1.7.7.jar at spark://138.96.200.169:38525/jars/avro-ipc-1.7.7.jar with timestamp 1516965630959
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/scala-library-2.11.8.jar at spark://138.96.200.169:38525/jars/scala-library-2.11.8.jar with timestamp 1516965630960
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/spark-unsafe_2.11-2.2.2-SNAPSHOT.jar at spark://138.96.200.169:38525/jars/spark-unsafe_2.11-2.2.2-SNAPSHOT.jar with timestamp 1516965630960
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/commons-configuration-1.6.jar at spark://138.96.200.169:38525/jars/commons-configuration-1.6.jar with timestamp 1516965630960
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/ST4-4.0.4.jar at spark://138.96.200.169:38525/jars/ST4-4.0.4.jar with timestamp 1516965630960
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/xercesImpl-2.9.1.jar at spark://138.96.200.169:38525/jars/xercesImpl-2.9.1.jar with timestamp 1516965630960
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/jcl-over-slf4j-1.7.16.jar at spark://138.96.200.169:38525/jars/jcl-over-slf4j-1.7.16.jar with timestamp 1516965630960
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/jets3t-0.9.3.jar at spark://138.96.200.169:38525/jars/jets3t-0.9.3.jar with timestamp 1516965630960
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/breeze-macros_2.11-0.13.2.jar at spark://138.96.200.169:38525/jars/breeze-macros_2.11-0.13.2.jar with timestamp 1516965630960
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/javax.inject-2.4.0-b34.jar at spark://138.96.200.169:38525/jars/javax.inject-2.4.0-b34.jar with timestamp 1516965630961
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/compress-lzf-1.0.3.jar at spark://138.96.200.169:38525/jars/compress-lzf-1.0.3.jar with timestamp 1516965630961
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/validation-api-1.1.0.Final.jar at spark://138.96.200.169:38525/jars/validation-api-1.1.0.Final.jar with timestamp 1516965630961
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/commons-dbcp-1.4.jar at spark://138.96.200.169:38525/jars/commons-dbcp-1.4.jar with timestamp 1516965630961
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/JavaEWAH-0.3.2.jar at spark://138.96.200.169:38525/jars/JavaEWAH-0.3.2.jar with timestamp 1516965630961
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/spark-mllib_2.11-2.2.2-SNAPSHOT.jar at spark://138.96.200.169:38525/jars/spark-mllib_2.11-2.2.2-SNAPSHOT.jar with timestamp 1516965630961
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/jetty-servlet-9.3.11.v20160721.jar at spark://138.96.200.169:38525/jars/jetty-servlet-9.3.11.v20160721.jar with timestamp 1516965630961
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/scopt_2.11-3.3.0.jar at spark://138.96.200.169:38525/jars/scopt_2.11-3.3.0.jar with timestamp 1516965630961
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/chill_2.11-0.8.0.jar at spark://138.96.200.169:38525/jars/chill_2.11-0.8.0.jar with timestamp 1516965630962
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/jersey-container-servlet-2.22.2.jar at spark://138.96.200.169:38525/jars/jersey-container-servlet-2.22.2.jar with timestamp 1516965630962
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/servlet-api-2.5-20110124.jar at spark://138.96.200.169:38525/jars/servlet-api-2.5-20110124.jar with timestamp 1516965630962
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/jetty-client-9.3.11.v20160721.jar at spark://138.96.200.169:38525/jars/jetty-client-9.3.11.v20160721.jar with timestamp 1516965630962
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/spark-launcher_2.11-2.2.2-SNAPSHOT.jar at spark://138.96.200.169:38525/jars/spark-launcher_2.11-2.2.2-SNAPSHOT.jar with timestamp 1516965630962
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/calcite-linq4j-1.2.0-incubating.jar at spark://138.96.200.169:38525/jars/calcite-linq4j-1.2.0-incubating.jar with timestamp 1516965630962
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/spark-streaming-flume_2.11-2.2.2-SNAPSHOT.jar at spark://138.96.200.169:38525/jars/spark-streaming-flume_2.11-2.2.2-SNAPSHOT.jar with timestamp 1516965630962
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/commons-beanutils-core-1.8.0.jar at spark://138.96.200.169:38525/jars/commons-beanutils-core-1.8.0.jar with timestamp 1516965630962
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/java-xmlbuilder-1.0.jar at spark://138.96.200.169:38525/jars/java-xmlbuilder-1.0.jar with timestamp 1516965630963
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/hadoop-hdfs-2.6.5.jar at spark://138.96.200.169:38525/jars/hadoop-hdfs-2.6.5.jar with timestamp 1516965630963
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/stax-api-1.0.1.jar at spark://138.96.200.169:38525/jars/stax-api-1.0.1.jar with timestamp 1516965630963
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/jtransforms-2.4.0.jar at spark://138.96.200.169:38525/jars/jtransforms-2.4.0.jar with timestamp 1516965630963
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/hadoop-common-2.6.5.jar at spark://138.96.200.169:38525/jars/hadoop-common-2.6.5.jar with timestamp 1516965630963
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/flume-ng-sdk-1.6.0.jar at spark://138.96.200.169:38525/jars/flume-ng-sdk-1.6.0.jar with timestamp 1516965630963
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/pyrolite-4.13.jar at spark://138.96.200.169:38525/jars/pyrolite-4.13.jar with timestamp 1516965630963
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/javassist-3.18.1-GA.jar at spark://138.96.200.169:38525/jars/javassist-3.18.1-GA.jar with timestamp 1516965630963
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/jettison-1.1.jar at spark://138.96.200.169:38525/jars/jettison-1.1.jar with timestamp 1516965630964
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/jetty-io-9.3.11.v20160721.jar at spark://138.96.200.169:38525/jars/jetty-io-9.3.11.v20160721.jar with timestamp 1516965630964
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/paranamer-2.6.jar at spark://138.96.200.169:38525/jars/paranamer-2.6.jar with timestamp 1516965630964
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/jackson-module-paranamer-2.6.5.jar at spark://138.96.200.169:38525/jars/jackson-module-paranamer-2.6.5.jar with timestamp 1516965630964
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/spark-graphx_2.11-2.2.2-SNAPSHOT.jar at spark://138.96.200.169:38525/jars/spark-graphx_2.11-2.2.2-SNAPSHOT.jar with timestamp 1516965630964
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/ivy-2.4.0.jar at spark://138.96.200.169:38525/jars/ivy-2.4.0.jar with timestamp 1516965630964
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/commons-crypto-1.0.0.jar at spark://138.96.200.169:38525/jars/commons-crypto-1.0.0.jar with timestamp 1516965630964
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/hadoop-mapreduce-client-app-2.6.5.jar at spark://138.96.200.169:38525/jars/hadoop-mapreduce-client-app-2.6.5.jar with timestamp 1516965630964
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/httpclient-4.5.2.jar at spark://138.96.200.169:38525/jars/httpclient-4.5.2.jar with timestamp 1516965630965
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/curator-recipes-2.6.0.jar at spark://138.96.200.169:38525/jars/curator-recipes-2.6.0.jar with timestamp 1516965630965
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/libfb303-0.9.3.jar at spark://138.96.200.169:38525/jars/libfb303-0.9.3.jar with timestamp 1516965630965
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/jersey-media-jaxb-2.22.2.jar at spark://138.96.200.169:38525/jars/jersey-media-jaxb-2.22.2.jar with timestamp 1516965630965
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/api-util-1.0.0-M20.jar at spark://138.96.200.169:38525/jars/api-util-1.0.0-M20.jar with timestamp 1516965630965
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/metrics-json-3.1.2.jar at spark://138.96.200.169:38525/jars/metrics-json-3.1.2.jar with timestamp 1516965630965
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/hive-exec-1.2.1.spark2.jar at spark://138.96.200.169:38525/jars/hive-exec-1.2.1.spark2.jar with timestamp 1516965630965
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/jetty-util-9.3.11.v20160721.jar at spark://138.96.200.169:38525/jars/jetty-util-9.3.11.v20160721.jar with timestamp 1516965630965
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/spire_2.11-0.13.0.jar at spark://138.96.200.169:38525/jars/spire_2.11-0.13.0.jar with timestamp 1516965630966
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/hk2-locator-2.4.0-b34.jar at spark://138.96.200.169:38525/jars/hk2-locator-2.4.0-b34.jar with timestamp 1516965630966
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/spark-network-common_2.11-2.2.2-SNAPSHOT.jar at spark://138.96.200.169:38525/jars/spark-network-common_2.11-2.2.2-SNAPSHOT.jar with timestamp 1516965630966
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/velocity-1.7.jar at spark://138.96.200.169:38525/jars/velocity-1.7.jar with timestamp 1516965630966
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/flume-ng-core-1.6.0.jar at spark://138.96.200.169:38525/jars/flume-ng-core-1.6.0.jar with timestamp 1516965630966
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/commons-io-2.4.jar at spark://138.96.200.169:38525/jars/commons-io-2.4.jar with timestamp 1516965630966
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/jersey-container-servlet-core-2.22.2.jar at spark://138.96.200.169:38525/jars/jersey-container-servlet-core-2.22.2.jar with timestamp 1516965630966
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/apache-log4j-extras-1.2.17.jar at spark://138.96.200.169:38525/jars/apache-log4j-extras-1.2.17.jar with timestamp 1516965630966
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/scala-reflect-2.11.8.jar at spark://138.96.200.169:38525/jars/scala-reflect-2.11.8.jar with timestamp 1516965630966
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/javax.servlet-api-3.1.0.jar at spark://138.96.200.169:38525/jars/javax.servlet-api-3.1.0.jar with timestamp 1516965630967
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/parquet-encoding-1.8.2.jar at spark://138.96.200.169:38525/jars/parquet-encoding-1.8.2.jar with timestamp 1516965630967
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/hadoop-yarn-server-common-2.6.5.jar at spark://138.96.200.169:38525/jars/hadoop-yarn-server-common-2.6.5.jar with timestamp 1516965630967
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/jackson-xc-1.9.13.jar at spark://138.96.200.169:38525/jars/jackson-xc-1.9.13.jar with timestamp 1516965630967
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/commons-pool-1.5.4.jar at spark://138.96.200.169:38525/jars/commons-pool-1.5.4.jar with timestamp 1516965630967
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/jackson-databind-2.6.5.jar at spark://138.96.200.169:38525/jars/jackson-databind-2.6.5.jar with timestamp 1516965630967
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/mina-core-2.0.4.jar at spark://138.96.200.169:38525/jars/mina-core-2.0.4.jar with timestamp 1516965630967
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/hadoop-yarn-api-2.6.5.jar at spark://138.96.200.169:38525/jars/hadoop-yarn-api-2.6.5.jar with timestamp 1516965630967
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/gson-2.2.4.jar at spark://138.96.200.169:38525/jars/gson-2.2.4.jar with timestamp 1516965630968
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/datanucleus-api-jdo-3.2.6.jar at spark://138.96.200.169:38525/jars/datanucleus-api-jdo-3.2.6.jar with timestamp 1516965630968
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/commons-compiler-3.0.7.jar at spark://138.96.200.169:38525/jars/commons-compiler-3.0.7.jar with timestamp 1516965630968
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/hadoop-yarn-common-2.6.5.jar at spark://138.96.200.169:38525/jars/hadoop-yarn-common-2.6.5.jar with timestamp 1516965630968
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/jackson-core-asl-1.9.13.jar at spark://138.96.200.169:38525/jars/jackson-core-asl-1.9.13.jar with timestamp 1516965630968
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/commons-collections-3.2.2.jar at spark://138.96.200.169:38525/jars/commons-collections-3.2.2.jar with timestamp 1516965630968
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/commons-logging-1.2.jar at spark://138.96.200.169:38525/jars/commons-logging-1.2.jar with timestamp 1516965630968
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/parquet-common-1.8.2.jar at spark://138.96.200.169:38525/jars/parquet-common-1.8.2.jar with timestamp 1516965630968
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/unused-1.0.0.jar at spark://138.96.200.169:38525/jars/unused-1.0.0.jar with timestamp 1516965630969
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/commons-digester-1.8.jar at spark://138.96.200.169:38525/jars/commons-digester-1.8.jar with timestamp 1516965630969
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/bcprov-jdk15on-1.51.jar at spark://138.96.200.169:38525/jars/bcprov-jdk15on-1.51.jar with timestamp 1516965630969
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/stream-2.7.0.jar at spark://138.96.200.169:38525/jars/stream-2.7.0.jar with timestamp 1516965630969
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/jdo-api-3.0.1.jar at spark://138.96.200.169:38525/jars/jdo-api-3.0.1.jar with timestamp 1516965630969
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/guava-14.0.1.jar at spark://138.96.200.169:38525/jars/guava-14.0.1.jar with timestamp 1516965630969
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/avro-1.7.7.jar at spark://138.96.200.169:38525/jars/avro-1.7.7.jar with timestamp 1516965630969
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/hk2-utils-2.4.0-b34.jar at spark://138.96.200.169:38525/jars/hk2-utils-2.4.0-b34.jar with timestamp 1516965630969
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/jetty-server-9.3.11.v20160721.jar at spark://138.96.200.169:38525/jars/jetty-server-9.3.11.v20160721.jar with timestamp 1516965630969
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/javax.inject-1.jar at spark://138.96.200.169:38525/jars/javax.inject-1.jar with timestamp 1516965630970
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/spark-tags_2.11-2.2.2-SNAPSHOT.jar at spark://138.96.200.169:38525/jars/spark-tags_2.11-2.2.2-SNAPSHOT.jar with timestamp 1516965630970
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/xmlenc-0.52.jar at spark://138.96.200.169:38525/jars/xmlenc-0.52.jar with timestamp 1516965630970
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/parquet-hadoop-bundle-1.6.0.jar at spark://138.96.200.169:38525/jars/parquet-hadoop-bundle-1.6.0.jar with timestamp 1516965630970
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/shapeless_2.11-2.3.2.jar at spark://138.96.200.169:38525/jars/shapeless_2.11-2.3.2.jar with timestamp 1516965630970
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/jetty-6.1.26.jar at spark://138.96.200.169:38525/jars/jetty-6.1.26.jar with timestamp 1516965630970
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/jetty-plus-9.3.11.v20160721.jar at spark://138.96.200.169:38525/jars/jetty-plus-9.3.11.v20160721.jar with timestamp 1516965630970
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/commons-lang3-3.5.jar at spark://138.96.200.169:38525/jars/commons-lang3-3.5.jar with timestamp 1516965630970
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/aopalliance-1.0.jar at spark://138.96.200.169:38525/jars/aopalliance-1.0.jar with timestamp 1516965630970
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/jaxb-api-2.2.2.jar at spark://138.96.200.169:38525/jars/jaxb-api-2.2.2.jar with timestamp 1516965630971
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/curator-client-2.6.0.jar at spark://138.96.200.169:38525/jars/curator-client-2.6.0.jar with timestamp 1516965630971
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/spark-core_2.11-2.2.2-SNAPSHOT.jar at spark://138.96.200.169:38525/jars/spark-core_2.11-2.2.2-SNAPSHOT.jar with timestamp 1516965630971
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/metrics-core-3.1.2.jar at spark://138.96.200.169:38525/jars/metrics-core-3.1.2.jar with timestamp 1516965630971
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/commons-cli-1.2.jar at spark://138.96.200.169:38525/jars/commons-cli-1.2.jar with timestamp 1516965630971
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/hadoop-mapreduce-client-jobclient-2.6.5.jar at spark://138.96.200.169:38525/jars/hadoop-mapreduce-client-jobclient-2.6.5.jar with timestamp 1516965630971
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/spire-macros_2.11-0.13.0.jar at spark://138.96.200.169:38525/jars/spire-macros_2.11-0.13.0.jar with timestamp 1516965630971
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/spark-catalyst_2.11-2.2.2-SNAPSHOT.jar at spark://138.96.200.169:38525/jars/spark-catalyst_2.11-2.2.2-SNAPSHOT.jar with timestamp 1516965630971
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/metrics-jvm-3.1.2.jar at spark://138.96.200.169:38525/jars/metrics-jvm-3.1.2.jar with timestamp 1516965630971
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/parquet-column-1.8.2.jar at spark://138.96.200.169:38525/jars/parquet-column-1.8.2.jar with timestamp 1516965630972
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/janino-3.0.7.jar at spark://138.96.200.169:38525/jars/janino-3.0.7.jar with timestamp 1516965630972
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/guice-3.0.jar at spark://138.96.200.169:38525/jars/guice-3.0.jar with timestamp 1516965630972
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/avro-ipc-1.7.7-tests.jar at spark://138.96.200.169:38525/jars/avro-ipc-1.7.7-tests.jar with timestamp 1516965630972
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/mail-1.4.7.jar at spark://138.96.200.169:38525/jars/mail-1.4.7.jar with timestamp 1516965630972
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/jersey-client-2.22.2.jar at spark://138.96.200.169:38525/jars/jersey-client-2.22.2.jar with timestamp 1516965630972
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/pmml-schema-1.2.15.jar at spark://138.96.200.169:38525/jars/pmml-schema-1.2.15.jar with timestamp 1516965630972
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/py4j-0.10.4.jar at spark://138.96.200.169:38525/jars/py4j-0.10.4.jar with timestamp 1516965630972
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/hadoop-auth-2.6.5.jar at spark://138.96.200.169:38525/jars/hadoop-auth-2.6.5.jar with timestamp 1516965630972
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/bonecp-0.8.0.RELEASE.jar at spark://138.96.200.169:38525/jars/bonecp-0.8.0.RELEASE.jar with timestamp 1516965630972
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/hadoop-client-2.6.5.jar at spark://138.96.200.169:38525/jars/hadoop-client-2.6.5.jar with timestamp 1516965630973
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/jackson-mapper-asl-1.9.13.jar at spark://138.96.200.169:38525/jars/jackson-mapper-asl-1.9.13.jar with timestamp 1516965630973
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/antlr-runtime-3.4.jar at spark://138.96.200.169:38525/jars/antlr-runtime-3.4.jar with timestamp 1516965630973
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/jersey-guava-2.22.2.jar at spark://138.96.200.169:38525/jars/jersey-guava-2.22.2.jar with timestamp 1516965630973
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/jackson-annotations-2.6.5.jar at spark://138.96.200.169:38525/jars/jackson-annotations-2.6.5.jar with timestamp 1516965630973
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/scalap-2.11.8.jar at spark://138.96.200.169:38525/jars/scalap-2.11.8.jar with timestamp 1516965630973
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/jersey-common-2.22.2.jar at spark://138.96.200.169:38525/jars/jersey-common-2.22.2.jar with timestamp 1516965630973
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/avro-mapred-1.7.7-hadoop2.jar at spark://138.96.200.169:38525/jars/avro-mapred-1.7.7-hadoop2.jar with timestamp 1516965630973
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/RoaringBitmap-0.5.11.jar at spark://138.96.200.169:38525/jars/RoaringBitmap-0.5.11.jar with timestamp 1516965630973
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/objenesis-2.1.jar at spark://138.96.200.169:38525/jars/objenesis-2.1.jar with timestamp 1516965630974
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/stax-api-1.0-2.jar at spark://138.96.200.169:38525/jars/stax-api-1.0-2.jar with timestamp 1516965630974
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/spark-sketch_2.11-2.2.2-SNAPSHOT.jar at spark://138.96.200.169:38525/jars/spark-sketch_2.11-2.2.2-SNAPSHOT.jar with timestamp 1516965630974
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/univocity-parsers-2.2.1.jar at spark://138.96.200.169:38525/jars/univocity-parsers-2.2.1.jar with timestamp 1516965630974
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/metrics-graphite-3.1.2.jar at spark://138.96.200.169:38525/jars/metrics-graphite-3.1.2.jar with timestamp 1516965630974
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/activation-1.1.1.jar at spark://138.96.200.169:38525/jars/activation-1.1.1.jar with timestamp 1516965630974
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/mx4j-3.0.2.jar at spark://138.96.200.169:38525/jars/mx4j-3.0.2.jar with timestamp 1516965630974
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/minlog-1.3.0.jar at spark://138.96.200.169:38525/jars/minlog-1.3.0.jar with timestamp 1516965630974
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/spark-sql_2.11-2.2.2-SNAPSHOT.jar at spark://138.96.200.169:38525/jars/spark-sql_2.11-2.2.2-SNAPSHOT.jar with timestamp 1516965630974
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/protobuf-java-2.5.0.jar at spark://138.96.200.169:38525/jars/protobuf-java-2.5.0.jar with timestamp 1516965630975
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/pmml-model-1.2.15.jar at spark://138.96.200.169:38525/jars/pmml-model-1.2.15.jar with timestamp 1516965630975
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/base64-2.3.8.jar at spark://138.96.200.169:38525/jars/base64-2.3.8.jar with timestamp 1516965630975
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/metrics-core-2.2.0.jar at spark://138.96.200.169:38525/jars/metrics-core-2.2.0.jar with timestamp 1516965630975
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/antlr-2.7.7.jar at spark://138.96.200.169:38525/jars/antlr-2.7.7.jar with timestamp 1516965630975
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/chill-java-0.8.0.jar at spark://138.96.200.169:38525/jars/chill-java-0.8.0.jar with timestamp 1516965630975
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/netty-all-4.0.43.Final.jar at spark://138.96.200.169:38525/jars/netty-all-4.0.43.Final.jar with timestamp 1516965630975
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/slf4j-api-1.7.21.jar at spark://138.96.200.169:38525/jars/slf4j-api-1.7.21.jar with timestamp 1516965630975
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/cglib-2.2.1-v20090111.jar at spark://138.96.200.169:38525/jars/cglib-2.2.1-v20090111.jar with timestamp 1516965630975
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/jetty-http-9.3.11.v20160721.jar at spark://138.96.200.169:38525/jars/jetty-http-9.3.11.v20160721.jar with timestamp 1516965630976
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/slf4j-log4j12-1.7.16.jar at spark://138.96.200.169:38525/jars/slf4j-log4j12-1.7.16.jar with timestamp 1516965630976
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/parquet-hadoop-1.8.2.jar at spark://138.96.200.169:38525/jars/parquet-hadoop-1.8.2.jar with timestamp 1516965630976
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/hk2-api-2.4.0-b34.jar at spark://138.96.200.169:38525/jars/hk2-api-2.4.0-b34.jar with timestamp 1516965630976
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/core-1.1.2.jar at spark://138.96.200.169:38525/jars/core-1.1.2.jar with timestamp 1516965630976
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/api-asn1-api-1.0.0-M20.jar at spark://138.96.200.169:38525/jars/api-asn1-api-1.0.0-M20.jar with timestamp 1516965630976
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/json4s-jackson_2.11-3.2.11.jar at spark://138.96.200.169:38525/jars/json4s-jackson_2.11-3.2.11.jar with timestamp 1516965630977
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/commons-net-3.1.jar at spark://138.96.200.169:38525/jars/commons-net-3.1.jar with timestamp 1516965630977
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/avro-compiler-1.7.3.jar at spark://138.96.200.169:38525/jars/avro-compiler-1.7.3.jar with timestamp 1516965630977
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/jetty-webapp-9.3.11.v20160721.jar at spark://138.96.200.169:38525/jars/jetty-webapp-9.3.11.v20160721.jar with timestamp 1516965630977
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/jetty-jndi-9.3.11.v20160721.jar at spark://138.96.200.169:38525/jars/jetty-jndi-9.3.11.v20160721.jar with timestamp 1516965630977
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/spark-sql-kafka-0-10_2.11-2.2.2-SNAPSHOT.jar at spark://138.96.200.169:38525/jars/spark-sql-kafka-0-10_2.11-2.2.2-SNAPSHOT.jar with timestamp 1516965630977
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/jsr305-1.3.9.jar at spark://138.96.200.169:38525/jars/jsr305-1.3.9.jar with timestamp 1516965630977
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/flume-ng-auth-1.6.0.jar at spark://138.96.200.169:38525/jars/flume-ng-auth-1.6.0.jar with timestamp 1516965630977
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/commons-lang-2.6.jar at spark://138.96.200.169:38525/jars/commons-lang-2.6.jar with timestamp 1516965630977
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/spark-streaming-flume-sink_2.11-2.2.2-SNAPSHOT.jar at spark://138.96.200.169:38525/jars/spark-streaming-flume-sink_2.11-2.2.2-SNAPSHOT.jar with timestamp 1516965630977
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/apacheds-i18n-2.0.0-M15.jar at spark://138.96.200.169:38525/jars/apacheds-i18n-2.0.0-M15.jar with timestamp 1516965630978
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/jetty-continuation-9.3.11.v20160721.jar at spark://138.96.200.169:38525/jars/jetty-continuation-9.3.11.v20160721.jar with timestamp 1516965630978
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/spark-mllib-local_2.11-2.2.2-SNAPSHOT.jar at spark://138.96.200.169:38525/jars/spark-mllib-local_2.11-2.2.2-SNAPSHOT.jar with timestamp 1516965630978
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/parquet-format-2.3.1.jar at spark://138.96.200.169:38525/jars/parquet-format-2.3.1.jar with timestamp 1516965630978
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/spark-streaming-kafka-0-8_2.11-2.2.2-SNAPSHOT.jar at spark://138.96.200.169:38525/jars/spark-streaming-kafka-0-8_2.11-2.2.2-SNAPSHOT.jar with timestamp 1516965630978
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/datanucleus-rdbms-3.2.9.jar at spark://138.96.200.169:38525/jars/datanucleus-rdbms-3.2.9.jar with timestamp 1516965630978
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/jul-to-slf4j-1.7.16.jar at spark://138.96.200.169:38525/jars/jul-to-slf4j-1.7.16.jar with timestamp 1516965630978
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/datanucleus-core-3.2.10.jar at spark://138.96.200.169:38525/jars/datanucleus-core-3.2.10.jar with timestamp 1516965630978
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/hive-metastore-1.2.1.spark2.jar at spark://138.96.200.169:38525/jars/hive-metastore-1.2.1.spark2.jar with timestamp 1516965630978
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/hadoop-annotations-2.6.5.jar at spark://138.96.200.169:38525/jars/hadoop-annotations-2.6.5.jar with timestamp 1516965630979
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/jodd-core-3.5.2.jar at spark://138.96.200.169:38525/jars/jodd-core-3.5.2.jar with timestamp 1516965630979
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/json4s-ast_2.11-3.2.11.jar at spark://138.96.200.169:38525/jars/json4s-ast_2.11-3.2.11.jar with timestamp 1516965630979
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/jetty-util-6.1.26.jar at spark://138.96.200.169:38525/jars/jetty-util-6.1.26.jar with timestamp 1516965630979
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/commons-compress-1.4.1.jar at spark://138.96.200.169:38525/jars/commons-compress-1.4.1.jar with timestamp 1516965630979
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/zkclient-0.3.jar at spark://138.96.200.169:38525/jars/zkclient-0.3.jar with timestamp 1516965630979
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/macro-compat_2.11-1.1.1.jar at spark://138.96.200.169:38525/jars/macro-compat_2.11-1.1.1.jar with timestamp 1516965630979
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/scala-xml_2.11-1.0.4.jar at spark://138.96.200.169:38525/jars/scala-xml_2.11-1.0.4.jar with timestamp 1516965630979
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/scala-parser-combinators_2.11-1.0.4.jar at spark://138.96.200.169:38525/jars/scala-parser-combinators_2.11-1.0.4.jar with timestamp 1516965630979
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/eigenbase-properties-1.1.5.jar at spark://138.96.200.169:38525/jars/eigenbase-properties-1.1.5.jar with timestamp 1516965630979
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/xz-1.0.jar at spark://138.96.200.169:38525/jars/xz-1.0.jar with timestamp 1516965630980
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/javax.ws.rs-api-2.0.1.jar at spark://138.96.200.169:38525/jars/javax.ws.rs-api-2.0.1.jar with timestamp 1516965630980
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/zookeeper-3.4.6.jar at spark://138.96.200.169:38525/jars/zookeeper-3.4.6.jar with timestamp 1516965630980
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/json4s-core_2.11-3.2.11.jar at spark://138.96.200.169:38525/jars/json4s-core_2.11-3.2.11.jar with timestamp 1516965630980
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/jackson-module-scala_2.11-2.6.5.jar at spark://138.96.200.169:38525/jars/jackson-module-scala_2.11-2.6.5.jar with timestamp 1516965630980
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/antlr4-runtime-4.5.3.jar at spark://138.96.200.169:38525/jars/antlr4-runtime-4.5.3.jar with timestamp 1516965630980
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/hadoop-yarn-client-2.6.5.jar at spark://138.96.200.169:38525/jars/hadoop-yarn-client-2.6.5.jar with timestamp 1516965630980
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/oro-2.0.8.jar at spark://138.96.200.169:38525/jars/oro-2.0.8.jar with timestamp 1516965630980
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/libthrift-0.9.3.jar at spark://138.96.200.169:38525/jars/libthrift-0.9.3.jar with timestamp 1516965630980
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/jetty-proxy-9.3.11.v20160721.jar at spark://138.96.200.169:38525/jars/jetty-proxy-9.3.11.v20160721.jar with timestamp 1516965630980
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/commons-beanutils-1.7.0.jar at spark://138.96.200.169:38525/jars/commons-beanutils-1.7.0.jar with timestamp 1516965630981
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/joda-time-2.9.3.jar at spark://138.96.200.169:38525/jars/joda-time-2.9.3.jar with timestamp 1516965630981
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/xbean-asm5-shaded-4.4.jar at spark://138.96.200.169:38525/jars/xbean-asm5-shaded-4.4.jar with timestamp 1516965630981
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/derby-10.12.1.1.jar at spark://138.96.200.169:38525/jars/derby-10.12.1.1.jar with timestamp 1516965630981
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/jersey-server-2.22.2.jar at spark://138.96.200.169:38525/jars/jersey-server-2.22.2.jar with timestamp 1516965630981
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/kryo-shaded-3.0.3.jar at spark://138.96.200.169:38525/jars/kryo-shaded-3.0.3.jar with timestamp 1516965630981
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/commons-math3-3.4.1.jar at spark://138.96.200.169:38525/jars/commons-math3-3.4.1.jar with timestamp 1516965630981
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/hadoop-mapreduce-client-shuffle-2.6.5.jar at spark://138.96.200.169:38525/jars/hadoop-mapreduce-client-shuffle-2.6.5.jar with timestamp 1516965630981
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/calcite-core-1.2.0-incubating.jar at spark://138.96.200.169:38525/jars/calcite-core-1.2.0-incubating.jar with timestamp 1516965630981
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/jetty-xml-9.3.11.v20160721.jar at spark://138.96.200.169:38525/jars/jetty-xml-9.3.11.v20160721.jar with timestamp 1516965630981
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/commons-httpclient-3.1.jar at spark://138.96.200.169:38525/jars/commons-httpclient-3.1.jar with timestamp 1516965630982
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/opencsv-2.3.jar at spark://138.96.200.169:38525/jars/opencsv-2.3.jar with timestamp 1516965630982
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/xml-apis-1.3.04.jar at spark://138.96.200.169:38525/jars/xml-apis-1.3.04.jar with timestamp 1516965630982
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/jetty-servlets-9.3.11.v20160721.jar at spark://138.96.200.169:38525/jars/jetty-servlets-9.3.11.v20160721.jar with timestamp 1516965630982
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/jetty-security-9.3.11.v20160721.jar at spark://138.96.200.169:38525/jars/jetty-security-9.3.11.v20160721.jar with timestamp 1516965630982
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/jackson-core-2.6.5.jar at spark://138.96.200.169:38525/jars/jackson-core-2.6.5.jar with timestamp 1516965630982
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/jline-0.9.94.jar at spark://138.96.200.169:38525/jars/jline-0.9.94.jar with timestamp 1516965630982
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/lz4-1.3.0.jar at spark://138.96.200.169:38525/jars/lz4-1.3.0.jar with timestamp 1516965630982
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/aopalliance-repackaged-2.4.0-b34.jar at spark://138.96.200.169:38525/jars/aopalliance-repackaged-2.4.0-b34.jar with timestamp 1516965630982
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/spark-examples_2.11-2.2.2-SNAPSHOT.jar at spark://138.96.200.169:38525/jars/spark-examples_2.11-2.2.2-SNAPSHOT.jar with timestamp 1516965630983
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/arpack_combined_all-0.1.jar at spark://138.96.200.169:38525/jars/arpack_combined_all-0.1.jar with timestamp 1516965630983
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/spark-network-shuffle_2.11-2.2.2-SNAPSHOT.jar at spark://138.96.200.169:38525/jars/spark-network-shuffle_2.11-2.2.2-SNAPSHOT.jar with timestamp 1516965630983
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/snappy-0.2.jar at spark://138.96.200.169:38525/jars/snappy-0.2.jar with timestamp 1516965630983
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/httpcore-4.4.4.jar at spark://138.96.200.169:38525/jars/httpcore-4.4.4.jar with timestamp 1516965630983
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/commons-codec-1.10.jar at spark://138.96.200.169:38525/jars/commons-codec-1.10.jar with timestamp 1516965630983
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/jackson-jaxrs-1.9.13.jar at spark://138.96.200.169:38525/jars/jackson-jaxrs-1.9.13.jar with timestamp 1516965630983
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/snappy-java-1.1.2.6.jar at spark://138.96.200.169:38525/jars/snappy-java-1.1.2.6.jar with timestamp 1516965630983
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/breeze_2.11-0.13.2.jar at spark://138.96.200.169:38525/jars/breeze_2.11-0.13.2.jar with timestamp 1516965630983
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/flume-ng-configuration-1.6.0.jar at spark://138.96.200.169:38525/jars/flume-ng-configuration-1.6.0.jar with timestamp 1516965630983
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/javolution-5.5.1.jar at spark://138.96.200.169:38525/jars/javolution-5.5.1.jar with timestamp 1516965630983
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/kafka_2.11-0.8.2.1.jar at spark://138.96.200.169:38525/jars/kafka_2.11-0.8.2.1.jar with timestamp 1516965630984
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/netty-3.9.9.Final.jar at spark://138.96.200.169:38525/jars/netty-3.9.9.Final.jar with timestamp 1516965630984
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/machinist_2.11-0.6.1.jar at spark://138.96.200.169:38525/jars/machinist_2.11-0.6.1.jar with timestamp 1516965630984
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/scala-compiler-2.11.8.jar at spark://138.96.200.169:38525/jars/scala-compiler-2.11.8.jar with timestamp 1516965630984
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/parquet-jackson-1.8.2.jar at spark://138.96.200.169:38525/jars/parquet-jackson-1.8.2.jar with timestamp 1516965630984
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/leveldbjni-all-1.8.jar at spark://138.96.200.169:38525/jars/leveldbjni-all-1.8.jar with timestamp 1516965630984
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/stringtemplate-3.2.1.jar at spark://138.96.200.169:38525/jars/stringtemplate-3.2.1.jar with timestamp 1516965630984
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/apacheds-kerberos-codec-2.0.0-M15.jar at spark://138.96.200.169:38525/jars/apacheds-kerberos-codec-2.0.0-M15.jar with timestamp 1516965630984
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/calcite-avatica-1.2.0-incubating.jar at spark://138.96.200.169:38525/jars/calcite-avatica-1.2.0-incubating.jar with timestamp 1516965630984
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/spark-hive_2.11-2.2.2-SNAPSHOT.jar at spark://138.96.200.169:38525/jars/spark-hive_2.11-2.2.2-SNAPSHOT.jar with timestamp 1516965630984
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/hadoop-mapreduce-client-common-2.6.5.jar at spark://138.96.200.169:38525/jars/hadoop-mapreduce-client-common-2.6.5.jar with timestamp 1516965630984
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/curator-framework-2.6.0.jar at spark://138.96.200.169:38525/jars/curator-framework-2.6.0.jar with timestamp 1516965630985
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/jta-1.1.jar at spark://138.96.200.169:38525/jars/jta-1.1.jar with timestamp 1516965630985
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/kafka-clients-0.10.0.1.jar at spark://138.96.200.169:38525/jars/kafka-clients-0.10.0.1.jar with timestamp 1516965630985
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/hadoop-mapreduce-client-core-2.6.5.jar at spark://138.96.200.169:38525/jars/hadoop-mapreduce-client-core-2.6.5.jar with timestamp 1516965630985
+18/01/26 12:20:30 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/log4j-1.2.17.jar at spark://138.96.200.169:38525/jars/log4j-1.2.17.jar with timestamp 1516965630985
+18/01/26 12:20:31 INFO Executor: Starting executor ID driver on host localhost
+18/01/26 12:20:31 INFO Utils: Successfully started service 'org.apache.spark.network.netty.NettyBlockTransferService' on port 35011.
+18/01/26 12:20:31 INFO NettyBlockTransferService: Server created on 138.96.200.169:35011
+18/01/26 12:20:31 INFO BlockManager: Using org.apache.spark.storage.RandomBlockReplicationPolicy for block replication policy
+18/01/26 12:20:31 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, 138.96.200.169, 35011, None)
+18/01/26 12:20:31 INFO BlockManagerMasterEndpoint: Registering block manager 138.96.200.169:35011 with 366.3 MB RAM, BlockManagerId(driver, 138.96.200.169, 35011, None)
+18/01/26 12:20:31 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, 138.96.200.169, 35011, None)
+18/01/26 12:20:31 INFO BlockManager: Initialized BlockManager: BlockManagerId(driver, 138.96.200.169, 35011, None)
+18/01/26 12:20:31 INFO ContextHandler: Started o.e.j.s.ServletContextHandler@4c0884e8{/metrics/json,null,AVAILABLE,@Spark}
+18/01/26 12:20:31 INFO EventLoggingListener: Logging events to file:/workspaces/kderment/repos/spark/logs/local-1516965631018
+18/01/26 12:20:32 INFO SharedState: Setting hive.metastore.warehouse.dir ('null') to the value of spark.sql.warehouse.dir ('file:/local/workspaces/kderment/repos/spark/bin/spark-warehouse/').
+18/01/26 12:20:32 INFO SharedState: Warehouse path is 'file:/local/workspaces/kderment/repos/spark/bin/spark-warehouse/'.
+18/01/26 12:20:32 INFO ContextHandler: Started o.e.j.s.ServletContextHandler@477021ee{/SQL,null,AVAILABLE,@Spark}
+18/01/26 12:20:32 INFO ContextHandler: Started o.e.j.s.ServletContextHandler@5e9bbd9d{/SQL/json,null,AVAILABLE,@Spark}
+18/01/26 12:20:32 INFO ContextHandler: Started o.e.j.s.ServletContextHandler@5b1efaaf{/SQL/execution,null,AVAILABLE,@Spark}
+18/01/26 12:20:32 INFO ContextHandler: Started o.e.j.s.ServletContextHandler@2de6f1bc{/SQL/execution/json,null,AVAILABLE,@Spark}
+18/01/26 12:20:32 INFO ContextHandler: Started o.e.j.s.ServletContextHandler@40bf4386{/static/sql,null,AVAILABLE,@Spark}
+18/01/26 12:20:32 INFO StateStoreCoordinatorRef: Registered StateStoreCoordinator endpoint
+18/01/26 12:20:33 INFO CodeGenerator: Code generated in 161.602096 ms
+18/01/26 12:20:33 INFO SparkContext: Starting job: take at DeveloperApiExample.scala:128
+18/01/26 12:20:33 INFO DAGScheduler: Got job 0 (take at DeveloperApiExample.scala:128) with 1 output partitions
+18/01/26 12:20:33 INFO DAGScheduler: Final stage: ResultStage 0 (take at DeveloperApiExample.scala:128)
+18/01/26 12:20:33 INFO DAGScheduler: Parents of final stage: List()
+18/01/26 12:20:33 INFO DAGScheduler: Missing parents: List()
+18/01/26 12:20:33 INFO DAGScheduler: Submitting ResultStage 0 (MapPartitionsRDD[4] at map at Predictor.scala:152), which has no missing parents
+18/01/26 12:20:33 WARN DAGScheduler: || DAGINFO || {
+18/01/26 12:20:33 WARN DAGScheduler: || DAGINFO ||   id: 0,
+18/01/26 12:20:33 WARN DAGScheduler: || DAGINFO ||   name: ResultStage 0,
+18/01/26 12:20:33 WARN DAGScheduler: || DAGINFO ||   final_rdd_id: 4,
+18/01/26 12:20:33 WARN DAGScheduler: || DAGINFO ||   stage type: ResultStage,
+18/01/26 12:20:33 WARN DAGScheduler: || DAGINFO ||   rdds: [
+18/01/26 12:20:33 WARN DAGScheduler: || DAGINFO ||     {id: 4,
+18/01/26 12:20:33 WARN DAGScheduler: || DAGINFO ||      name: MapPartitionsRDD[4] at map at Predictor.scala:152,
+18/01/26 12:20:33 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+18/01/26 12:20:33 WARN DAGScheduler: || DAGINFO ||      partitions_number: 4,
+18/01/26 12:20:33 WARN DAGScheduler: || DAGINFO ||      paths: (1,1),
+18/01/26 12:20:33 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+18/01/26 12:20:33 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 3}
+18/01/26 12:20:33 WARN DAGScheduler: || DAGINFO ||      ]
+18/01/26 12:20:33 WARN DAGScheduler: || DAGINFO ||     },
+18/01/26 12:20:33 WARN DAGScheduler: || DAGINFO ||     {id: 3,
+18/01/26 12:20:33 WARN DAGScheduler: || DAGINFO ||      name: MapPartitionsRDD[3] at rdd at Predictor.scala:152,
+18/01/26 12:20:33 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+18/01/26 12:20:33 WARN DAGScheduler: || DAGINFO ||      partitions_number: 4,
+18/01/26 12:20:33 WARN DAGScheduler: || DAGINFO ||      paths: (1,1),
+18/01/26 12:20:33 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+18/01/26 12:20:33 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 2}
+18/01/26 12:20:33 WARN DAGScheduler: || DAGINFO ||      ]
+18/01/26 12:20:33 WARN DAGScheduler: || DAGINFO ||     },
+18/01/26 12:20:33 WARN DAGScheduler: || DAGINFO ||     {id: 2,
+18/01/26 12:20:33 WARN DAGScheduler: || DAGINFO ||      name: MapPartitionsRDD[2] at rdd at Predictor.scala:152,
+18/01/26 12:20:33 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+18/01/26 12:20:33 WARN DAGScheduler: || DAGINFO ||      partitions_number: 4,
+18/01/26 12:20:33 WARN DAGScheduler: || DAGINFO ||      paths: (1,1),
+18/01/26 12:20:33 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+18/01/26 12:20:33 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 1}
+18/01/26 12:20:33 WARN DAGScheduler: || DAGINFO ||      ]
+18/01/26 12:20:33 WARN DAGScheduler: || DAGINFO ||     },
+18/01/26 12:20:33 WARN DAGScheduler: || DAGINFO ||     {id: 1,
+18/01/26 12:20:33 WARN DAGScheduler: || DAGINFO ||      name: MapPartitionsRDD[1] at rdd at Predictor.scala:152,
+18/01/26 12:20:33 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+18/01/26 12:20:33 WARN DAGScheduler: || DAGINFO ||      partitions_number: 4,
+18/01/26 12:20:33 WARN DAGScheduler: || DAGINFO ||      paths: (1,1),
+18/01/26 12:20:33 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+18/01/26 12:20:33 WARN DAGScheduler: || DAGINFO ||          {type: narrow, rddid: 0}
+18/01/26 12:20:33 WARN DAGScheduler: || DAGINFO ||      ]
+18/01/26 12:20:33 WARN DAGScheduler: || DAGINFO ||     },
+18/01/26 12:20:33 WARN DAGScheduler: || DAGINFO ||     {id: 0,
+18/01/26 12:20:33 WARN DAGScheduler: || DAGINFO ||      name: ParallelCollectionRDD[0] at rdd at Predictor.scala:152,
+18/01/26 12:20:33 WARN DAGScheduler: || DAGINFO ||      storageLevel: StorageLevel(1 replicas),
+18/01/26 12:20:33 WARN DAGScheduler: || DAGINFO ||      partitions_number: 4,
+18/01/26 12:20:33 WARN DAGScheduler: || DAGINFO ||      paths: (1,1),
+18/01/26 12:20:33 WARN DAGScheduler: || DAGINFO ||      deps: [ 
+18/01/26 12:20:33 WARN DAGScheduler: || DAGINFO ||      ]
+18/01/26 12:20:33 WARN DAGScheduler: || DAGINFO ||     }
+18/01/26 12:20:33 WARN DAGScheduler: || DAGINFO ||   ]
+18/01/26 12:20:33 WARN DAGScheduler: || DAGINFO || }
+18/01/26 12:20:33 WARN Simulator: || SIMULATION || Starting for job = 0
+18/01/26 12:20:33 WARN Simulator: || SIMULATION || submitStage(ResultStage 0)
+18/01/26 12:20:33 WARN Simulator: || SIMULATION || missing: List()
+18/01/26 12:20:33 WARN Simulator: || SIMULATION || Statistics for 0:
+18/01/26 12:20:33 WARN Simulator: || SIMULATION || hits = 0
+18/01/26 12:20:33 WARN Simulator: || SIMULATION || misses = 0
+18/01/26 12:20:33 WARN Simulator: || SIMULATION || diskHits = 0
+18/01/26 12:20:33 WARN Simulator: || SIMULATION || narrowDependencies = 4
+18/01/26 12:20:33 WARN Simulator: || SIMULATION || shuffleDpendencies = 0
+18/01/26 12:20:33 WARN Simulator: || SIMULATION || Finished for job = 0
+18/01/26 12:20:33 INFO MemoryStore: Block broadcast_0 stored as values in memory (estimated size 7.5 KB, free 366.3 MB)
+18/01/26 12:20:33 INFO MemoryStore: Block broadcast_0_piece0 stored as bytes in memory (estimated size 3.8 KB, free 366.3 MB)
+18/01/26 12:20:33 INFO BlockManagerInfo: Added broadcast_0_piece0 in memory on 138.96.200.169:35011 (size: 3.8 KB, free: 366.3 MB)
+18/01/26 12:20:33 INFO SparkContext: Created broadcast 0 from broadcast at DAGScheduler.scala:1141
+18/01/26 12:20:33 INFO DAGScheduler: Submitting 1 missing tasks from ResultStage 0 (MapPartitionsRDD[4] at map at Predictor.scala:152) (first 15 tasks are for partitions Vector(0))
+18/01/26 12:20:33 INFO TaskSchedulerImpl: Adding task set 0.0 with 1 tasks
+18/01/26 12:20:33 INFO TaskSetManager: Starting task 0.0 in stage 0.0 (TID 0, localhost, executor driver, partition 0, PROCESS_LOCAL, 5091 bytes)
+18/01/26 12:20:33 INFO Executor: Running task 0.0 in stage 0.0 (TID 0)
+18/01/26 12:20:33 INFO Executor: Fetching spark://138.96.200.169:38525/jars/spark-sql-kafka-0-10_2.11-2.2.2-SNAPSHOT.jar with timestamp 1516965630977
+18/01/26 12:20:33 INFO TransportClientFactory: Successfully created connection to /138.96.200.169:38525 after 22 ms (0 ms spent in bootstraps)
+18/01/26 12:20:33 INFO Utils: Fetching spark://138.96.200.169:38525/jars/spark-sql-kafka-0-10_2.11-2.2.2-SNAPSHOT.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp633852932740488692.tmp
+18/01/26 12:20:33 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/spark-sql-kafka-0-10_2.11-2.2.2-SNAPSHOT.jar to class loader
+18/01/26 12:20:33 INFO Executor: Fetching spark://138.96.200.169:38525/jars/commons-compress-1.4.1.jar with timestamp 1516965630979
+18/01/26 12:20:33 INFO Utils: Fetching spark://138.96.200.169:38525/jars/commons-compress-1.4.1.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp145659210874948268.tmp
+18/01/26 12:20:33 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/commons-compress-1.4.1.jar to class loader
+18/01/26 12:20:33 INFO Executor: Fetching spark://138.96.200.169:38525/jars/zookeeper-3.4.6.jar with timestamp 1516965630980
+18/01/26 12:20:33 INFO Utils: Fetching spark://138.96.200.169:38525/jars/zookeeper-3.4.6.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp7237744945426344093.tmp
+18/01/26 12:20:33 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/zookeeper-3.4.6.jar to class loader
+18/01/26 12:20:33 INFO Executor: Fetching spark://138.96.200.169:38525/jars/calcite-linq4j-1.2.0-incubating.jar with timestamp 1516965630962
+18/01/26 12:20:33 INFO Utils: Fetching spark://138.96.200.169:38525/jars/calcite-linq4j-1.2.0-incubating.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp4293379901521883287.tmp
+18/01/26 12:20:33 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/calcite-linq4j-1.2.0-incubating.jar to class loader
+18/01/26 12:20:33 INFO Executor: Fetching spark://138.96.200.169:38525/jars/commons-beanutils-core-1.8.0.jar with timestamp 1516965630962
+18/01/26 12:20:33 INFO Utils: Fetching spark://138.96.200.169:38525/jars/commons-beanutils-core-1.8.0.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp335097672931858373.tmp
+18/01/26 12:20:33 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/commons-beanutils-core-1.8.0.jar to class loader
+18/01/26 12:20:33 INFO Executor: Fetching spark://138.96.200.169:38525/jars/hk2-utils-2.4.0-b34.jar with timestamp 1516965630969
+18/01/26 12:20:33 INFO Utils: Fetching spark://138.96.200.169:38525/jars/hk2-utils-2.4.0-b34.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp4463920599595778002.tmp
+18/01/26 12:20:33 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/hk2-utils-2.4.0-b34.jar to class loader
+18/01/26 12:20:33 INFO Executor: Fetching spark://138.96.200.169:38525/jars/curator-recipes-2.6.0.jar with timestamp 1516965630965
+18/01/26 12:20:33 INFO Utils: Fetching spark://138.96.200.169:38525/jars/curator-recipes-2.6.0.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp6764806294236921225.tmp
+18/01/26 12:20:33 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/curator-recipes-2.6.0.jar to class loader
+18/01/26 12:20:33 INFO Executor: Fetching spark://138.96.200.169:38525/jars/py4j-0.10.4.jar with timestamp 1516965630972
+18/01/26 12:20:33 INFO Utils: Fetching spark://138.96.200.169:38525/jars/py4j-0.10.4.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp7794084180763805723.tmp
+18/01/26 12:20:33 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/py4j-0.10.4.jar to class loader
+18/01/26 12:20:33 INFO Executor: Fetching spark://138.96.200.169:38525/jars/bcprov-jdk15on-1.51.jar with timestamp 1516965630969
+18/01/26 12:20:33 INFO Utils: Fetching spark://138.96.200.169:38525/jars/bcprov-jdk15on-1.51.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp8666931191855468478.tmp
+18/01/26 12:20:33 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/bcprov-jdk15on-1.51.jar to class loader
+18/01/26 12:20:33 INFO Executor: Fetching spark://138.96.200.169:38525/jars/slf4j-log4j12-1.7.16.jar with timestamp 1516965630976
+18/01/26 12:20:33 INFO Utils: Fetching spark://138.96.200.169:38525/jars/slf4j-log4j12-1.7.16.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp4676881476676366313.tmp
+18/01/26 12:20:33 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/slf4j-log4j12-1.7.16.jar to class loader
+18/01/26 12:20:33 INFO Executor: Fetching spark://138.96.200.169:38525/jars/scopt_2.11-3.3.0.jar with timestamp 1516965630961
+18/01/26 12:20:33 INFO Utils: Fetching spark://138.96.200.169:38525/jars/scopt_2.11-3.3.0.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp3385015535845460088.tmp
+18/01/26 12:20:33 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/scopt_2.11-3.3.0.jar to class loader
+18/01/26 12:20:33 INFO Executor: Fetching spark://138.96.200.169:38525/jars/jetty-client-9.3.11.v20160721.jar with timestamp 1516965630962
+18/01/26 12:20:33 INFO Utils: Fetching spark://138.96.200.169:38525/jars/jetty-client-9.3.11.v20160721.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp854015230837326775.tmp
+18/01/26 12:20:33 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/jetty-client-9.3.11.v20160721.jar to class loader
+18/01/26 12:20:33 INFO Executor: Fetching spark://138.96.200.169:38525/jars/jackson-core-asl-1.9.13.jar with timestamp 1516965630968
+18/01/26 12:20:33 INFO Utils: Fetching spark://138.96.200.169:38525/jars/jackson-core-asl-1.9.13.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp1776926462761565440.tmp
+18/01/26 12:20:33 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/jackson-core-asl-1.9.13.jar to class loader
+18/01/26 12:20:33 INFO Executor: Fetching spark://138.96.200.169:38525/jars/joda-time-2.9.3.jar with timestamp 1516965630981
+18/01/26 12:20:33 INFO Utils: Fetching spark://138.96.200.169:38525/jars/joda-time-2.9.3.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp2298230008458421740.tmp
+18/01/26 12:20:33 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/joda-time-2.9.3.jar to class loader
+18/01/26 12:20:33 INFO Executor: Fetching spark://138.96.200.169:38525/jars/validation-api-1.1.0.Final.jar with timestamp 1516965630961
+18/01/26 12:20:33 INFO Utils: Fetching spark://138.96.200.169:38525/jars/validation-api-1.1.0.Final.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp1423950267693978002.tmp
+18/01/26 12:20:33 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/validation-api-1.1.0.Final.jar to class loader
+18/01/26 12:20:33 INFO Executor: Fetching spark://138.96.200.169:38525/jars/jackson-mapper-asl-1.9.13.jar with timestamp 1516965630973
+18/01/26 12:20:33 INFO Utils: Fetching spark://138.96.200.169:38525/jars/jackson-mapper-asl-1.9.13.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp4725147668783641297.tmp
+18/01/26 12:20:33 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/jackson-mapper-asl-1.9.13.jar to class loader
+18/01/26 12:20:33 INFO Executor: Fetching spark://138.96.200.169:38525/jars/janino-3.0.7.jar with timestamp 1516965630972
+18/01/26 12:20:33 INFO Utils: Fetching spark://138.96.200.169:38525/jars/janino-3.0.7.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp2893761825991086671.tmp
+18/01/26 12:20:33 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/janino-3.0.7.jar to class loader
+18/01/26 12:20:33 INFO Executor: Fetching spark://138.96.200.169:38525/jars/avro-1.7.7.jar with timestamp 1516965630969
+18/01/26 12:20:33 INFO Utils: Fetching spark://138.96.200.169:38525/jars/avro-1.7.7.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp3705141345218983231.tmp
+18/01/26 12:20:33 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/avro-1.7.7.jar to class loader
+18/01/26 12:20:33 INFO Executor: Fetching spark://138.96.200.169:38525/jars/parquet-hadoop-bundle-1.6.0.jar with timestamp 1516965630970
+18/01/26 12:20:33 INFO Utils: Fetching spark://138.96.200.169:38525/jars/parquet-hadoop-bundle-1.6.0.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp1430310248701256332.tmp
+18/01/26 12:20:33 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/parquet-hadoop-bundle-1.6.0.jar to class loader
+18/01/26 12:20:33 INFO Executor: Fetching spark://138.96.200.169:38525/jars/stringtemplate-3.2.1.jar with timestamp 1516965630984
+18/01/26 12:20:33 INFO Utils: Fetching spark://138.96.200.169:38525/jars/stringtemplate-3.2.1.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp2926324980811966303.tmp
+18/01/26 12:20:33 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/stringtemplate-3.2.1.jar to class loader
+18/01/26 12:20:33 INFO Executor: Fetching spark://138.96.200.169:38525/jars/commons-beanutils-1.7.0.jar with timestamp 1516965630981
+18/01/26 12:20:33 INFO Utils: Fetching spark://138.96.200.169:38525/jars/commons-beanutils-1.7.0.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp6772304478097226247.tmp
+18/01/26 12:20:33 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/commons-beanutils-1.7.0.jar to class loader
+18/01/26 12:20:33 INFO Executor: Fetching spark://138.96.200.169:38525/jars/snappy-0.2.jar with timestamp 1516965630983
+18/01/26 12:20:33 INFO Utils: Fetching spark://138.96.200.169:38525/jars/snappy-0.2.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp8954382440550823094.tmp
+18/01/26 12:20:33 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/snappy-0.2.jar to class loader
+18/01/26 12:20:33 INFO Executor: Fetching spark://138.96.200.169:38525/jars/kafka-clients-0.10.0.1.jar with timestamp 1516965630985
+18/01/26 12:20:33 INFO Utils: Fetching spark://138.96.200.169:38525/jars/kafka-clients-0.10.0.1.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp3747008247157183975.tmp
+18/01/26 12:20:33 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/kafka-clients-0.10.0.1.jar to class loader
+18/01/26 12:20:33 INFO Executor: Fetching spark://138.96.200.169:38525/jars/metrics-json-3.1.2.jar with timestamp 1516965630965
+18/01/26 12:20:33 INFO Utils: Fetching spark://138.96.200.169:38525/jars/metrics-json-3.1.2.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp3196380180117528960.tmp
+18/01/26 12:20:33 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/metrics-json-3.1.2.jar to class loader
+18/01/26 12:20:33 INFO Executor: Fetching spark://138.96.200.169:38525/jars/stream-2.7.0.jar with timestamp 1516965630969
+18/01/26 12:20:33 INFO Utils: Fetching spark://138.96.200.169:38525/jars/stream-2.7.0.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp4618456375486418826.tmp
+18/01/26 12:20:33 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/stream-2.7.0.jar to class loader
+18/01/26 12:20:33 INFO Executor: Fetching spark://138.96.200.169:38525/jars/jackson-annotations-2.6.5.jar with timestamp 1516965630973
+18/01/26 12:20:33 INFO Utils: Fetching spark://138.96.200.169:38525/jars/jackson-annotations-2.6.5.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp2371975129878325469.tmp
+18/01/26 12:20:33 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/jackson-annotations-2.6.5.jar to class loader
+18/01/26 12:20:33 INFO Executor: Fetching spark://138.96.200.169:38525/jars/json4s-core_2.11-3.2.11.jar with timestamp 1516965630980
+18/01/26 12:20:33 INFO Utils: Fetching spark://138.96.200.169:38525/jars/json4s-core_2.11-3.2.11.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp8281638982339259451.tmp
+18/01/26 12:20:33 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/json4s-core_2.11-3.2.11.jar to class loader
+18/01/26 12:20:33 INFO Executor: Fetching spark://138.96.200.169:38525/jars/unused-1.0.0.jar with timestamp 1516965630969
+18/01/26 12:20:33 INFO Utils: Fetching spark://138.96.200.169:38525/jars/unused-1.0.0.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp1000596961140629244.tmp
+18/01/26 12:20:33 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/unused-1.0.0.jar to class loader
+18/01/26 12:20:33 INFO Executor: Fetching spark://138.96.200.169:38525/jars/guice-3.0.jar with timestamp 1516965630972
+18/01/26 12:20:33 INFO Utils: Fetching spark://138.96.200.169:38525/jars/guice-3.0.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp9170144938962249888.tmp
+18/01/26 12:20:33 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/guice-3.0.jar to class loader
+18/01/26 12:20:33 INFO Executor: Fetching spark://138.96.200.169:38525/jars/bonecp-0.8.0.RELEASE.jar with timestamp 1516965630972
+18/01/26 12:20:33 INFO Utils: Fetching spark://138.96.200.169:38525/jars/bonecp-0.8.0.RELEASE.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp6388701198090861678.tmp
+18/01/26 12:20:33 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/bonecp-0.8.0.RELEASE.jar to class loader
+18/01/26 12:20:33 INFO Executor: Fetching spark://138.96.200.169:38525/jars/xercesImpl-2.9.1.jar with timestamp 1516965630960
+18/01/26 12:20:33 INFO Utils: Fetching spark://138.96.200.169:38525/jars/xercesImpl-2.9.1.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp3103578321411546004.tmp
+18/01/26 12:20:33 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/xercesImpl-2.9.1.jar to class loader
+18/01/26 12:20:33 INFO Executor: Fetching spark://138.96.200.169:38525/jars/antlr4-runtime-4.5.3.jar with timestamp 1516965630980
+18/01/26 12:20:33 INFO Utils: Fetching spark://138.96.200.169:38525/jars/antlr4-runtime-4.5.3.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp880597716817029633.tmp
+18/01/26 12:20:33 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/antlr4-runtime-4.5.3.jar to class loader
+18/01/26 12:20:33 INFO Executor: Fetching spark://138.96.200.169:38525/jars/spark-mllib_2.11-2.2.2-SNAPSHOT.jar with timestamp 1516965630961
+18/01/26 12:20:33 INFO Utils: Fetching spark://138.96.200.169:38525/jars/spark-mllib_2.11-2.2.2-SNAPSHOT.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp6853185029723648969.tmp
+18/01/26 12:20:33 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/spark-mllib_2.11-2.2.2-SNAPSHOT.jar to class loader
+18/01/26 12:20:33 INFO Executor: Fetching spark://138.96.200.169:38525/jars/kryo-shaded-3.0.3.jar with timestamp 1516965630981
+18/01/26 12:20:33 INFO Utils: Fetching spark://138.96.200.169:38525/jars/kryo-shaded-3.0.3.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp6497885143547531114.tmp
+18/01/26 12:20:33 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/kryo-shaded-3.0.3.jar to class loader
+18/01/26 12:20:33 INFO Executor: Fetching spark://138.96.200.169:38525/jars/slf4j-api-1.7.21.jar with timestamp 1516965630975
+18/01/26 12:20:33 INFO Utils: Fetching spark://138.96.200.169:38525/jars/slf4j-api-1.7.21.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp1661256062629465974.tmp
+18/01/26 12:20:33 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/slf4j-api-1.7.21.jar to class loader
+18/01/26 12:20:33 INFO Executor: Fetching spark://138.96.200.169:38525/jars/antlr-runtime-3.4.jar with timestamp 1516965630973
+18/01/26 12:20:33 INFO Utils: Fetching spark://138.96.200.169:38525/jars/antlr-runtime-3.4.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp535806341944163852.tmp
+18/01/26 12:20:33 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/antlr-runtime-3.4.jar to class loader
+18/01/26 12:20:33 INFO Executor: Fetching spark://138.96.200.169:38525/jars/hadoop-mapreduce-client-common-2.6.5.jar with timestamp 1516965630984
+18/01/26 12:20:33 INFO Utils: Fetching spark://138.96.200.169:38525/jars/hadoop-mapreduce-client-common-2.6.5.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp6396978055703036819.tmp
+18/01/26 12:20:33 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/hadoop-mapreduce-client-common-2.6.5.jar to class loader
+18/01/26 12:20:33 INFO Executor: Fetching spark://138.96.200.169:38525/jars/objenesis-2.1.jar with timestamp 1516965630974
+18/01/26 12:20:33 INFO Utils: Fetching spark://138.96.200.169:38525/jars/objenesis-2.1.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp7598783688176035995.tmp
+18/01/26 12:20:33 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/objenesis-2.1.jar to class loader
+18/01/26 12:20:33 INFO Executor: Fetching spark://138.96.200.169:38525/jars/apache-log4j-extras-1.2.17.jar with timestamp 1516965630966
+18/01/26 12:20:33 INFO Utils: Fetching spark://138.96.200.169:38525/jars/apache-log4j-extras-1.2.17.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp5913112433959892635.tmp
+18/01/26 12:20:33 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/apache-log4j-extras-1.2.17.jar to class loader
+18/01/26 12:20:33 INFO Executor: Fetching spark://138.96.200.169:38525/jars/parquet-format-2.3.1.jar with timestamp 1516965630978
+18/01/26 12:20:33 INFO Utils: Fetching spark://138.96.200.169:38525/jars/parquet-format-2.3.1.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp4940154006949239933.tmp
+18/01/26 12:20:33 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/parquet-format-2.3.1.jar to class loader
+18/01/26 12:20:33 INFO Executor: Fetching spark://138.96.200.169:38525/jars/spark-sql_2.11-2.2.2-SNAPSHOT.jar with timestamp 1516965630974
+18/01/26 12:20:33 INFO Utils: Fetching spark://138.96.200.169:38525/jars/spark-sql_2.11-2.2.2-SNAPSHOT.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp2830976310524021078.tmp
+18/01/26 12:20:33 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/spark-sql_2.11-2.2.2-SNAPSHOT.jar to class loader
+18/01/26 12:20:33 INFO Executor: Fetching spark://138.96.200.169:38525/jars/commons-compiler-3.0.7.jar with timestamp 1516965630968
+18/01/26 12:20:33 INFO Utils: Fetching spark://138.96.200.169:38525/jars/commons-compiler-3.0.7.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp6201939467740843207.tmp
+18/01/26 12:20:33 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/commons-compiler-3.0.7.jar to class loader
+18/01/26 12:20:33 INFO Executor: Fetching spark://138.96.200.169:38525/jars/httpclient-4.5.2.jar with timestamp 1516965630965
+18/01/26 12:20:33 INFO Utils: Fetching spark://138.96.200.169:38525/jars/httpclient-4.5.2.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp625609525166512573.tmp
+18/01/26 12:20:33 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/httpclient-4.5.2.jar to class loader
+18/01/26 12:20:33 INFO Executor: Fetching spark://138.96.200.169:38525/jars/apacheds-kerberos-codec-2.0.0-M15.jar with timestamp 1516965630984
+18/01/26 12:20:33 INFO Utils: Fetching spark://138.96.200.169:38525/jars/apacheds-kerberos-codec-2.0.0-M15.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp4723529777278059573.tmp
+18/01/26 12:20:33 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/apacheds-kerberos-codec-2.0.0-M15.jar to class loader
+18/01/26 12:20:33 INFO Executor: Fetching spark://138.96.200.169:38525/jars/javax.inject-1.jar with timestamp 1516965630970
+18/01/26 12:20:33 INFO Utils: Fetching spark://138.96.200.169:38525/jars/javax.inject-1.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp5905297225564735474.tmp
+18/01/26 12:20:33 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/javax.inject-1.jar to class loader
+18/01/26 12:20:33 INFO Executor: Fetching spark://138.96.200.169:38525/jars/json4s-jackson_2.11-3.2.11.jar with timestamp 1516965630977
+18/01/26 12:20:33 INFO Utils: Fetching spark://138.96.200.169:38525/jars/json4s-jackson_2.11-3.2.11.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp1118487808084748357.tmp
+18/01/26 12:20:33 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/json4s-jackson_2.11-3.2.11.jar to class loader
+18/01/26 12:20:33 INFO Executor: Fetching spark://138.96.200.169:38525/jars/spark-graphx_2.11-2.2.2-SNAPSHOT.jar with timestamp 1516965630964
+18/01/26 12:20:33 INFO Utils: Fetching spark://138.96.200.169:38525/jars/spark-graphx_2.11-2.2.2-SNAPSHOT.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp6489115672873153579.tmp
+18/01/26 12:20:33 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/spark-graphx_2.11-2.2.2-SNAPSHOT.jar to class loader
+18/01/26 12:20:33 INFO Executor: Fetching spark://138.96.200.169:38525/jars/metrics-core-3.1.2.jar with timestamp 1516965630971
+18/01/26 12:20:33 INFO Utils: Fetching spark://138.96.200.169:38525/jars/metrics-core-3.1.2.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp4074862244088498906.tmp
+18/01/26 12:20:33 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/metrics-core-3.1.2.jar to class loader
+18/01/26 12:20:33 INFO Executor: Fetching spark://138.96.200.169:38525/jars/metrics-graphite-3.1.2.jar with timestamp 1516965630974
+18/01/26 12:20:33 INFO Utils: Fetching spark://138.96.200.169:38525/jars/metrics-graphite-3.1.2.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp2668651820516559068.tmp
+18/01/26 12:20:33 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/metrics-graphite-3.1.2.jar to class loader
+18/01/26 12:20:33 INFO Executor: Fetching spark://138.96.200.169:38525/jars/minlog-1.3.0.jar with timestamp 1516965630974
+18/01/26 12:20:33 INFO Utils: Fetching spark://138.96.200.169:38525/jars/minlog-1.3.0.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp1147866413644777885.tmp
+18/01/26 12:20:33 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/minlog-1.3.0.jar to class loader
+18/01/26 12:20:33 INFO Executor: Fetching spark://138.96.200.169:38525/jars/datanucleus-rdbms-3.2.9.jar with timestamp 1516965630978
+18/01/26 12:20:33 INFO Utils: Fetching spark://138.96.200.169:38525/jars/datanucleus-rdbms-3.2.9.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp2925585938175730419.tmp
+18/01/26 12:20:33 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/datanucleus-rdbms-3.2.9.jar to class loader
+18/01/26 12:20:33 INFO Executor: Fetching spark://138.96.200.169:38525/jars/snappy-java-1.1.2.6.jar with timestamp 1516965630983
+18/01/26 12:20:33 INFO Utils: Fetching spark://138.96.200.169:38525/jars/snappy-java-1.1.2.6.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp3302816517275114662.tmp
+18/01/26 12:20:33 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/snappy-java-1.1.2.6.jar to class loader
+18/01/26 12:20:33 INFO Executor: Fetching spark://138.96.200.169:38525/jars/spark-mllib-local_2.11-2.2.2-SNAPSHOT.jar with timestamp 1516965630978
+18/01/26 12:20:33 INFO Utils: Fetching spark://138.96.200.169:38525/jars/spark-mllib-local_2.11-2.2.2-SNAPSHOT.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp560439391315892978.tmp
+18/01/26 12:20:33 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/spark-mllib-local_2.11-2.2.2-SNAPSHOT.jar to class loader
+18/01/26 12:20:33 INFO Executor: Fetching spark://138.96.200.169:38525/jars/jetty-xml-9.3.11.v20160721.jar with timestamp 1516965630981
+18/01/26 12:20:33 INFO Utils: Fetching spark://138.96.200.169:38525/jars/jetty-xml-9.3.11.v20160721.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp2139771137783175006.tmp
+18/01/26 12:20:33 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/jetty-xml-9.3.11.v20160721.jar to class loader
+18/01/26 12:20:33 INFO Executor: Fetching spark://138.96.200.169:38525/jars/hive-metastore-1.2.1.spark2.jar with timestamp 1516965630978
+18/01/26 12:20:33 INFO Utils: Fetching spark://138.96.200.169:38525/jars/hive-metastore-1.2.1.spark2.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp7589489491862073536.tmp
+18/01/26 12:20:33 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/hive-metastore-1.2.1.spark2.jar to class loader
+18/01/26 12:20:33 INFO Executor: Fetching spark://138.96.200.169:38525/jars/jetty-webapp-9.3.11.v20160721.jar with timestamp 1516965630977
+18/01/26 12:20:33 INFO Utils: Fetching spark://138.96.200.169:38525/jars/jetty-webapp-9.3.11.v20160721.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp1506438421770237689.tmp
+18/01/26 12:20:33 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/jetty-webapp-9.3.11.v20160721.jar to class loader
+18/01/26 12:20:33 INFO Executor: Fetching spark://138.96.200.169:38525/jars/avro-ipc-1.7.7-tests.jar with timestamp 1516965630972
+18/01/26 12:20:33 INFO Utils: Fetching spark://138.96.200.169:38525/jars/avro-ipc-1.7.7-tests.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp2726057636527094108.tmp
+18/01/26 12:20:33 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/avro-ipc-1.7.7-tests.jar to class loader
+18/01/26 12:20:33 INFO Executor: Fetching spark://138.96.200.169:38525/jars/avro-mapred-1.7.7-hadoop2.jar with timestamp 1516965630973
+18/01/26 12:20:33 INFO Utils: Fetching spark://138.96.200.169:38525/jars/avro-mapred-1.7.7-hadoop2.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp9156849602055704695.tmp
+18/01/26 12:20:33 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/avro-mapred-1.7.7-hadoop2.jar to class loader
+18/01/26 12:20:33 INFO Executor: Fetching spark://138.96.200.169:38525/jars/hadoop-auth-2.6.5.jar with timestamp 1516965630972
+18/01/26 12:20:33 INFO Utils: Fetching spark://138.96.200.169:38525/jars/hadoop-auth-2.6.5.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp7572888140333496752.tmp
+18/01/26 12:20:33 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/hadoop-auth-2.6.5.jar to class loader
+18/01/26 12:20:33 INFO Executor: Fetching spark://138.96.200.169:38525/jars/pyrolite-4.13.jar with timestamp 1516965630963
+18/01/26 12:20:33 INFO Utils: Fetching spark://138.96.200.169:38525/jars/pyrolite-4.13.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp8826677546997943559.tmp
+18/01/26 12:20:33 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/pyrolite-4.13.jar to class loader
+18/01/26 12:20:33 INFO Executor: Fetching spark://138.96.200.169:38525/jars/hadoop-common-2.6.5.jar with timestamp 1516965630963
+18/01/26 12:20:33 INFO Utils: Fetching spark://138.96.200.169:38525/jars/hadoop-common-2.6.5.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp5640642870798828309.tmp
+18/01/26 12:20:33 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/hadoop-common-2.6.5.jar to class loader
+18/01/26 12:20:33 INFO Executor: Fetching spark://138.96.200.169:38525/jars/calcite-avatica-1.2.0-incubating.jar with timestamp 1516965630984
+18/01/26 12:20:33 INFO Utils: Fetching spark://138.96.200.169:38525/jars/calcite-avatica-1.2.0-incubating.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp2398335406332853896.tmp
+18/01/26 12:20:33 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/calcite-avatica-1.2.0-incubating.jar to class loader
+18/01/26 12:20:33 INFO Executor: Fetching spark://138.96.200.169:38525/jars/jersey-client-2.22.2.jar with timestamp 1516965630972
+18/01/26 12:20:33 INFO Utils: Fetching spark://138.96.200.169:38525/jars/jersey-client-2.22.2.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp5918254916864003659.tmp
+18/01/26 12:20:33 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/jersey-client-2.22.2.jar to class loader
+18/01/26 12:20:33 INFO Executor: Fetching spark://138.96.200.169:38525/jars/jcl-over-slf4j-1.7.16.jar with timestamp 1516965630960
+18/01/26 12:20:33 INFO Utils: Fetching spark://138.96.200.169:38525/jars/jcl-over-slf4j-1.7.16.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp580959688888383725.tmp
+18/01/26 12:20:33 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/jcl-over-slf4j-1.7.16.jar to class loader
+18/01/26 12:20:33 INFO Executor: Fetching spark://138.96.200.169:38525/jars/spark-launcher_2.11-2.2.2-SNAPSHOT.jar with timestamp 1516965630962
+18/01/26 12:20:33 INFO Utils: Fetching spark://138.96.200.169:38525/jars/spark-launcher_2.11-2.2.2-SNAPSHOT.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp4450675609858313095.tmp
+18/01/26 12:20:33 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/spark-launcher_2.11-2.2.2-SNAPSHOT.jar to class loader
+18/01/26 12:20:33 INFO Executor: Fetching spark://138.96.200.169:38525/jars/avro-ipc-1.7.7.jar with timestamp 1516965630959
+18/01/26 12:20:33 INFO Utils: Fetching spark://138.96.200.169:38525/jars/avro-ipc-1.7.7.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp8543432571481057035.tmp
+18/01/26 12:20:33 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/avro-ipc-1.7.7.jar to class loader
+18/01/26 12:20:33 INFO Executor: Fetching spark://138.96.200.169:38525/jars/jersey-container-servlet-core-2.22.2.jar with timestamp 1516965630966
+18/01/26 12:20:33 INFO Utils: Fetching spark://138.96.200.169:38525/jars/jersey-container-servlet-core-2.22.2.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp6643412579293542599.tmp
+18/01/26 12:20:33 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/jersey-container-servlet-core-2.22.2.jar to class loader
+18/01/26 12:20:33 INFO Executor: Fetching spark://138.96.200.169:38525/jars/hadoop-yarn-client-2.6.5.jar with timestamp 1516965630980
+18/01/26 12:20:33 INFO Utils: Fetching spark://138.96.200.169:38525/jars/hadoop-yarn-client-2.6.5.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp177984535389253146.tmp
+18/01/26 12:20:33 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/hadoop-yarn-client-2.6.5.jar to class loader
+18/01/26 12:20:33 INFO Executor: Fetching spark://138.96.200.169:38525/jars/commons-logging-1.2.jar with timestamp 1516965630968
+18/01/26 12:20:33 INFO Utils: Fetching spark://138.96.200.169:38525/jars/commons-logging-1.2.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp1373248911772028937.tmp
+18/01/26 12:20:33 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/commons-logging-1.2.jar to class loader
+18/01/26 12:20:33 INFO Executor: Fetching spark://138.96.200.169:38525/jars/commons-net-3.1.jar with timestamp 1516965630977
+18/01/26 12:20:33 INFO Utils: Fetching spark://138.96.200.169:38525/jars/commons-net-3.1.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp4179864332749444888.tmp
+18/01/26 12:20:33 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/commons-net-3.1.jar to class loader
+18/01/26 12:20:33 INFO Executor: Fetching spark://138.96.200.169:38525/jars/jackson-module-paranamer-2.6.5.jar with timestamp 1516965630964
+18/01/26 12:20:33 INFO Utils: Fetching spark://138.96.200.169:38525/jars/jackson-module-paranamer-2.6.5.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp4732332495142786041.tmp
+18/01/26 12:20:33 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/jackson-module-paranamer-2.6.5.jar to class loader
+18/01/26 12:20:33 INFO Executor: Fetching spark://138.96.200.169:38525/jars/jetty-util-9.3.11.v20160721.jar with timestamp 1516965630965
+18/01/26 12:20:33 INFO Utils: Fetching spark://138.96.200.169:38525/jars/jetty-util-9.3.11.v20160721.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp1534466071409826022.tmp
+18/01/26 12:20:33 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/jetty-util-9.3.11.v20160721.jar to class loader
+18/01/26 12:20:33 INFO Executor: Fetching spark://138.96.200.169:38525/jars/hadoop-yarn-api-2.6.5.jar with timestamp 1516965630967
+18/01/26 12:20:33 INFO Utils: Fetching spark://138.96.200.169:38525/jars/hadoop-yarn-api-2.6.5.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp8364382086458065315.tmp
+18/01/26 12:20:33 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/hadoop-yarn-api-2.6.5.jar to class loader
+18/01/26 12:20:33 INFO Executor: Fetching spark://138.96.200.169:38525/jars/javax.servlet-api-3.1.0.jar with timestamp 1516965630967
+18/01/26 12:20:33 INFO Utils: Fetching spark://138.96.200.169:38525/jars/javax.servlet-api-3.1.0.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp522669054398133167.tmp
+18/01/26 12:20:33 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/javax.servlet-api-3.1.0.jar to class loader
+18/01/26 12:20:33 INFO Executor: Fetching spark://138.96.200.169:38525/jars/datanucleus-api-jdo-3.2.6.jar with timestamp 1516965630968
+18/01/26 12:20:33 INFO Utils: Fetching spark://138.96.200.169:38525/jars/datanucleus-api-jdo-3.2.6.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp8251796433002935786.tmp
+18/01/26 12:20:33 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/datanucleus-api-jdo-3.2.6.jar to class loader
+18/01/26 12:20:33 INFO Executor: Fetching spark://138.96.200.169:38525/jars/commons-dbcp-1.4.jar with timestamp 1516965630961
+18/01/26 12:20:33 INFO Utils: Fetching spark://138.96.200.169:38525/jars/commons-dbcp-1.4.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp4212930926880435826.tmp
+18/01/26 12:20:33 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/commons-dbcp-1.4.jar to class loader
+18/01/26 12:20:33 INFO Executor: Fetching spark://138.96.200.169:38525/jars/commons-math3-3.4.1.jar with timestamp 1516965630981
+18/01/26 12:20:33 INFO Utils: Fetching spark://138.96.200.169:38525/jars/commons-math3-3.4.1.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp535195072307415309.tmp
+18/01/26 12:20:33 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/commons-math3-3.4.1.jar to class loader
+18/01/26 12:20:33 INFO Executor: Fetching spark://138.96.200.169:38525/jars/xz-1.0.jar with timestamp 1516965630980
+18/01/26 12:20:33 INFO Utils: Fetching spark://138.96.200.169:38525/jars/xz-1.0.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp2326174918607674897.tmp
+18/01/26 12:20:33 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/xz-1.0.jar to class loader
+18/01/26 12:20:33 INFO Executor: Fetching spark://138.96.200.169:38525/jars/jetty-security-9.3.11.v20160721.jar with timestamp 1516965630982
+18/01/26 12:20:33 INFO Utils: Fetching spark://138.96.200.169:38525/jars/jetty-security-9.3.11.v20160721.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp7593262245726536833.tmp
+18/01/26 12:20:33 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/jetty-security-9.3.11.v20160721.jar to class loader
+18/01/26 12:20:33 INFO Executor: Fetching spark://138.96.200.169:38525/jars/spark-unsafe_2.11-2.2.2-SNAPSHOT.jar with timestamp 1516965630960
+18/01/26 12:20:33 INFO Utils: Fetching spark://138.96.200.169:38525/jars/spark-unsafe_2.11-2.2.2-SNAPSHOT.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp4001205948103283262.tmp
+18/01/26 12:20:33 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/spark-unsafe_2.11-2.2.2-SNAPSHOT.jar to class loader
+18/01/26 12:20:33 INFO Executor: Fetching spark://138.96.200.169:38525/jars/jetty-servlet-9.3.11.v20160721.jar with timestamp 1516965630961
+18/01/26 12:20:33 INFO Utils: Fetching spark://138.96.200.169:38525/jars/jetty-servlet-9.3.11.v20160721.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp8847291864476691897.tmp
+18/01/26 12:20:33 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/jetty-servlet-9.3.11.v20160721.jar to class loader
+18/01/26 12:20:33 INFO Executor: Fetching spark://138.96.200.169:38525/jars/shapeless_2.11-2.3.2.jar with timestamp 1516965630970
+18/01/26 12:20:33 INFO Utils: Fetching spark://138.96.200.169:38525/jars/shapeless_2.11-2.3.2.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp8886830495113896524.tmp
+18/01/26 12:20:33 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/shapeless_2.11-2.3.2.jar to class loader
+18/01/26 12:20:33 INFO Executor: Fetching spark://138.96.200.169:38525/jars/spire-macros_2.11-0.13.0.jar with timestamp 1516965630971
+18/01/26 12:20:33 INFO Utils: Fetching spark://138.96.200.169:38525/jars/spire-macros_2.11-0.13.0.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp2478805846720566827.tmp
+18/01/26 12:20:33 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/spire-macros_2.11-0.13.0.jar to class loader
+18/01/26 12:20:33 INFO Executor: Fetching spark://138.96.200.169:38525/jars/jackson-core-2.6.5.jar with timestamp 1516965630982
+18/01/26 12:20:33 INFO Utils: Fetching spark://138.96.200.169:38525/jars/jackson-core-2.6.5.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp3851830329952157316.tmp
+18/01/26 12:20:33 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/jackson-core-2.6.5.jar to class loader
+18/01/26 12:20:33 INFO Executor: Fetching spark://138.96.200.169:38525/jars/core-1.1.2.jar with timestamp 1516965630976
+18/01/26 12:20:33 INFO Utils: Fetching spark://138.96.200.169:38525/jars/core-1.1.2.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp1319803472547376643.tmp
+18/01/26 12:20:33 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/core-1.1.2.jar to class loader
+18/01/26 12:20:33 INFO Executor: Fetching spark://138.96.200.169:38525/jars/jetty-continuation-9.3.11.v20160721.jar with timestamp 1516965630978
+18/01/26 12:20:33 INFO Utils: Fetching spark://138.96.200.169:38525/jars/jetty-continuation-9.3.11.v20160721.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp6063784559494041892.tmp
+18/01/26 12:20:33 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/jetty-continuation-9.3.11.v20160721.jar to class loader
+18/01/26 12:20:33 INFO Executor: Fetching spark://138.96.200.169:38525/jars/activation-1.1.1.jar with timestamp 1516965630974
+18/01/26 12:20:33 INFO Utils: Fetching spark://138.96.200.169:38525/jars/activation-1.1.1.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp372083743365976459.tmp
+18/01/26 12:20:33 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/activation-1.1.1.jar to class loader
+18/01/26 12:20:33 INFO Executor: Fetching spark://138.96.200.169:38525/jars/jackson-module-scala_2.11-2.6.5.jar with timestamp 1516965630980
+18/01/26 12:20:33 INFO Utils: Fetching spark://138.96.200.169:38525/jars/jackson-module-scala_2.11-2.6.5.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp2162685186751708737.tmp
+18/01/26 12:20:33 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/jackson-module-scala_2.11-2.6.5.jar to class loader
+18/01/26 12:20:33 INFO Executor: Fetching spark://138.96.200.169:38525/jars/mail-1.4.7.jar with timestamp 1516965630972
+18/01/26 12:20:33 INFO Utils: Fetching spark://138.96.200.169:38525/jars/mail-1.4.7.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp1817818472510119510.tmp
+18/01/26 12:20:33 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/mail-1.4.7.jar to class loader
+18/01/26 12:20:33 INFO Executor: Fetching spark://138.96.200.169:38525/jars/chill-java-0.8.0.jar with timestamp 1516965630975
+18/01/26 12:20:33 INFO Utils: Fetching spark://138.96.200.169:38525/jars/chill-java-0.8.0.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp1569773320873610516.tmp
+18/01/26 12:20:33 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/chill-java-0.8.0.jar to class loader
+18/01/26 12:20:33 INFO Executor: Fetching spark://138.96.200.169:38525/jars/jackson-xc-1.9.13.jar with timestamp 1516965630967
+18/01/26 12:20:33 INFO Utils: Fetching spark://138.96.200.169:38525/jars/jackson-xc-1.9.13.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp2330736775806970886.tmp
+18/01/26 12:20:33 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/jackson-xc-1.9.13.jar to class loader
+18/01/26 12:20:33 INFO Executor: Fetching spark://138.96.200.169:38525/jars/scala-library-2.11.8.jar with timestamp 1516965630960
+18/01/26 12:20:33 INFO Utils: Fetching spark://138.96.200.169:38525/jars/scala-library-2.11.8.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp7069226516926712857.tmp
+18/01/26 12:20:33 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/scala-library-2.11.8.jar to class loader
+18/01/26 12:20:33 INFO Executor: Fetching spark://138.96.200.169:38525/jars/jetty-io-9.3.11.v20160721.jar with timestamp 1516965630964
+18/01/26 12:20:33 INFO Utils: Fetching spark://138.96.200.169:38525/jars/jetty-io-9.3.11.v20160721.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp1716450384791375342.tmp
+18/01/26 12:20:33 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/jetty-io-9.3.11.v20160721.jar to class loader
+18/01/26 12:20:33 INFO Executor: Fetching spark://138.96.200.169:38525/jars/scala-parser-combinators_2.11-1.0.4.jar with timestamp 1516965630979
+18/01/26 12:20:33 INFO Utils: Fetching spark://138.96.200.169:38525/jars/scala-parser-combinators_2.11-1.0.4.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp2823770547571813067.tmp
+18/01/26 12:20:33 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/scala-parser-combinators_2.11-1.0.4.jar to class loader
+18/01/26 12:20:33 INFO Executor: Fetching spark://138.96.200.169:38525/jars/spark-examples_2.11-2.2.2-SNAPSHOT.jar with timestamp 1516965630983
+18/01/26 12:20:33 INFO Utils: Fetching spark://138.96.200.169:38525/jars/spark-examples_2.11-2.2.2-SNAPSHOT.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp3349076952994108263.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/spark-examples_2.11-2.2.2-SNAPSHOT.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/parquet-column-1.8.2.jar with timestamp 1516965630972
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/parquet-column-1.8.2.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp2019281543800239220.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/parquet-column-1.8.2.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/spark-network-shuffle_2.11-2.2.2-SNAPSHOT.jar with timestamp 1516965630983
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/spark-network-shuffle_2.11-2.2.2-SNAPSHOT.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp398479344409655811.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/spark-network-shuffle_2.11-2.2.2-SNAPSHOT.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/breeze_2.11-0.13.2.jar with timestamp 1516965630983
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/breeze_2.11-0.13.2.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp1694549014485187939.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/breeze_2.11-0.13.2.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/curator-client-2.6.0.jar with timestamp 1516965630971
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/curator-client-2.6.0.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp8288721148426016607.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/curator-client-2.6.0.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/derby-10.12.1.1.jar with timestamp 1516965630981
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/derby-10.12.1.1.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp2366422026715480823.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/derby-10.12.1.1.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/log4j-1.2.17.jar with timestamp 1516965630985
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/log4j-1.2.17.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp6115217518027272721.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/log4j-1.2.17.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/java-xmlbuilder-1.0.jar with timestamp 1516965630963
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/java-xmlbuilder-1.0.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp1239348396837846462.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/java-xmlbuilder-1.0.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/jetty-6.1.26.jar with timestamp 1516965630970
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/jetty-6.1.26.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp8312102280778268954.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/jetty-6.1.26.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/RoaringBitmap-0.5.11.jar with timestamp 1516965630973
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/RoaringBitmap-0.5.11.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp611132844069886166.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/RoaringBitmap-0.5.11.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/jetty-server-9.3.11.v20160721.jar with timestamp 1516965630969
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/jetty-server-9.3.11.v20160721.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp8494279159592185466.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/jetty-server-9.3.11.v20160721.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/metrics-jvm-3.1.2.jar with timestamp 1516965630971
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/metrics-jvm-3.1.2.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp8694810037991610817.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/metrics-jvm-3.1.2.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/chill_2.11-0.8.0.jar with timestamp 1516965630962
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/chill_2.11-0.8.0.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp3706503532114408857.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/chill_2.11-0.8.0.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/jodd-core-3.5.2.jar with timestamp 1516965630979
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/jodd-core-3.5.2.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp8267270371847629909.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/jodd-core-3.5.2.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/arpack_combined_all-0.1.jar with timestamp 1516965630983
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/arpack_combined_all-0.1.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp9196142947897086115.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/arpack_combined_all-0.1.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/protobuf-java-2.5.0.jar with timestamp 1516965630975
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/protobuf-java-2.5.0.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp2199189213951647481.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/protobuf-java-2.5.0.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/jackson-databind-2.6.5.jar with timestamp 1516965630967
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/jackson-databind-2.6.5.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp500219288341357097.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/jackson-databind-2.6.5.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/leveldbjni-all-1.8.jar with timestamp 1516965630984
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/leveldbjni-all-1.8.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp325760889693766291.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/leveldbjni-all-1.8.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/hadoop-client-2.6.5.jar with timestamp 1516965630973
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/hadoop-client-2.6.5.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp6644406266440889932.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/hadoop-client-2.6.5.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/opencsv-2.3.jar with timestamp 1516965630982
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/opencsv-2.3.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp7424336770783066570.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/opencsv-2.3.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/paranamer-2.6.jar with timestamp 1516965630964
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/paranamer-2.6.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp2098863787199687688.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/paranamer-2.6.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/hive-exec-1.2.1.spark2.jar with timestamp 1516965630965
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/hive-exec-1.2.1.spark2.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp8476321431213691012.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/hive-exec-1.2.1.spark2.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/jets3t-0.9.3.jar with timestamp 1516965630960
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/jets3t-0.9.3.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp9219014631785464682.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/jets3t-0.9.3.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/machinist_2.11-0.6.1.jar with timestamp 1516965630984
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/machinist_2.11-0.6.1.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp2179481147502940524.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/machinist_2.11-0.6.1.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/ivy-2.4.0.jar with timestamp 1516965630964
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/ivy-2.4.0.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp3865921279117136868.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/ivy-2.4.0.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/jetty-proxy-9.3.11.v20160721.jar with timestamp 1516965630980
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/jetty-proxy-9.3.11.v20160721.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp7498958814685294476.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/jetty-proxy-9.3.11.v20160721.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/jetty-servlets-9.3.11.v20160721.jar with timestamp 1516965630982
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/jetty-servlets-9.3.11.v20160721.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp8721753564004033906.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/jetty-servlets-9.3.11.v20160721.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/httpcore-4.4.4.jar with timestamp 1516965630983
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/httpcore-4.4.4.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp245496637955015436.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/httpcore-4.4.4.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/spire_2.11-0.13.0.jar with timestamp 1516965630966
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/spire_2.11-0.13.0.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp5906344567752024.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/spire_2.11-0.13.0.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/htrace-core-3.0.4.jar with timestamp 1516965630958
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/htrace-core-3.0.4.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp8264030575526070438.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/htrace-core-3.0.4.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/calcite-core-1.2.0-incubating.jar with timestamp 1516965630981
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/calcite-core-1.2.0-incubating.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp637985899583831945.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/calcite-core-1.2.0-incubating.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/compress-lzf-1.0.3.jar with timestamp 1516965630961
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/compress-lzf-1.0.3.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp3402315663495309416.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/compress-lzf-1.0.3.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/jaxb-api-2.2.2.jar with timestamp 1516965630971
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/jaxb-api-2.2.2.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp8730967775543725899.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/jaxb-api-2.2.2.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/commons-lang3-3.5.jar with timestamp 1516965630970
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/commons-lang3-3.5.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp2790353304129585674.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/commons-lang3-3.5.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/pmml-model-1.2.15.jar with timestamp 1516965630975
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/pmml-model-1.2.15.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp4818429563926301341.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/pmml-model-1.2.15.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/hadoop-hdfs-2.6.5.jar with timestamp 1516965630963
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/hadoop-hdfs-2.6.5.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp3719511478950506507.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/hadoop-hdfs-2.6.5.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/api-asn1-api-1.0.0-M20.jar with timestamp 1516965630976
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/api-asn1-api-1.0.0-M20.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp1983084157802166454.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/api-asn1-api-1.0.0-M20.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/aopalliance-repackaged-2.4.0-b34.jar with timestamp 1516965630982
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/aopalliance-repackaged-2.4.0-b34.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp2352904400573215549.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/aopalliance-repackaged-2.4.0-b34.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/commons-codec-1.10.jar with timestamp 1516965630983
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/commons-codec-1.10.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp6112908405230660885.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/commons-codec-1.10.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/commons-configuration-1.6.jar with timestamp 1516965630960
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/commons-configuration-1.6.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp436266859421168705.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/commons-configuration-1.6.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/xbean-asm5-shaded-4.4.jar with timestamp 1516965630981
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/xbean-asm5-shaded-4.4.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp3991260762030160619.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/xbean-asm5-shaded-4.4.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/gson-2.2.4.jar with timestamp 1516965630968
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/gson-2.2.4.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp4959880081542373965.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/gson-2.2.4.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/avro-compiler-1.7.3.jar with timestamp 1516965630977
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/avro-compiler-1.7.3.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp4620061712562552746.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/avro-compiler-1.7.3.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/javassist-3.18.1-GA.jar with timestamp 1516965630963
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/javassist-3.18.1-GA.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp8368103384566670403.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/javassist-3.18.1-GA.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/javax.ws.rs-api-2.0.1.jar with timestamp 1516965630980
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/javax.ws.rs-api-2.0.1.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp4180193929204454830.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/javax.ws.rs-api-2.0.1.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/aopalliance-1.0.jar with timestamp 1516965630970
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/aopalliance-1.0.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp6789494489363754100.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/aopalliance-1.0.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/spark-tags_2.11-2.2.2-SNAPSHOT.jar with timestamp 1516965630970
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/spark-tags_2.11-2.2.2-SNAPSHOT.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp663918344203161887.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/spark-tags_2.11-2.2.2-SNAPSHOT.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/pmml-schema-1.2.15.jar with timestamp 1516965630972
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/pmml-schema-1.2.15.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp1783619782978357861.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/pmml-schema-1.2.15.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/parquet-common-1.8.2.jar with timestamp 1516965630968
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/parquet-common-1.8.2.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp7026670102415987689.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/parquet-common-1.8.2.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/jsr305-1.3.9.jar with timestamp 1516965630977
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/jsr305-1.3.9.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp8337640101720256168.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/jsr305-1.3.9.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/datanucleus-core-3.2.10.jar with timestamp 1516965630978
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/datanucleus-core-3.2.10.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp417245346127342331.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/datanucleus-core-3.2.10.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/spark-sketch_2.11-2.2.2-SNAPSHOT.jar with timestamp 1516965630974
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/spark-sketch_2.11-2.2.2-SNAPSHOT.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp6829495285958738077.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/spark-sketch_2.11-2.2.2-SNAPSHOT.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/javolution-5.5.1.jar with timestamp 1516965630983
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/javolution-5.5.1.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp4804614431419155127.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/javolution-5.5.1.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/api-util-1.0.0-M20.jar with timestamp 1516965630965
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/api-util-1.0.0-M20.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp3053176821859766977.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/api-util-1.0.0-M20.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/jettison-1.1.jar with timestamp 1516965630964
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/jettison-1.1.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp7500852191946050467.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/jettison-1.1.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/jackson-jaxrs-1.9.13.jar with timestamp 1516965630983
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/jackson-jaxrs-1.9.13.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp1235164115177268811.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/jackson-jaxrs-1.9.13.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/flume-ng-core-1.6.0.jar with timestamp 1516965630966
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/flume-ng-core-1.6.0.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp6554975456222605109.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/flume-ng-core-1.6.0.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/osgi-resource-locator-1.0.1.jar with timestamp 1516965630959
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/osgi-resource-locator-1.0.1.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp6511940479792254013.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/osgi-resource-locator-1.0.1.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/netty-3.9.9.Final.jar with timestamp 1516965630984
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/netty-3.9.9.Final.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp3582204173114418326.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/netty-3.9.9.Final.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/mina-core-2.0.4.jar with timestamp 1516965630967
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/mina-core-2.0.4.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp8794483386028200545.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/mina-core-2.0.4.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/commons-lang-2.6.jar with timestamp 1516965630977
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/commons-lang-2.6.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp5149820891844396014.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/commons-lang-2.6.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/jetty-http-9.3.11.v20160721.jar with timestamp 1516965630976
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/jetty-http-9.3.11.v20160721.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp778387719959672269.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/jetty-http-9.3.11.v20160721.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/spark-streaming_2.11-2.2.2-SNAPSHOT.jar with timestamp 1516965630959
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/spark-streaming_2.11-2.2.2-SNAPSHOT.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp1014666145341784862.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/spark-streaming_2.11-2.2.2-SNAPSHOT.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/hk2-locator-2.4.0-b34.jar with timestamp 1516965630966
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/hk2-locator-2.4.0-b34.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp4537127007365346082.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/hk2-locator-2.4.0-b34.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/jersey-guava-2.22.2.jar with timestamp 1516965630973
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/jersey-guava-2.22.2.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp4380961978186233559.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/jersey-guava-2.22.2.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/spark-core_2.11-2.2.2-SNAPSHOT.jar with timestamp 1516965630971
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/spark-core_2.11-2.2.2-SNAPSHOT.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp2203532656099916234.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/spark-core_2.11-2.2.2-SNAPSHOT.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/json4s-ast_2.11-3.2.11.jar with timestamp 1516965630979
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/json4s-ast_2.11-3.2.11.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp2735761329568397947.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/json4s-ast_2.11-3.2.11.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/parquet-encoding-1.8.2.jar with timestamp 1516965630967
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/parquet-encoding-1.8.2.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp2533904118887314337.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/parquet-encoding-1.8.2.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/jersey-media-jaxb-2.22.2.jar with timestamp 1516965630965
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/jersey-media-jaxb-2.22.2.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp2582128057573427262.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/jersey-media-jaxb-2.22.2.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/libthrift-0.9.3.jar with timestamp 1516965630980
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/libthrift-0.9.3.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp7489709629122706954.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/libthrift-0.9.3.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/spark-network-common_2.11-2.2.2-SNAPSHOT.jar with timestamp 1516965630966
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/spark-network-common_2.11-2.2.2-SNAPSHOT.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp4891162341887315500.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/spark-network-common_2.11-2.2.2-SNAPSHOT.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/metrics-core-2.2.0.jar with timestamp 1516965630975
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/metrics-core-2.2.0.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp8271155290966312166.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/metrics-core-2.2.0.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/guava-14.0.1.jar with timestamp 1516965630969
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/guava-14.0.1.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp3234746411045978246.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/guava-14.0.1.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/antlr-2.7.7.jar with timestamp 1516965630975
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/antlr-2.7.7.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp2336563133554219555.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/antlr-2.7.7.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/hadoop-mapreduce-client-app-2.6.5.jar with timestamp 1516965630964
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/hadoop-mapreduce-client-app-2.6.5.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp2357781349270080466.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/hadoop-mapreduce-client-app-2.6.5.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/jtransforms-2.4.0.jar with timestamp 1516965630963
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/jtransforms-2.4.0.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp929867886910773063.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/jtransforms-2.4.0.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/cglib-2.2.1-v20090111.jar with timestamp 1516965630975
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/cglib-2.2.1-v20090111.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp8145450642260349949.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/cglib-2.2.1-v20090111.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/libfb303-0.9.3.jar with timestamp 1516965630965
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/libfb303-0.9.3.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp5151098322585276998.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/libfb303-0.9.3.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/jersey-common-2.22.2.jar with timestamp 1516965630973
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/jersey-common-2.22.2.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp8624397324456065630.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/jersey-common-2.22.2.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/lz4-1.3.0.jar with timestamp 1516965630982
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/lz4-1.3.0.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp8898171222319061012.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/lz4-1.3.0.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/stax-api-1.0-2.jar with timestamp 1516965630974
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/stax-api-1.0-2.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp2534052526584541765.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/stax-api-1.0-2.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/spark-streaming-kafka-0-8_2.11-2.2.2-SNAPSHOT.jar with timestamp 1516965630978
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/spark-streaming-kafka-0-8_2.11-2.2.2-SNAPSHOT.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp3980665157456258669.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/spark-streaming-kafka-0-8_2.11-2.2.2-SNAPSHOT.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/jetty-jndi-9.3.11.v20160721.jar with timestamp 1516965630977
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/jetty-jndi-9.3.11.v20160721.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp3709716137014223535.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/jetty-jndi-9.3.11.v20160721.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/jul-to-slf4j-1.7.16.jar with timestamp 1516965630978
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/jul-to-slf4j-1.7.16.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp3475216446772167357.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/jul-to-slf4j-1.7.16.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/hk2-api-2.4.0-b34.jar with timestamp 1516965630976
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/hk2-api-2.4.0-b34.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp7661839935365290624.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/hk2-api-2.4.0-b34.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/hadoop-mapreduce-client-jobclient-2.6.5.jar with timestamp 1516965630971
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/hadoop-mapreduce-client-jobclient-2.6.5.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp5531243786907250749.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/hadoop-mapreduce-client-jobclient-2.6.5.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/javax.annotation-api-1.2.jar with timestamp 1516965630959
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/javax.annotation-api-1.2.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp5382871239935424747.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/javax.annotation-api-1.2.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/spark-hive_2.11-2.2.2-SNAPSHOT.jar with timestamp 1516965630984
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/spark-hive_2.11-2.2.2-SNAPSHOT.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp2891773087783808239.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/spark-hive_2.11-2.2.2-SNAPSHOT.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/servlet-api-2.5-20110124.jar with timestamp 1516965630962
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/servlet-api-2.5-20110124.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp4732732860103785709.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/servlet-api-2.5-20110124.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/kafka_2.11-0.8.2.1.jar with timestamp 1516965630984
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/kafka_2.11-0.8.2.1.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp344546409484068393.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/kafka_2.11-0.8.2.1.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/jdo-api-3.0.1.jar with timestamp 1516965630969
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/jdo-api-3.0.1.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp5647957365269620250.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/jdo-api-3.0.1.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/parquet-hadoop-1.8.2.jar with timestamp 1516965630976
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/parquet-hadoop-1.8.2.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp6213750753237417655.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/parquet-hadoop-1.8.2.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/JavaEWAH-0.3.2.jar with timestamp 1516965630961
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/JavaEWAH-0.3.2.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp3429273609716067164.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/JavaEWAH-0.3.2.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/netty-all-4.0.43.Final.jar with timestamp 1516965630975
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/netty-all-4.0.43.Final.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp6348372566316693681.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/netty-all-4.0.43.Final.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/oro-2.0.8.jar with timestamp 1516965630980
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/oro-2.0.8.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp1029470820964955231.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/oro-2.0.8.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/flume-ng-configuration-1.6.0.jar with timestamp 1516965630983
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/flume-ng-configuration-1.6.0.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp342886067541090558.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/flume-ng-configuration-1.6.0.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/spark-streaming-flume_2.11-2.2.2-SNAPSHOT.jar with timestamp 1516965630962
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/spark-streaming-flume_2.11-2.2.2-SNAPSHOT.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp8128321036126646640.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/spark-streaming-flume_2.11-2.2.2-SNAPSHOT.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/stax-api-1.0.1.jar with timestamp 1516965630963
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/stax-api-1.0.1.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp6930189733889695521.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/stax-api-1.0.1.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/xml-apis-1.3.04.jar with timestamp 1516965630982
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/xml-apis-1.3.04.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp5497806723597639928.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/xml-apis-1.3.04.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/commons-crypto-1.0.0.jar with timestamp 1516965630964
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/commons-crypto-1.0.0.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp6824178590995799507.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/commons-crypto-1.0.0.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/jetty-util-6.1.26.jar with timestamp 1516965630979
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/jetty-util-6.1.26.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp405756106511503776.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/jetty-util-6.1.26.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/univocity-parsers-2.2.1.jar with timestamp 1516965630974
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/univocity-parsers-2.2.1.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp502906989321820762.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/univocity-parsers-2.2.1.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/parquet-jackson-1.8.2.jar with timestamp 1516965630984
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/parquet-jackson-1.8.2.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp4475574403570410601.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/parquet-jackson-1.8.2.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/scala-reflect-2.11.8.jar with timestamp 1516965630966
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/scala-reflect-2.11.8.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp2434913934653860852.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/scala-reflect-2.11.8.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/velocity-1.7.jar with timestamp 1516965630966
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/velocity-1.7.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp3995588946863401798.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/velocity-1.7.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/hadoop-annotations-2.6.5.jar with timestamp 1516965630979
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/hadoop-annotations-2.6.5.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp4134090866705810145.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/hadoop-annotations-2.6.5.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/jetty-plus-9.3.11.v20160721.jar with timestamp 1516965630970
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/jetty-plus-9.3.11.v20160721.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp7763165156314144318.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/jetty-plus-9.3.11.v20160721.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/spark-catalyst_2.11-2.2.2-SNAPSHOT.jar with timestamp 1516965630971
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/spark-catalyst_2.11-2.2.2-SNAPSHOT.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp6723247319143087721.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/spark-catalyst_2.11-2.2.2-SNAPSHOT.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/eigenbase-properties-1.1.5.jar with timestamp 1516965630979
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/eigenbase-properties-1.1.5.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp3950669310990706309.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/eigenbase-properties-1.1.5.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/commons-httpclient-3.1.jar with timestamp 1516965630982
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/commons-httpclient-3.1.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp3143980029166329492.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/commons-httpclient-3.1.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/zkclient-0.3.jar with timestamp 1516965630979
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/zkclient-0.3.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp8355861230181335154.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/zkclient-0.3.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/breeze-macros_2.11-0.13.2.jar with timestamp 1516965630960
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/breeze-macros_2.11-0.13.2.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp2121339388235996483.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/breeze-macros_2.11-0.13.2.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/scalap-2.11.8.jar with timestamp 1516965630973
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/scalap-2.11.8.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp3320674657517123464.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/scalap-2.11.8.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/macro-compat_2.11-1.1.1.jar with timestamp 1516965630979
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/macro-compat_2.11-1.1.1.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp6790743703043768905.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/macro-compat_2.11-1.1.1.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/spark-streaming-flume-sink_2.11-2.2.2-SNAPSHOT.jar with timestamp 1516965630977
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/spark-streaming-flume-sink_2.11-2.2.2-SNAPSHOT.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp3234765294370510903.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/spark-streaming-flume-sink_2.11-2.2.2-SNAPSHOT.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/flume-ng-sdk-1.6.0.jar with timestamp 1516965630963
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/flume-ng-sdk-1.6.0.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp2459124601026722603.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/flume-ng-sdk-1.6.0.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/jta-1.1.jar with timestamp 1516965630985
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/jta-1.1.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp2988367942594572263.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/jta-1.1.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/hadoop-yarn-server-common-2.6.5.jar with timestamp 1516965630967
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/hadoop-yarn-server-common-2.6.5.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp5952549573880501913.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/hadoop-yarn-server-common-2.6.5.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/commons-cli-1.2.jar with timestamp 1516965630971
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/commons-cli-1.2.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp7539118107624859737.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/commons-cli-1.2.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/mx4j-3.0.2.jar with timestamp 1516965630974
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/mx4j-3.0.2.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp717637997847977986.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/mx4j-3.0.2.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/commons-digester-1.8.jar with timestamp 1516965630969
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/commons-digester-1.8.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp8108297306348582536.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/commons-digester-1.8.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/commons-collections-3.2.2.jar with timestamp 1516965630968
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/commons-collections-3.2.2.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp8585036294503809328.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/commons-collections-3.2.2.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/scala-xml_2.11-1.0.4.jar with timestamp 1516965630979
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/scala-xml_2.11-1.0.4.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp5538753667208633784.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/scala-xml_2.11-1.0.4.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/curator-framework-2.6.0.jar with timestamp 1516965630985
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/curator-framework-2.6.0.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp2209580246909025313.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/curator-framework-2.6.0.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/base64-2.3.8.jar with timestamp 1516965630975
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/base64-2.3.8.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp6485175782738509461.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/base64-2.3.8.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/jline-0.9.94.jar with timestamp 1516965630982
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/jline-0.9.94.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp8655161228560939788.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/jline-0.9.94.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/scala-compiler-2.11.8.jar with timestamp 1516965630984
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/scala-compiler-2.11.8.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp717601094330341955.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/scala-compiler-2.11.8.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/ST4-4.0.4.jar with timestamp 1516965630960
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/ST4-4.0.4.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp7985586962642672620.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/ST4-4.0.4.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/hadoop-mapreduce-client-shuffle-2.6.5.jar with timestamp 1516965630981
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/hadoop-mapreduce-client-shuffle-2.6.5.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp6963735725810533211.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/hadoop-mapreduce-client-shuffle-2.6.5.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/hadoop-yarn-common-2.6.5.jar with timestamp 1516965630968
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/hadoop-yarn-common-2.6.5.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp411069524452451233.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/hadoop-yarn-common-2.6.5.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/jersey-server-2.22.2.jar with timestamp 1516965630981
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/jersey-server-2.22.2.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp4222810059731153390.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/jersey-server-2.22.2.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/flume-ng-auth-1.6.0.jar with timestamp 1516965630977
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/flume-ng-auth-1.6.0.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp1871073038518592925.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/flume-ng-auth-1.6.0.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/jersey-container-servlet-2.22.2.jar with timestamp 1516965630962
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/jersey-container-servlet-2.22.2.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp6981133660576861092.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/jersey-container-servlet-2.22.2.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/commons-pool-1.5.4.jar with timestamp 1516965630967
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/commons-pool-1.5.4.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp4515478774197720217.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/commons-pool-1.5.4.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/commons-io-2.4.jar with timestamp 1516965630966
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/commons-io-2.4.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp7250800523905834774.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/commons-io-2.4.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/hadoop-mapreduce-client-core-2.6.5.jar with timestamp 1516965630985
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/hadoop-mapreduce-client-core-2.6.5.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp1508679945328701914.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/hadoop-mapreduce-client-core-2.6.5.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/xmlenc-0.52.jar with timestamp 1516965630970
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/xmlenc-0.52.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp2747462485428067371.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/xmlenc-0.52.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/javax.inject-2.4.0-b34.jar with timestamp 1516965630961
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/javax.inject-2.4.0-b34.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp4066630934057069227.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/javax.inject-2.4.0-b34.jar to class loader
+18/01/26 12:20:34 INFO Executor: Fetching spark://138.96.200.169:38525/jars/apacheds-i18n-2.0.0-M15.jar with timestamp 1516965630978
+18/01/26 12:20:34 INFO Utils: Fetching spark://138.96.200.169:38525/jars/apacheds-i18n-2.0.0-M15.jar to /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/fetchFileTemp435402083681905503.tmp
+18/01/26 12:20:34 INFO Executor: Adding file:/tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1/userFiles-4518c57c-3366-4263-bc82-4a85890024db/apacheds-i18n-2.0.0-M15.jar to class loader
+18/01/26 12:20:34 INFO CodeGenerator: Code generated in 10.642672 ms
+18/01/26 12:20:34 INFO Executor: Finished task 0.0 in stage 0.0 (TID 0). 1321 bytes result sent to driver
+18/01/26 12:20:34 INFO TaskSetManager: Finished task 0.0 in stage 0.0 (TID 0) in 894 ms on localhost (executor driver) (1/1)
+18/01/26 12:20:34 INFO TaskSchedulerImpl: Removed TaskSet 0.0, whose tasks have all completed, from pool 
+18/01/26 12:20:34 INFO DAGScheduler: ResultStage 0 (take at DeveloperApiExample.scala:128) finished in 0.907 s
+18/01/26 12:20:34 INFO DAGScheduler: Job 0 finished: take at DeveloperApiExample.scala:128, took 1.187531 s
+18/01/26 12:20:34 WARN BLAS: Failed to load implementation from: com.github.fommil.netlib.NativeSystemBLAS
+18/01/26 12:20:34 WARN BLAS: Failed to load implementation from: com.github.fommil.netlib.NativeRefBLAS
+18/01/26 12:20:34 INFO CodeGenerator: Code generated in 11.443347 ms
+18/01/26 12:20:34 INFO CodeGenerator: Code generated in 21.655928 ms
+18/01/26 12:20:34 INFO AbstractConnector: Stopped Spark@54a3ab8f{HTTP/1.1,[http/1.1]}{0.0.0.0:4040}
+18/01/26 12:20:34 INFO SparkUI: Stopped Spark web UI at http://138.96.200.169:4040
+18/01/26 12:20:34 INFO MapOutputTrackerMasterEndpoint: MapOutputTrackerMasterEndpoint stopped!
+18/01/26 12:20:34 INFO MemoryStore: MemoryStore cleared
+18/01/26 12:20:34 INFO BlockManager: BlockManager stopped
+18/01/26 12:20:34 INFO BlockManagerMaster: BlockManagerMaster stopped
+18/01/26 12:20:34 INFO OutputCommitCoordinator$OutputCommitCoordinatorEndpoint: OutputCommitCoordinator stopped!
+18/01/26 12:20:34 INFO SparkContext: Successfully stopped SparkContext
+18/01/26 12:20:34 INFO ShutdownHookManager: Shutdown hook called
+18/01/26 12:20:34 INFO ShutdownHookManager: Deleting directory /tmp/spark-80bdb3c5-ebb8-46b9-b962-6b3232d051f1

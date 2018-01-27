@@ -1,0 +1,22 @@
+Error: Missing argument <input>
+LogisticRegressionExample: an example Logistic Regression with Elastic-Net app.
+Usage: LogisticRegressionExample [options] <input>
+
+  --regParam <value>
+        regularization parameter, default: 0.0
+  --elasticNetParam <value>
+        ElasticNet mixing parameter. For alpha = 0, the penalty is an L2 penalty. For alpha = 1, it is an L1 penalty. For 0 < alpha < 1, the penalty is a combination of L1 and L2, default: 0.0
+  --maxIter <value>
+        maximum number of iterations, default: 100
+  --fitIntercept <value>
+        whether to fit an intercept term, default: true
+  --tol <value>
+        the convergence tolerance of iterations, Smaller value will lead to higher accuracy with the cost of more iterations, default: 1.0E-6
+  --fracTest <value>
+        fraction of data to hold out for testing. If given option testInput, this option is ignored. default: 0.2
+  --testInput <value>
+        input path to test dataset. If given, option fracTest is ignored. default: 
+  --dataFormat <value>
+        data format: libsvm (default), dense (deprecated in Spark v1.1)
+  <input>
+        input path to labeled examples

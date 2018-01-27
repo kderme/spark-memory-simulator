@@ -1,0 +1,333 @@
+Using Spark's default log4j profile: org/apache/spark/log4j-defaults.properties
+18/01/26 12:22:08 INFO SparkContext: Running Spark version 2.2.2-SNAPSHOT
+18/01/26 12:22:08 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+18/01/26 12:22:08 INFO SparkContext: Submitted application: MulticlassLogisticRegressionWithElasticNetExample
+18/01/26 12:22:08 INFO SecurityManager: Changing view acls to: kderment
+18/01/26 12:22:08 INFO SecurityManager: Changing modify acls to: kderment
+18/01/26 12:22:08 INFO SecurityManager: Changing view acls groups to: 
+18/01/26 12:22:08 INFO SecurityManager: Changing modify acls groups to: 
+18/01/26 12:22:08 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users  with view permissions: Set(kderment); groups with view permissions: Set(); users  with modify permissions: Set(kderment); groups with modify permissions: Set()
+18/01/26 12:22:08 INFO Utils: Successfully started service 'sparkDriver' on port 35305.
+18/01/26 12:22:08 INFO SparkEnv: Registering MapOutputTracker
+18/01/26 12:22:08 INFO SparkEnv: Registering BlockManagerMaster
+18/01/26 12:22:08 INFO BlockManagerMasterEndpoint: Using org.apache.spark.storage.DefaultTopologyMapper for getting topology information
+18/01/26 12:22:08 INFO BlockManagerMasterEndpoint: BlockManagerMasterEndpoint up
+18/01/26 12:22:08 INFO DiskBlockManager: Created local directory at /tmp/blockmgr-0f419a11-f601-4238-9652-8b7a2d05751d
+18/01/26 12:22:08 INFO MemoryStore: MemoryStore started with capacity 366.3 MB
+18/01/26 12:22:08 INFO SparkEnv: Registering OutputCommitCoordinator
+18/01/26 12:22:08 INFO log: Logging initialized @1353ms
+18/01/26 12:22:08 INFO Server: jetty-9.3.11.v20160721
+18/01/26 12:22:08 INFO Server: Started @1409ms
+18/01/26 12:22:08 INFO AbstractConnector: Started ServerConnector@10ad20cb{HTTP/1.1,[http/1.1]}{0.0.0.0:4040}
+18/01/26 12:22:08 INFO Utils: Successfully started service 'SparkUI' on port 4040.
+18/01/26 12:22:08 INFO ContextHandler: Started o.e.j.s.ServletContextHandler@4d4d48a6{/jobs,null,AVAILABLE,@Spark}
+18/01/26 12:22:08 INFO ContextHandler: Started o.e.j.s.ServletContextHandler@65ef722a{/jobs/json,null,AVAILABLE,@Spark}
+18/01/26 12:22:08 INFO ContextHandler: Started o.e.j.s.ServletContextHandler@214894fc{/jobs/job,null,AVAILABLE,@Spark}
+18/01/26 12:22:08 INFO ContextHandler: Started o.e.j.s.ServletContextHandler@1c4ee95c{/jobs/job/json,null,AVAILABLE,@Spark}
+18/01/26 12:22:08 INFO ContextHandler: Started o.e.j.s.ServletContextHandler@5aa360ea{/stages,null,AVAILABLE,@Spark}
+18/01/26 12:22:08 INFO ContextHandler: Started o.e.j.s.ServletContextHandler@e27ba81{/stages/json,null,AVAILABLE,@Spark}
+18/01/26 12:22:08 INFO ContextHandler: Started o.e.j.s.ServletContextHandler@1556f2dd{/stages/stage,null,AVAILABLE,@Spark}
+18/01/26 12:22:08 INFO ContextHandler: Started o.e.j.s.ServletContextHandler@6b5f8707{/stages/stage/json,null,AVAILABLE,@Spark}
+18/01/26 12:22:08 INFO ContextHandler: Started o.e.j.s.ServletContextHandler@5a12c728{/stages/pool,null,AVAILABLE,@Spark}
+18/01/26 12:22:08 INFO ContextHandler: Started o.e.j.s.ServletContextHandler@6e5bfdfc{/stages/pool/json,null,AVAILABLE,@Spark}
+18/01/26 12:22:08 INFO ContextHandler: Started o.e.j.s.ServletContextHandler@71652c98{/storage,null,AVAILABLE,@Spark}
+18/01/26 12:22:08 INFO ContextHandler: Started o.e.j.s.ServletContextHandler@60b85ba1{/storage/json,null,AVAILABLE,@Spark}
+18/01/26 12:22:08 INFO ContextHandler: Started o.e.j.s.ServletContextHandler@117632cf{/storage/rdd,null,AVAILABLE,@Spark}
+18/01/26 12:22:08 INFO ContextHandler: Started o.e.j.s.ServletContextHandler@d71adc2{/storage/rdd/json,null,AVAILABLE,@Spark}
+18/01/26 12:22:08 INFO ContextHandler: Started o.e.j.s.ServletContextHandler@1a1d3c1a{/environment,null,AVAILABLE,@Spark}
+18/01/26 12:22:08 INFO ContextHandler: Started o.e.j.s.ServletContextHandler@159e366{/environment/json,null,AVAILABLE,@Spark}
+18/01/26 12:22:08 INFO ContextHandler: Started o.e.j.s.ServletContextHandler@24528a25{/executors,null,AVAILABLE,@Spark}
+18/01/26 12:22:08 INFO ContextHandler: Started o.e.j.s.ServletContextHandler@59221b97{/executors/json,null,AVAILABLE,@Spark}
+18/01/26 12:22:08 INFO ContextHandler: Started o.e.j.s.ServletContextHandler@5a772895{/executors/threadDump,null,AVAILABLE,@Spark}
+18/01/26 12:22:08 INFO ContextHandler: Started o.e.j.s.ServletContextHandler@704b2127{/executors/threadDump/json,null,AVAILABLE,@Spark}
+18/01/26 12:22:08 INFO ContextHandler: Started o.e.j.s.ServletContextHandler@5d332969{/static,null,AVAILABLE,@Spark}
+18/01/26 12:22:08 INFO ContextHandler: Started o.e.j.s.ServletContextHandler@36b6964d{/,null,AVAILABLE,@Spark}
+18/01/26 12:22:08 INFO ContextHandler: Started o.e.j.s.ServletContextHandler@9257031{/api,null,AVAILABLE,@Spark}
+18/01/26 12:22:08 INFO ContextHandler: Started o.e.j.s.ServletContextHandler@1db0ec27{/jobs/job/kill,null,AVAILABLE,@Spark}
+18/01/26 12:22:08 INFO ContextHandler: Started o.e.j.s.ServletContextHandler@d4ab71a{/stages/stage/kill,null,AVAILABLE,@Spark}
+18/01/26 12:22:08 INFO SparkUI: Bound SparkUI to 0.0.0.0, and started at http://138.96.200.169:4040
+18/01/26 12:22:08 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/htrace-core-3.0.4.jar at spark://138.96.200.169:35305/jars/htrace-core-3.0.4.jar with timestamp 1516965728994
+18/01/26 12:22:08 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/javax.annotation-api-1.2.jar at spark://138.96.200.169:35305/jars/javax.annotation-api-1.2.jar with timestamp 1516965728995
+18/01/26 12:22:08 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/spark-streaming_2.11-2.2.2-SNAPSHOT.jar at spark://138.96.200.169:35305/jars/spark-streaming_2.11-2.2.2-SNAPSHOT.jar with timestamp 1516965728996
+18/01/26 12:22:08 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/osgi-resource-locator-1.0.1.jar at spark://138.96.200.169:35305/jars/osgi-resource-locator-1.0.1.jar with timestamp 1516965728996
+18/01/26 12:22:08 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/avro-ipc-1.7.7.jar at spark://138.96.200.169:35305/jars/avro-ipc-1.7.7.jar with timestamp 1516965728996
+18/01/26 12:22:08 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/scala-library-2.11.8.jar at spark://138.96.200.169:35305/jars/scala-library-2.11.8.jar with timestamp 1516965728996
+18/01/26 12:22:08 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/spark-unsafe_2.11-2.2.2-SNAPSHOT.jar at spark://138.96.200.169:35305/jars/spark-unsafe_2.11-2.2.2-SNAPSHOT.jar with timestamp 1516965728996
+18/01/26 12:22:08 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/commons-configuration-1.6.jar at spark://138.96.200.169:35305/jars/commons-configuration-1.6.jar with timestamp 1516965728996
+18/01/26 12:22:08 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/ST4-4.0.4.jar at spark://138.96.200.169:35305/jars/ST4-4.0.4.jar with timestamp 1516965728997
+18/01/26 12:22:08 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/xercesImpl-2.9.1.jar at spark://138.96.200.169:35305/jars/xercesImpl-2.9.1.jar with timestamp 1516965728997
+18/01/26 12:22:08 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/jcl-over-slf4j-1.7.16.jar at spark://138.96.200.169:35305/jars/jcl-over-slf4j-1.7.16.jar with timestamp 1516965728997
+18/01/26 12:22:08 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/jets3t-0.9.3.jar at spark://138.96.200.169:35305/jars/jets3t-0.9.3.jar with timestamp 1516965728997
+18/01/26 12:22:08 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/breeze-macros_2.11-0.13.2.jar at spark://138.96.200.169:35305/jars/breeze-macros_2.11-0.13.2.jar with timestamp 1516965728997
+18/01/26 12:22:08 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/javax.inject-2.4.0-b34.jar at spark://138.96.200.169:35305/jars/javax.inject-2.4.0-b34.jar with timestamp 1516965728997
+18/01/26 12:22:08 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/compress-lzf-1.0.3.jar at spark://138.96.200.169:35305/jars/compress-lzf-1.0.3.jar with timestamp 1516965728997
+18/01/26 12:22:08 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/validation-api-1.1.0.Final.jar at spark://138.96.200.169:35305/jars/validation-api-1.1.0.Final.jar with timestamp 1516965728998
+18/01/26 12:22:08 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/commons-dbcp-1.4.jar at spark://138.96.200.169:35305/jars/commons-dbcp-1.4.jar with timestamp 1516965728998
+18/01/26 12:22:08 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/JavaEWAH-0.3.2.jar at spark://138.96.200.169:35305/jars/JavaEWAH-0.3.2.jar with timestamp 1516965728998
+18/01/26 12:22:08 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/spark-mllib_2.11-2.2.2-SNAPSHOT.jar at spark://138.96.200.169:35305/jars/spark-mllib_2.11-2.2.2-SNAPSHOT.jar with timestamp 1516965728998
+18/01/26 12:22:08 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/jetty-servlet-9.3.11.v20160721.jar at spark://138.96.200.169:35305/jars/jetty-servlet-9.3.11.v20160721.jar with timestamp 1516965728998
+18/01/26 12:22:08 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/scopt_2.11-3.3.0.jar at spark://138.96.200.169:35305/jars/scopt_2.11-3.3.0.jar with timestamp 1516965728998
+18/01/26 12:22:08 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/chill_2.11-0.8.0.jar at spark://138.96.200.169:35305/jars/chill_2.11-0.8.0.jar with timestamp 1516965728998
+18/01/26 12:22:08 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/jersey-container-servlet-2.22.2.jar at spark://138.96.200.169:35305/jars/jersey-container-servlet-2.22.2.jar with timestamp 1516965728999
+18/01/26 12:22:08 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/servlet-api-2.5-20110124.jar at spark://138.96.200.169:35305/jars/servlet-api-2.5-20110124.jar with timestamp 1516965728999
+18/01/26 12:22:08 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/jetty-client-9.3.11.v20160721.jar at spark://138.96.200.169:35305/jars/jetty-client-9.3.11.v20160721.jar with timestamp 1516965728999
+18/01/26 12:22:08 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/spark-launcher_2.11-2.2.2-SNAPSHOT.jar at spark://138.96.200.169:35305/jars/spark-launcher_2.11-2.2.2-SNAPSHOT.jar with timestamp 1516965728999
+18/01/26 12:22:08 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/calcite-linq4j-1.2.0-incubating.jar at spark://138.96.200.169:35305/jars/calcite-linq4j-1.2.0-incubating.jar with timestamp 1516965728999
+18/01/26 12:22:08 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/spark-streaming-flume_2.11-2.2.2-SNAPSHOT.jar at spark://138.96.200.169:35305/jars/spark-streaming-flume_2.11-2.2.2-SNAPSHOT.jar with timestamp 1516965728999
+18/01/26 12:22:08 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/commons-beanutils-core-1.8.0.jar at spark://138.96.200.169:35305/jars/commons-beanutils-core-1.8.0.jar with timestamp 1516965728999
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/java-xmlbuilder-1.0.jar at spark://138.96.200.169:35305/jars/java-xmlbuilder-1.0.jar with timestamp 1516965729000
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/hadoop-hdfs-2.6.5.jar at spark://138.96.200.169:35305/jars/hadoop-hdfs-2.6.5.jar with timestamp 1516965729000
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/stax-api-1.0.1.jar at spark://138.96.200.169:35305/jars/stax-api-1.0.1.jar with timestamp 1516965729000
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/jtransforms-2.4.0.jar at spark://138.96.200.169:35305/jars/jtransforms-2.4.0.jar with timestamp 1516965729000
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/hadoop-common-2.6.5.jar at spark://138.96.200.169:35305/jars/hadoop-common-2.6.5.jar with timestamp 1516965729000
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/flume-ng-sdk-1.6.0.jar at spark://138.96.200.169:35305/jars/flume-ng-sdk-1.6.0.jar with timestamp 1516965729000
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/pyrolite-4.13.jar at spark://138.96.200.169:35305/jars/pyrolite-4.13.jar with timestamp 1516965729000
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/javassist-3.18.1-GA.jar at spark://138.96.200.169:35305/jars/javassist-3.18.1-GA.jar with timestamp 1516965729001
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/jettison-1.1.jar at spark://138.96.200.169:35305/jars/jettison-1.1.jar with timestamp 1516965729001
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/jetty-io-9.3.11.v20160721.jar at spark://138.96.200.169:35305/jars/jetty-io-9.3.11.v20160721.jar with timestamp 1516965729001
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/paranamer-2.6.jar at spark://138.96.200.169:35305/jars/paranamer-2.6.jar with timestamp 1516965729001
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/jackson-module-paranamer-2.6.5.jar at spark://138.96.200.169:35305/jars/jackson-module-paranamer-2.6.5.jar with timestamp 1516965729001
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/spark-graphx_2.11-2.2.2-SNAPSHOT.jar at spark://138.96.200.169:35305/jars/spark-graphx_2.11-2.2.2-SNAPSHOT.jar with timestamp 1516965729001
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/ivy-2.4.0.jar at spark://138.96.200.169:35305/jars/ivy-2.4.0.jar with timestamp 1516965729001
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/commons-crypto-1.0.0.jar at spark://138.96.200.169:35305/jars/commons-crypto-1.0.0.jar with timestamp 1516965729001
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/hadoop-mapreduce-client-app-2.6.5.jar at spark://138.96.200.169:35305/jars/hadoop-mapreduce-client-app-2.6.5.jar with timestamp 1516965729002
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/httpclient-4.5.2.jar at spark://138.96.200.169:35305/jars/httpclient-4.5.2.jar with timestamp 1516965729002
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/curator-recipes-2.6.0.jar at spark://138.96.200.169:35305/jars/curator-recipes-2.6.0.jar with timestamp 1516965729002
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/libfb303-0.9.3.jar at spark://138.96.200.169:35305/jars/libfb303-0.9.3.jar with timestamp 1516965729002
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/jersey-media-jaxb-2.22.2.jar at spark://138.96.200.169:35305/jars/jersey-media-jaxb-2.22.2.jar with timestamp 1516965729002
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/api-util-1.0.0-M20.jar at spark://138.96.200.169:35305/jars/api-util-1.0.0-M20.jar with timestamp 1516965729002
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/metrics-json-3.1.2.jar at spark://138.96.200.169:35305/jars/metrics-json-3.1.2.jar with timestamp 1516965729002
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/hive-exec-1.2.1.spark2.jar at spark://138.96.200.169:35305/jars/hive-exec-1.2.1.spark2.jar with timestamp 1516965729003
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/jetty-util-9.3.11.v20160721.jar at spark://138.96.200.169:35305/jars/jetty-util-9.3.11.v20160721.jar with timestamp 1516965729003
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/spire_2.11-0.13.0.jar at spark://138.96.200.169:35305/jars/spire_2.11-0.13.0.jar with timestamp 1516965729003
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/hk2-locator-2.4.0-b34.jar at spark://138.96.200.169:35305/jars/hk2-locator-2.4.0-b34.jar with timestamp 1516965729003
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/spark-network-common_2.11-2.2.2-SNAPSHOT.jar at spark://138.96.200.169:35305/jars/spark-network-common_2.11-2.2.2-SNAPSHOT.jar with timestamp 1516965729003
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/velocity-1.7.jar at spark://138.96.200.169:35305/jars/velocity-1.7.jar with timestamp 1516965729003
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/flume-ng-core-1.6.0.jar at spark://138.96.200.169:35305/jars/flume-ng-core-1.6.0.jar with timestamp 1516965729003
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/commons-io-2.4.jar at spark://138.96.200.169:35305/jars/commons-io-2.4.jar with timestamp 1516965729003
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/jersey-container-servlet-core-2.22.2.jar at spark://138.96.200.169:35305/jars/jersey-container-servlet-core-2.22.2.jar with timestamp 1516965729004
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/apache-log4j-extras-1.2.17.jar at spark://138.96.200.169:35305/jars/apache-log4j-extras-1.2.17.jar with timestamp 1516965729004
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/scala-reflect-2.11.8.jar at spark://138.96.200.169:35305/jars/scala-reflect-2.11.8.jar with timestamp 1516965729004
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/javax.servlet-api-3.1.0.jar at spark://138.96.200.169:35305/jars/javax.servlet-api-3.1.0.jar with timestamp 1516965729004
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/parquet-encoding-1.8.2.jar at spark://138.96.200.169:35305/jars/parquet-encoding-1.8.2.jar with timestamp 1516965729004
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/hadoop-yarn-server-common-2.6.5.jar at spark://138.96.200.169:35305/jars/hadoop-yarn-server-common-2.6.5.jar with timestamp 1516965729004
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/jackson-xc-1.9.13.jar at spark://138.96.200.169:35305/jars/jackson-xc-1.9.13.jar with timestamp 1516965729004
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/commons-pool-1.5.4.jar at spark://138.96.200.169:35305/jars/commons-pool-1.5.4.jar with timestamp 1516965729005
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/jackson-databind-2.6.5.jar at spark://138.96.200.169:35305/jars/jackson-databind-2.6.5.jar with timestamp 1516965729005
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/mina-core-2.0.4.jar at spark://138.96.200.169:35305/jars/mina-core-2.0.4.jar with timestamp 1516965729005
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/hadoop-yarn-api-2.6.5.jar at spark://138.96.200.169:35305/jars/hadoop-yarn-api-2.6.5.jar with timestamp 1516965729005
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/gson-2.2.4.jar at spark://138.96.200.169:35305/jars/gson-2.2.4.jar with timestamp 1516965729005
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/datanucleus-api-jdo-3.2.6.jar at spark://138.96.200.169:35305/jars/datanucleus-api-jdo-3.2.6.jar with timestamp 1516965729005
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/commons-compiler-3.0.7.jar at spark://138.96.200.169:35305/jars/commons-compiler-3.0.7.jar with timestamp 1516965729005
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/hadoop-yarn-common-2.6.5.jar at spark://138.96.200.169:35305/jars/hadoop-yarn-common-2.6.5.jar with timestamp 1516965729005
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/jackson-core-asl-1.9.13.jar at spark://138.96.200.169:35305/jars/jackson-core-asl-1.9.13.jar with timestamp 1516965729006
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/commons-collections-3.2.2.jar at spark://138.96.200.169:35305/jars/commons-collections-3.2.2.jar with timestamp 1516965729006
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/commons-logging-1.2.jar at spark://138.96.200.169:35305/jars/commons-logging-1.2.jar with timestamp 1516965729006
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/parquet-common-1.8.2.jar at spark://138.96.200.169:35305/jars/parquet-common-1.8.2.jar with timestamp 1516965729006
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/unused-1.0.0.jar at spark://138.96.200.169:35305/jars/unused-1.0.0.jar with timestamp 1516965729006
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/commons-digester-1.8.jar at spark://138.96.200.169:35305/jars/commons-digester-1.8.jar with timestamp 1516965729006
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/bcprov-jdk15on-1.51.jar at spark://138.96.200.169:35305/jars/bcprov-jdk15on-1.51.jar with timestamp 1516965729006
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/stream-2.7.0.jar at spark://138.96.200.169:35305/jars/stream-2.7.0.jar with timestamp 1516965729007
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/jdo-api-3.0.1.jar at spark://138.96.200.169:35305/jars/jdo-api-3.0.1.jar with timestamp 1516965729007
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/guava-14.0.1.jar at spark://138.96.200.169:35305/jars/guava-14.0.1.jar with timestamp 1516965729007
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/avro-1.7.7.jar at spark://138.96.200.169:35305/jars/avro-1.7.7.jar with timestamp 1516965729007
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/hk2-utils-2.4.0-b34.jar at spark://138.96.200.169:35305/jars/hk2-utils-2.4.0-b34.jar with timestamp 1516965729007
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/jetty-server-9.3.11.v20160721.jar at spark://138.96.200.169:35305/jars/jetty-server-9.3.11.v20160721.jar with timestamp 1516965729007
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/javax.inject-1.jar at spark://138.96.200.169:35305/jars/javax.inject-1.jar with timestamp 1516965729007
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/spark-tags_2.11-2.2.2-SNAPSHOT.jar at spark://138.96.200.169:35305/jars/spark-tags_2.11-2.2.2-SNAPSHOT.jar with timestamp 1516965729007
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/xmlenc-0.52.jar at spark://138.96.200.169:35305/jars/xmlenc-0.52.jar with timestamp 1516965729007
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/parquet-hadoop-bundle-1.6.0.jar at spark://138.96.200.169:35305/jars/parquet-hadoop-bundle-1.6.0.jar with timestamp 1516965729008
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/shapeless_2.11-2.3.2.jar at spark://138.96.200.169:35305/jars/shapeless_2.11-2.3.2.jar with timestamp 1516965729008
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/jetty-6.1.26.jar at spark://138.96.200.169:35305/jars/jetty-6.1.26.jar with timestamp 1516965729008
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/jetty-plus-9.3.11.v20160721.jar at spark://138.96.200.169:35305/jars/jetty-plus-9.3.11.v20160721.jar with timestamp 1516965729008
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/commons-lang3-3.5.jar at spark://138.96.200.169:35305/jars/commons-lang3-3.5.jar with timestamp 1516965729008
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/aopalliance-1.0.jar at spark://138.96.200.169:35305/jars/aopalliance-1.0.jar with timestamp 1516965729008
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/jaxb-api-2.2.2.jar at spark://138.96.200.169:35305/jars/jaxb-api-2.2.2.jar with timestamp 1516965729008
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/curator-client-2.6.0.jar at spark://138.96.200.169:35305/jars/curator-client-2.6.0.jar with timestamp 1516965729008
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/spark-core_2.11-2.2.2-SNAPSHOT.jar at spark://138.96.200.169:35305/jars/spark-core_2.11-2.2.2-SNAPSHOT.jar with timestamp 1516965729009
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/metrics-core-3.1.2.jar at spark://138.96.200.169:35305/jars/metrics-core-3.1.2.jar with timestamp 1516965729009
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/commons-cli-1.2.jar at spark://138.96.200.169:35305/jars/commons-cli-1.2.jar with timestamp 1516965729009
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/hadoop-mapreduce-client-jobclient-2.6.5.jar at spark://138.96.200.169:35305/jars/hadoop-mapreduce-client-jobclient-2.6.5.jar with timestamp 1516965729009
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/spire-macros_2.11-0.13.0.jar at spark://138.96.200.169:35305/jars/spire-macros_2.11-0.13.0.jar with timestamp 1516965729009
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/spark-catalyst_2.11-2.2.2-SNAPSHOT.jar at spark://138.96.200.169:35305/jars/spark-catalyst_2.11-2.2.2-SNAPSHOT.jar with timestamp 1516965729009
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/metrics-jvm-3.1.2.jar at spark://138.96.200.169:35305/jars/metrics-jvm-3.1.2.jar with timestamp 1516965729009
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/parquet-column-1.8.2.jar at spark://138.96.200.169:35305/jars/parquet-column-1.8.2.jar with timestamp 1516965729009
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/janino-3.0.7.jar at spark://138.96.200.169:35305/jars/janino-3.0.7.jar with timestamp 1516965729009
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/guice-3.0.jar at spark://138.96.200.169:35305/jars/guice-3.0.jar with timestamp 1516965729009
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/avro-ipc-1.7.7-tests.jar at spark://138.96.200.169:35305/jars/avro-ipc-1.7.7-tests.jar with timestamp 1516965729010
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/mail-1.4.7.jar at spark://138.96.200.169:35305/jars/mail-1.4.7.jar with timestamp 1516965729010
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/jersey-client-2.22.2.jar at spark://138.96.200.169:35305/jars/jersey-client-2.22.2.jar with timestamp 1516965729010
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/pmml-schema-1.2.15.jar at spark://138.96.200.169:35305/jars/pmml-schema-1.2.15.jar with timestamp 1516965729010
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/py4j-0.10.4.jar at spark://138.96.200.169:35305/jars/py4j-0.10.4.jar with timestamp 1516965729010
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/hadoop-auth-2.6.5.jar at spark://138.96.200.169:35305/jars/hadoop-auth-2.6.5.jar with timestamp 1516965729010
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/bonecp-0.8.0.RELEASE.jar at spark://138.96.200.169:35305/jars/bonecp-0.8.0.RELEASE.jar with timestamp 1516965729010
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/hadoop-client-2.6.5.jar at spark://138.96.200.169:35305/jars/hadoop-client-2.6.5.jar with timestamp 1516965729010
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/jackson-mapper-asl-1.9.13.jar at spark://138.96.200.169:35305/jars/jackson-mapper-asl-1.9.13.jar with timestamp 1516965729010
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/antlr-runtime-3.4.jar at spark://138.96.200.169:35305/jars/antlr-runtime-3.4.jar with timestamp 1516965729011
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/jersey-guava-2.22.2.jar at spark://138.96.200.169:35305/jars/jersey-guava-2.22.2.jar with timestamp 1516965729011
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/jackson-annotations-2.6.5.jar at spark://138.96.200.169:35305/jars/jackson-annotations-2.6.5.jar with timestamp 1516965729011
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/scalap-2.11.8.jar at spark://138.96.200.169:35305/jars/scalap-2.11.8.jar with timestamp 1516965729011
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/jersey-common-2.22.2.jar at spark://138.96.200.169:35305/jars/jersey-common-2.22.2.jar with timestamp 1516965729011
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/avro-mapred-1.7.7-hadoop2.jar at spark://138.96.200.169:35305/jars/avro-mapred-1.7.7-hadoop2.jar with timestamp 1516965729011
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/RoaringBitmap-0.5.11.jar at spark://138.96.200.169:35305/jars/RoaringBitmap-0.5.11.jar with timestamp 1516965729011
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/objenesis-2.1.jar at spark://138.96.200.169:35305/jars/objenesis-2.1.jar with timestamp 1516965729011
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/stax-api-1.0-2.jar at spark://138.96.200.169:35305/jars/stax-api-1.0-2.jar with timestamp 1516965729011
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/spark-sketch_2.11-2.2.2-SNAPSHOT.jar at spark://138.96.200.169:35305/jars/spark-sketch_2.11-2.2.2-SNAPSHOT.jar with timestamp 1516965729012
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/univocity-parsers-2.2.1.jar at spark://138.96.200.169:35305/jars/univocity-parsers-2.2.1.jar with timestamp 1516965729012
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/metrics-graphite-3.1.2.jar at spark://138.96.200.169:35305/jars/metrics-graphite-3.1.2.jar with timestamp 1516965729012
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/activation-1.1.1.jar at spark://138.96.200.169:35305/jars/activation-1.1.1.jar with timestamp 1516965729012
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/mx4j-3.0.2.jar at spark://138.96.200.169:35305/jars/mx4j-3.0.2.jar with timestamp 1516965729012
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/minlog-1.3.0.jar at spark://138.96.200.169:35305/jars/minlog-1.3.0.jar with timestamp 1516965729012
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/spark-sql_2.11-2.2.2-SNAPSHOT.jar at spark://138.96.200.169:35305/jars/spark-sql_2.11-2.2.2-SNAPSHOT.jar with timestamp 1516965729012
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/protobuf-java-2.5.0.jar at spark://138.96.200.169:35305/jars/protobuf-java-2.5.0.jar with timestamp 1516965729012
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/pmml-model-1.2.15.jar at spark://138.96.200.169:35305/jars/pmml-model-1.2.15.jar with timestamp 1516965729013
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/base64-2.3.8.jar at spark://138.96.200.169:35305/jars/base64-2.3.8.jar with timestamp 1516965729013
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/metrics-core-2.2.0.jar at spark://138.96.200.169:35305/jars/metrics-core-2.2.0.jar with timestamp 1516965729013
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/antlr-2.7.7.jar at spark://138.96.200.169:35305/jars/antlr-2.7.7.jar with timestamp 1516965729013
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/chill-java-0.8.0.jar at spark://138.96.200.169:35305/jars/chill-java-0.8.0.jar with timestamp 1516965729013
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/netty-all-4.0.43.Final.jar at spark://138.96.200.169:35305/jars/netty-all-4.0.43.Final.jar with timestamp 1516965729013
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/slf4j-api-1.7.21.jar at spark://138.96.200.169:35305/jars/slf4j-api-1.7.21.jar with timestamp 1516965729013
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/cglib-2.2.1-v20090111.jar at spark://138.96.200.169:35305/jars/cglib-2.2.1-v20090111.jar with timestamp 1516965729013
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/jetty-http-9.3.11.v20160721.jar at spark://138.96.200.169:35305/jars/jetty-http-9.3.11.v20160721.jar with timestamp 1516965729013
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/slf4j-log4j12-1.7.16.jar at spark://138.96.200.169:35305/jars/slf4j-log4j12-1.7.16.jar with timestamp 1516965729013
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/parquet-hadoop-1.8.2.jar at spark://138.96.200.169:35305/jars/parquet-hadoop-1.8.2.jar with timestamp 1516965729014
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/hk2-api-2.4.0-b34.jar at spark://138.96.200.169:35305/jars/hk2-api-2.4.0-b34.jar with timestamp 1516965729014
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/core-1.1.2.jar at spark://138.96.200.169:35305/jars/core-1.1.2.jar with timestamp 1516965729014
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/api-asn1-api-1.0.0-M20.jar at spark://138.96.200.169:35305/jars/api-asn1-api-1.0.0-M20.jar with timestamp 1516965729014
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/json4s-jackson_2.11-3.2.11.jar at spark://138.96.200.169:35305/jars/json4s-jackson_2.11-3.2.11.jar with timestamp 1516965729014
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/commons-net-3.1.jar at spark://138.96.200.169:35305/jars/commons-net-3.1.jar with timestamp 1516965729014
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/avro-compiler-1.7.3.jar at spark://138.96.200.169:35305/jars/avro-compiler-1.7.3.jar with timestamp 1516965729014
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/jetty-webapp-9.3.11.v20160721.jar at spark://138.96.200.169:35305/jars/jetty-webapp-9.3.11.v20160721.jar with timestamp 1516965729014
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/jetty-jndi-9.3.11.v20160721.jar at spark://138.96.200.169:35305/jars/jetty-jndi-9.3.11.v20160721.jar with timestamp 1516965729014
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/spark-sql-kafka-0-10_2.11-2.2.2-SNAPSHOT.jar at spark://138.96.200.169:35305/jars/spark-sql-kafka-0-10_2.11-2.2.2-SNAPSHOT.jar with timestamp 1516965729015
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/jsr305-1.3.9.jar at spark://138.96.200.169:35305/jars/jsr305-1.3.9.jar with timestamp 1516965729015
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/flume-ng-auth-1.6.0.jar at spark://138.96.200.169:35305/jars/flume-ng-auth-1.6.0.jar with timestamp 1516965729015
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/commons-lang-2.6.jar at spark://138.96.200.169:35305/jars/commons-lang-2.6.jar with timestamp 1516965729015
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/spark-streaming-flume-sink_2.11-2.2.2-SNAPSHOT.jar at spark://138.96.200.169:35305/jars/spark-streaming-flume-sink_2.11-2.2.2-SNAPSHOT.jar with timestamp 1516965729015
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/apacheds-i18n-2.0.0-M15.jar at spark://138.96.200.169:35305/jars/apacheds-i18n-2.0.0-M15.jar with timestamp 1516965729015
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/jetty-continuation-9.3.11.v20160721.jar at spark://138.96.200.169:35305/jars/jetty-continuation-9.3.11.v20160721.jar with timestamp 1516965729015
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/spark-mllib-local_2.11-2.2.2-SNAPSHOT.jar at spark://138.96.200.169:35305/jars/spark-mllib-local_2.11-2.2.2-SNAPSHOT.jar with timestamp 1516965729015
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/parquet-format-2.3.1.jar at spark://138.96.200.169:35305/jars/parquet-format-2.3.1.jar with timestamp 1516965729015
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/spark-streaming-kafka-0-8_2.11-2.2.2-SNAPSHOT.jar at spark://138.96.200.169:35305/jars/spark-streaming-kafka-0-8_2.11-2.2.2-SNAPSHOT.jar with timestamp 1516965729015
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/datanucleus-rdbms-3.2.9.jar at spark://138.96.200.169:35305/jars/datanucleus-rdbms-3.2.9.jar with timestamp 1516965729016
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/jul-to-slf4j-1.7.16.jar at spark://138.96.200.169:35305/jars/jul-to-slf4j-1.7.16.jar with timestamp 1516965729016
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/datanucleus-core-3.2.10.jar at spark://138.96.200.169:35305/jars/datanucleus-core-3.2.10.jar with timestamp 1516965729016
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/hive-metastore-1.2.1.spark2.jar at spark://138.96.200.169:35305/jars/hive-metastore-1.2.1.spark2.jar with timestamp 1516965729016
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/hadoop-annotations-2.6.5.jar at spark://138.96.200.169:35305/jars/hadoop-annotations-2.6.5.jar with timestamp 1516965729016
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/jodd-core-3.5.2.jar at spark://138.96.200.169:35305/jars/jodd-core-3.5.2.jar with timestamp 1516965729016
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/json4s-ast_2.11-3.2.11.jar at spark://138.96.200.169:35305/jars/json4s-ast_2.11-3.2.11.jar with timestamp 1516965729016
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/jetty-util-6.1.26.jar at spark://138.96.200.169:35305/jars/jetty-util-6.1.26.jar with timestamp 1516965729016
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/commons-compress-1.4.1.jar at spark://138.96.200.169:35305/jars/commons-compress-1.4.1.jar with timestamp 1516965729016
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/zkclient-0.3.jar at spark://138.96.200.169:35305/jars/zkclient-0.3.jar with timestamp 1516965729016
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/macro-compat_2.11-1.1.1.jar at spark://138.96.200.169:35305/jars/macro-compat_2.11-1.1.1.jar with timestamp 1516965729017
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/scala-xml_2.11-1.0.4.jar at spark://138.96.200.169:35305/jars/scala-xml_2.11-1.0.4.jar with timestamp 1516965729017
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/scala-parser-combinators_2.11-1.0.4.jar at spark://138.96.200.169:35305/jars/scala-parser-combinators_2.11-1.0.4.jar with timestamp 1516965729017
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/eigenbase-properties-1.1.5.jar at spark://138.96.200.169:35305/jars/eigenbase-properties-1.1.5.jar with timestamp 1516965729017
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/xz-1.0.jar at spark://138.96.200.169:35305/jars/xz-1.0.jar with timestamp 1516965729017
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/javax.ws.rs-api-2.0.1.jar at spark://138.96.200.169:35305/jars/javax.ws.rs-api-2.0.1.jar with timestamp 1516965729017
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/zookeeper-3.4.6.jar at spark://138.96.200.169:35305/jars/zookeeper-3.4.6.jar with timestamp 1516965729017
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/json4s-core_2.11-3.2.11.jar at spark://138.96.200.169:35305/jars/json4s-core_2.11-3.2.11.jar with timestamp 1516965729017
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/jackson-module-scala_2.11-2.6.5.jar at spark://138.96.200.169:35305/jars/jackson-module-scala_2.11-2.6.5.jar with timestamp 1516965729017
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/antlr4-runtime-4.5.3.jar at spark://138.96.200.169:35305/jars/antlr4-runtime-4.5.3.jar with timestamp 1516965729018
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/hadoop-yarn-client-2.6.5.jar at spark://138.96.200.169:35305/jars/hadoop-yarn-client-2.6.5.jar with timestamp 1516965729018
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/oro-2.0.8.jar at spark://138.96.200.169:35305/jars/oro-2.0.8.jar with timestamp 1516965729018
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/libthrift-0.9.3.jar at spark://138.96.200.169:35305/jars/libthrift-0.9.3.jar with timestamp 1516965729018
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/jetty-proxy-9.3.11.v20160721.jar at spark://138.96.200.169:35305/jars/jetty-proxy-9.3.11.v20160721.jar with timestamp 1516965729018
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/commons-beanutils-1.7.0.jar at spark://138.96.200.169:35305/jars/commons-beanutils-1.7.0.jar with timestamp 1516965729018
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/joda-time-2.9.3.jar at spark://138.96.200.169:35305/jars/joda-time-2.9.3.jar with timestamp 1516965729018
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/xbean-asm5-shaded-4.4.jar at spark://138.96.200.169:35305/jars/xbean-asm5-shaded-4.4.jar with timestamp 1516965729018
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/derby-10.12.1.1.jar at spark://138.96.200.169:35305/jars/derby-10.12.1.1.jar with timestamp 1516965729018
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/jersey-server-2.22.2.jar at spark://138.96.200.169:35305/jars/jersey-server-2.22.2.jar with timestamp 1516965729019
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/kryo-shaded-3.0.3.jar at spark://138.96.200.169:35305/jars/kryo-shaded-3.0.3.jar with timestamp 1516965729019
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/commons-math3-3.4.1.jar at spark://138.96.200.169:35305/jars/commons-math3-3.4.1.jar with timestamp 1516965729019
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/hadoop-mapreduce-client-shuffle-2.6.5.jar at spark://138.96.200.169:35305/jars/hadoop-mapreduce-client-shuffle-2.6.5.jar with timestamp 1516965729019
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/calcite-core-1.2.0-incubating.jar at spark://138.96.200.169:35305/jars/calcite-core-1.2.0-incubating.jar with timestamp 1516965729019
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/jetty-xml-9.3.11.v20160721.jar at spark://138.96.200.169:35305/jars/jetty-xml-9.3.11.v20160721.jar with timestamp 1516965729019
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/commons-httpclient-3.1.jar at spark://138.96.200.169:35305/jars/commons-httpclient-3.1.jar with timestamp 1516965729019
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/opencsv-2.3.jar at spark://138.96.200.169:35305/jars/opencsv-2.3.jar with timestamp 1516965729019
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/xml-apis-1.3.04.jar at spark://138.96.200.169:35305/jars/xml-apis-1.3.04.jar with timestamp 1516965729019
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/jetty-servlets-9.3.11.v20160721.jar at spark://138.96.200.169:35305/jars/jetty-servlets-9.3.11.v20160721.jar with timestamp 1516965729019
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/jetty-security-9.3.11.v20160721.jar at spark://138.96.200.169:35305/jars/jetty-security-9.3.11.v20160721.jar with timestamp 1516965729020
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/jackson-core-2.6.5.jar at spark://138.96.200.169:35305/jars/jackson-core-2.6.5.jar with timestamp 1516965729020
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/jline-0.9.94.jar at spark://138.96.200.169:35305/jars/jline-0.9.94.jar with timestamp 1516965729020
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/lz4-1.3.0.jar at spark://138.96.200.169:35305/jars/lz4-1.3.0.jar with timestamp 1516965729020
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/aopalliance-repackaged-2.4.0-b34.jar at spark://138.96.200.169:35305/jars/aopalliance-repackaged-2.4.0-b34.jar with timestamp 1516965729020
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/spark-examples_2.11-2.2.2-SNAPSHOT.jar at spark://138.96.200.169:35305/jars/spark-examples_2.11-2.2.2-SNAPSHOT.jar with timestamp 1516965729020
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/arpack_combined_all-0.1.jar at spark://138.96.200.169:35305/jars/arpack_combined_all-0.1.jar with timestamp 1516965729020
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/spark-network-shuffle_2.11-2.2.2-SNAPSHOT.jar at spark://138.96.200.169:35305/jars/spark-network-shuffle_2.11-2.2.2-SNAPSHOT.jar with timestamp 1516965729020
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/snappy-0.2.jar at spark://138.96.200.169:35305/jars/snappy-0.2.jar with timestamp 1516965729020
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/httpcore-4.4.4.jar at spark://138.96.200.169:35305/jars/httpcore-4.4.4.jar with timestamp 1516965729021
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/commons-codec-1.10.jar at spark://138.96.200.169:35305/jars/commons-codec-1.10.jar with timestamp 1516965729021
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/jackson-jaxrs-1.9.13.jar at spark://138.96.200.169:35305/jars/jackson-jaxrs-1.9.13.jar with timestamp 1516965729021
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/snappy-java-1.1.2.6.jar at spark://138.96.200.169:35305/jars/snappy-java-1.1.2.6.jar with timestamp 1516965729021
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/breeze_2.11-0.13.2.jar at spark://138.96.200.169:35305/jars/breeze_2.11-0.13.2.jar with timestamp 1516965729021
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/flume-ng-configuration-1.6.0.jar at spark://138.96.200.169:35305/jars/flume-ng-configuration-1.6.0.jar with timestamp 1516965729021
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/javolution-5.5.1.jar at spark://138.96.200.169:35305/jars/javolution-5.5.1.jar with timestamp 1516965729021
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/kafka_2.11-0.8.2.1.jar at spark://138.96.200.169:35305/jars/kafka_2.11-0.8.2.1.jar with timestamp 1516965729021
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/netty-3.9.9.Final.jar at spark://138.96.200.169:35305/jars/netty-3.9.9.Final.jar with timestamp 1516965729021
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/machinist_2.11-0.6.1.jar at spark://138.96.200.169:35305/jars/machinist_2.11-0.6.1.jar with timestamp 1516965729022
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/scala-compiler-2.11.8.jar at spark://138.96.200.169:35305/jars/scala-compiler-2.11.8.jar with timestamp 1516965729022
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/parquet-jackson-1.8.2.jar at spark://138.96.200.169:35305/jars/parquet-jackson-1.8.2.jar with timestamp 1516965729022
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/leveldbjni-all-1.8.jar at spark://138.96.200.169:35305/jars/leveldbjni-all-1.8.jar with timestamp 1516965729022
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/stringtemplate-3.2.1.jar at spark://138.96.200.169:35305/jars/stringtemplate-3.2.1.jar with timestamp 1516965729022
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/apacheds-kerberos-codec-2.0.0-M15.jar at spark://138.96.200.169:35305/jars/apacheds-kerberos-codec-2.0.0-M15.jar with timestamp 1516965729022
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/calcite-avatica-1.2.0-incubating.jar at spark://138.96.200.169:35305/jars/calcite-avatica-1.2.0-incubating.jar with timestamp 1516965729022
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/spark-hive_2.11-2.2.2-SNAPSHOT.jar at spark://138.96.200.169:35305/jars/spark-hive_2.11-2.2.2-SNAPSHOT.jar with timestamp 1516965729022
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/hadoop-mapreduce-client-common-2.6.5.jar at spark://138.96.200.169:35305/jars/hadoop-mapreduce-client-common-2.6.5.jar with timestamp 1516965729022
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/curator-framework-2.6.0.jar at spark://138.96.200.169:35305/jars/curator-framework-2.6.0.jar with timestamp 1516965729022
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/jta-1.1.jar at spark://138.96.200.169:35305/jars/jta-1.1.jar with timestamp 1516965729022
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/kafka-clients-0.10.0.1.jar at spark://138.96.200.169:35305/jars/kafka-clients-0.10.0.1.jar with timestamp 1516965729023
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/hadoop-mapreduce-client-core-2.6.5.jar at spark://138.96.200.169:35305/jars/hadoop-mapreduce-client-core-2.6.5.jar with timestamp 1516965729023
+18/01/26 12:22:09 INFO SparkContext: Added JAR file:/workspaces/kderment/repos/spark/examples/target/scala-2.11/jars/log4j-1.2.17.jar at spark://138.96.200.169:35305/jars/log4j-1.2.17.jar with timestamp 1516965729023
+18/01/26 12:22:09 INFO Executor: Starting executor ID driver on host localhost
+18/01/26 12:22:09 INFO Utils: Successfully started service 'org.apache.spark.network.netty.NettyBlockTransferService' on port 33227.
+18/01/26 12:22:09 INFO NettyBlockTransferService: Server created on 138.96.200.169:33227
+18/01/26 12:22:09 INFO BlockManager: Using org.apache.spark.storage.RandomBlockReplicationPolicy for block replication policy
+18/01/26 12:22:09 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, 138.96.200.169, 33227, None)
+18/01/26 12:22:09 INFO BlockManagerMasterEndpoint: Registering block manager 138.96.200.169:33227 with 366.3 MB RAM, BlockManagerId(driver, 138.96.200.169, 33227, None)
+18/01/26 12:22:09 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, 138.96.200.169, 33227, None)
+18/01/26 12:22:09 INFO BlockManager: Initialized BlockManager: BlockManagerId(driver, 138.96.200.169, 33227, None)
+18/01/26 12:22:09 INFO ContextHandler: Started o.e.j.s.ServletContextHandler@43826ec{/metrics/json,null,AVAILABLE,@Spark}
+18/01/26 12:22:09 INFO EventLoggingListener: Logging events to file:/workspaces/kderment/repos/spark/logs/local-1516965729056
+18/01/26 12:22:09 INFO SharedState: Setting hive.metastore.warehouse.dir ('null') to the value of spark.sql.warehouse.dir ('file:/local/workspaces/kderment/repos/spark/bin/spark-warehouse/').
+18/01/26 12:22:09 INFO SharedState: Warehouse path is 'file:/local/workspaces/kderment/repos/spark/bin/spark-warehouse/'.
+18/01/26 12:22:09 INFO ContextHandler: Started o.e.j.s.ServletContextHandler@f4cfd90{/SQL,null,AVAILABLE,@Spark}
+18/01/26 12:22:09 INFO ContextHandler: Started o.e.j.s.ServletContextHandler@301aa982{/SQL/json,null,AVAILABLE,@Spark}
+18/01/26 12:22:09 INFO ContextHandler: Started o.e.j.s.ServletContextHandler@73ad7e90{/SQL/execution,null,AVAILABLE,@Spark}
+18/01/26 12:22:09 INFO ContextHandler: Started o.e.j.s.ServletContextHandler@784c5ef5{/SQL/execution/json,null,AVAILABLE,@Spark}
+18/01/26 12:22:09 INFO ContextHandler: Started o.e.j.s.ServletContextHandler@71dfcf21{/static/sql,null,AVAILABLE,@Spark}
+18/01/26 12:22:09 INFO StateStoreCoordinatorRef: Registered StateStoreCoordinator endpoint
+Exception in thread "main" org.apache.spark.sql.AnalysisException: Path does not exist: file:/local/workspaces/kderment/repos/spark/bin/data/mllib/sample_multiclass_classification_data.txt;
+	at org.apache.spark.sql.execution.datasources.DataSource$.org$apache$spark$sql$execution$datasources$DataSource$$checkAndGlobPathIfNecessary(DataSource.scala:626)
+	at org.apache.spark.sql.execution.datasources.DataSource$$anonfun$14.apply(DataSource.scala:350)
+	at org.apache.spark.sql.execution.datasources.DataSource$$anonfun$14.apply(DataSource.scala:350)
+	at scala.collection.TraversableLike$$anonfun$flatMap$1.apply(TraversableLike.scala:241)
+	at scala.collection.TraversableLike$$anonfun$flatMap$1.apply(TraversableLike.scala:241)
+	at scala.collection.immutable.List.foreach(List.scala:381)
+	at scala.collection.TraversableLike$class.flatMap(TraversableLike.scala:241)
+	at scala.collection.immutable.List.flatMap(List.scala:344)
+	at org.apache.spark.sql.execution.datasources.DataSource.resolveRelation(DataSource.scala:349)
+	at org.apache.spark.sql.DataFrameReader.load(DataFrameReader.scala:178)
+	at org.apache.spark.sql.DataFrameReader.load(DataFrameReader.scala:156)
+	at org.apache.spark.examples.ml.MulticlassLogisticRegressionWithElasticNetExample$.main(MulticlassLogisticRegressionWithElasticNetExample.scala:39)
+	at org.apache.spark.examples.ml.MulticlassLogisticRegressionWithElasticNetExample.main(MulticlassLogisticRegressionWithElasticNetExample.scala)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.apache.spark.deploy.SparkSubmit$.org$apache$spark$deploy$SparkSubmit$$runMain(SparkSubmit.scala:775)
+	at org.apache.spark.deploy.SparkSubmit$.doRunMain$1(SparkSubmit.scala:180)
+	at org.apache.spark.deploy.SparkSubmit$.submit(SparkSubmit.scala:205)
+	at org.apache.spark.deploy.SparkSubmit$.main(SparkSubmit.scala:119)
+	at org.apache.spark.deploy.SparkSubmit.main(SparkSubmit.scala)
+18/01/26 12:22:09 INFO SparkContext: Invoking stop() from shutdown hook
+18/01/26 12:22:09 INFO AbstractConnector: Stopped Spark@10ad20cb{HTTP/1.1,[http/1.1]}{0.0.0.0:4040}
+18/01/26 12:22:09 INFO SparkUI: Stopped Spark web UI at http://138.96.200.169:4040
+18/01/26 12:22:09 INFO MapOutputTrackerMasterEndpoint: MapOutputTrackerMasterEndpoint stopped!
+18/01/26 12:22:09 INFO MemoryStore: MemoryStore cleared
+18/01/26 12:22:09 INFO BlockManager: BlockManager stopped
+18/01/26 12:22:09 INFO BlockManagerMaster: BlockManagerMaster stopped
+18/01/26 12:22:09 INFO OutputCommitCoordinator$OutputCommitCoordinatorEndpoint: OutputCommitCoordinator stopped!
+18/01/26 12:22:09 INFO SparkContext: Successfully stopped SparkContext
+18/01/26 12:22:09 INFO ShutdownHookManager: Shutdown hook called
+18/01/26 12:22:09 INFO ShutdownHookManager: Deleting directory /tmp/spark-44a7f53a-fbe8-42e9-ac57-584b1d079ef9
