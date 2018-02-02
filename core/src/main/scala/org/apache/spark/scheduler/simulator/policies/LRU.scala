@@ -22,11 +22,13 @@ import java.util.LinkedHashMap
 import scala.collection.mutable.ArrayBuffer
 
 import org.apache.spark.rdd.RDD
-import org.apache.spark.scheduler.simulator.SizeAble
+import org.apache.spark.scheduler.simulator.{SimulationOufOfVirtualMemory, SizeAble}
 
 // The "<: SizeAble" is a type constraint that ensures that we can find the size of
 // the content C by applying getSize.
 class LRU[C <: SizeAble] (private[simulator] val isItLRU: Boolean) extends Policy[C]  {
+
+  val name = "LRU"
 
   private[simulator] def this() = {
     this(true)
@@ -34,6 +36,22 @@ class LRU[C <: SizeAble] (private[simulator] val isItLRU: Boolean) extends Polic
 
   /** LinkedHashMap works like FIFO if isItLRU = false and like LRU if isItLRU = true */
   private val entries = new LinkedHashMap[Int, C](32, 0.75f, isItLRU)
+
+  override private[simulator] def printEntries: String = {
+    var str = "["
+    val iterator = entries.entrySet().iterator()
+    while (iterator.hasNext) {
+      val pair = iterator.next()
+      val size = pair.getValue.getSize
+      str = "(" + str + pair.getKey + ", "
+      str = str + size + ")"
+      if (iterator.hasNext) {
+        str += ", "
+      }
+    }
+    str += "]"
+    str
+  }
 
   override private[simulator] def get(rdd: RDD[_]): Option[C] = {
     Option(entries.get(rdd.id))

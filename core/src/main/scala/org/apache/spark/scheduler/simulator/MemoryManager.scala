@@ -17,13 +17,10 @@
 
 package org.apache.spark.scheduler.simulator
 
-import java.util.LinkedHashMap
-
+import org.apache.spark.SparkException
 import org.apache.spark.internal.Logging
 import org.apache.spark.rdd.RDD
 import org.apache.spark.scheduler.simulator.policies._
-import org.apache.spark.storage.BlockId
-import org.apache.spark.storage.memory.MemoryEntry
 
 /*
  * C is the parametric content of a block, which has the constraint SizeAble.
@@ -37,27 +34,39 @@ class MemoryManager[C <: SizeAble](
  ) extends Logging {
 
   /** The size of the used storage memory */
-  private var memoryUsed: Long = 0L
+  private[simulator] var memoryUsed: Long = 0L
 
   private[simulator] def get(rdd: RDD[_]): Option[C] = policy.get(rdd)
 
   private[simulator] def put(rdd: RDD[_], content: C): Boolean = {
     val size = content.getSize
     if (!fits(size)) {
-      val evicted = policy.evictBlocksToFreeSpace(size)
-      memoryUsed -= evicted
-      if (!fits(size)) {
-        logError("Evicted but still doesn`t fit!")
-        false
+      if (oversized(size)) {
+        throw new SimulationOufOfVirtualMemory(
+          "rdd.id has size " + size + " while maxMemory = " + maxMemory)
       }
+      val evicted = policy.evictBlocksToFreeSpace(size)
+      if (evicted < size) {
+        throw new SimulationException(
+        " Policy " + policy.name + "evicted" + evicted + "instead of " + size)
+      }
+      memoryUsed -= evicted
     }
     policy.put(rdd, content)
     memoryUsed += size
     true
   }
 
-  private def fits(space: Long): Boolean = {
-    space <= maxMemory - memoryUsed
+  private[simulator] def printEntries: String = {
+    policy.printEntries
+  }
+
+  private def fits(size: Long): Boolean = {
+    size <= maxMemory - memoryUsed
+  }
+
+  private def oversized(size: Long): Boolean = {
+    size > maxMemory
   }
 }
 
@@ -70,3 +79,9 @@ private[simulator] class DefaultContent(a: Long) extends SizeAble {
 
   override private[simulator] def getSize = v
 }
+
+private[simulator] class SimulationOufOfVirtualMemory(cause: String)
+  extends Exception("Out of Virtual Memory: " + cause)
+
+private[simulator] class SimulationException(cause: String)
+  extends Exception(cause)

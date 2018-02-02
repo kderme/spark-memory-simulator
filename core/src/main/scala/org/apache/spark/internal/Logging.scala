@@ -91,6 +91,10 @@ trait Logging {
     if (log.isErrorEnabled) log.error(msg, throwable)
   }
 
+  protected def logSimulation(msg: String): Unit = logWarning("|| SIMULATION || " ++ msg)
+
+  protected def logDag(str: String) = logWarning("|| DAGINFO || " + str)
+
   protected def isTraceEnabled(): Boolean = {
     log.isTraceEnabled
   }

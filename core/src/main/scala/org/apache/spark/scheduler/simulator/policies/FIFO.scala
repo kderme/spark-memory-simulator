@@ -22,7 +22,14 @@ import org.apache.spark.scheduler.simulator.SizeAble
 
 class FIFO[C <: SizeAble] extends Policy[C] {
 
+  val name = "FIFO"
+
+  // LRU uses internally LinkedHashMap. This struct can be used as FIFO, given a false flag.
   private val lru = new LRU[C](false)
+
+  override private[simulator] def printEntries: String = {
+    lru.printEntries
+  }
 
   override private[simulator] def get(rdd: RDD[_]) = {
     lru.get(rdd)

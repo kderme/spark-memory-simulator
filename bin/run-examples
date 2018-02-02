@@ -4,33 +4,175 @@ function log {
   echo "[run-examples]: $1" 
 }
 
+function continue {
+  read -p "[run-examples]: Going to $1. Continue? " -n 1 -r
+  echo ""
+  if [[ ! $REPLY =~ ^[Yy]$ ]]
+  then
+    exit
+  fi
+}
+
+function ask_exit {
+  read -p "[run-examples]: Exit? " -n 1 -r
+  echo ""
+  if [[ $REPLY =~ ^[Yy]$ ]]
+  then
+    exit
+  fi
+}
+
+function success {
+  log "OK"
+  let succeeded=succeeded+1
+}
+
+function fail {
+  log "FAILED"
+  let failed=failed+1
+  if [ $recover = false ]; then
+    ask_exit
+    echo ""
+    read -p "[run-examples]: save option? " -n 1 -r
+    echo ""
+    if [[ $REPLY =~ ^[Yy]$ ]]
+    then
+      recover=true
+    fi
+  fi
+}
+
+function handle_output {
+  dir=$(dirname ${output})
+  log "Checking path $dir" # TODO delete line
+  if [ ! -d "$dir" ]; then
+    log "Did not find directory $dir"
+    if [ $create_dir = true ]; 
+    then
+      log "Creating.."
+      mkdir -p $dir
+    else
+      read -p "[run-examples]: Create? " -n 1 -r
+      echo ""
+      if [[ $REPLY =~ ^[Yy]$ ]]
+      then
+        mkdir -p $dir
+        read -p "[run-examples]: save option? " -n 1 -r
+        echo ""
+        if [[ $REPLY =~ ^[Yy]$ ]]
+        then
+          create_dir=true
+        fi
+      else
+        execute=false
+        ask_exit
+        return
+      fi
+    fi
+  fi
+
+  if [ -f $output ]; then
+    log "Found $output"
+    if [ $override = true ]
+    then
+      log "Overriding.."
+    else
+      read -p "[run-examples]: Override? " -n 1 -r
+      echo ""
+      if [[ $REPLY =~ ^[Yy]$ ]]
+      then
+        read -p "[run-examples]: save option? " -n 1 -r
+        echo ""
+        if [[ $REPLY =~ ^[Yy]$ ]]
+        then
+          override=true
+        fi
+      else
+        execute=false
+        ask_exit
+        return
+      fi
+    fi
+  fi
+}
+
+function containsElement {
+  local e match="$1"
+  shift
+  for e; do [[ "$e" == "$match" ]] && return 0; done
+  return 1
+}
+
 function run {
   ## class=$1 | sed -e "s/.scala//"
   ##  arg=$1
   ## name=${arg%.*}
   ## if $1 is mlib.xyz then ex is mlib/xyz
+  echo "--------------------------- $1 -------------------------------------"
   path=$(eval $"echo $1 | tr . /")
   cmd="$SPARK_HOME/bin/run-example $flags $1"
-  echo "Running: $cmd"
-  ## logs folder is called myLogs because logs is in .gitignore
-  if [ output_path_set = false ]
-  then 
-    output_path = $SPARK_HOME/$MAIN_LOG_DIR/$logs_subdir/
+  log "Running: $cmd"
+  if [ $ask_before_running = true ]; then        
+    read -p "[run-examples]: Skip? " -n 1 -r
+    echo ""
+    if [[ $REPLY =~ ^[Yy]$ ]]
+    then
+      return
+    fi
   fi
-  ## $cmd 2> $SPARK_HOME/myLogs/LRU/$path
-  ## if [ $? -eq 0 ]; then
-   ## echo "OK"
+  ## log "$ask_before_running"
+  ## exit
+  ## logs folder is called myLogs because logs is in .gitignore
+  if [ $output_path_set = false ]
+  then 
+    output_path="$SPARK_HOME/$MAIN_LOG_DIR/$log_subdir"
+  fi
+  output="$output_path/$path"
+  log "$cmd 2> $output"
+  execute=true
+  log "log = $log"
+  if [ $log = true ]; then
+    handle_output
+  fi
+  dangerous=("graphx.ComprehensiveExample" "graphx.PageRankExample")
+#  dangerous=()
+  containsElement "$1" "${dangerous[@]}"
+  if [ $? -eq 0 ]; then
+    log "Dangerous found: $1"
+    execute=false
+  fi
+  if [ $execute = false ]; then
+    log "Not executing"
+    return
+  fi
+  if [ $log = true ];
+  then
+    $cmd 2> $output
+  else
+    $cmd
+  fi
+  if [ $? -eq 0 ]; then
+    success
     ##cmd_clean="$SPARK_HOME/bin/clean-dag.py $SPARK_HOME/dags_exported/myLogs/$path $SPARK_HOME/dags_exported/clean/$path"
     ##echo "Cleaning the dag: $cmd_clean"
     ##$cmd_clean
-  ##else
+  else
     ## if execution failed print diagnostic logs and delete them.
-   ## echo "FAILED"
-   ## cat "$SPARK_HOME/statistics/myLogs/LRU/$path"
-  ##  rm "$SPARK_HOME/statistics/myLogs/LRU$path"
-  ##fi
+    cat "$output"
+    rm "$output"
+    fail
+  fi
 }
 
+function run_lib {
+  examples=$(eval $"ls $examples_path | grep scala")
+  log "No arguments. I will run everythin in $examples_path"
+    for ex in $examples 
+    do
+      name="$lib_for_name${ex%.*}"
+      run $name
+    done
+}
 
 EXAMPLES_DIR="examples/src/main/scala/org/apache/spark/examples"
 MAIN_LOG_DIR="all_logs"
@@ -40,19 +182,36 @@ lib=""
 example=""
 example_set=false
 output_path_set=false
+policy_set=false
 output_path=""
-flags="--master=spark://calypso.inria.fr:7077"
+flags="--master=spark://kostas-X580VD:7077"
+log=true
 
-while getopts 'l:h:o:x:a:s:' flag; do
+ask_before_running=false
+create_dir=false
+override=false
+recover=false
+
+while getopts 'l:h:o:x:s:p:z:na' flag; do
   case "${flag}" in
     l) lib="${OPTARG}" ;;
     h) SPARK_HOME="${OPTARG}" ;;
-    o) output="${OPTARG}"
+    o) output_path="${OPTARG}"
        output_path_set=true ;;
     x) example="${OPTARG}" 
        example_set=true ;;
     f) flags="${OPTARG}" ;;
     s) logs_subdir="${OPTARG}" ;;
+    p) set_policy
+       policy_set=true
+       policy="${OPTARG}"
+       log_subdir="$log_subdir/$policy"
+       flags="$flags --conf spark.policy=$policy" ;;
+    n) log=false ;;
+    a) ask_before_running=true ;;
+    z) size="${OPTARG}"
+       flags="$flags --conf spark.simulator.size=$size"
+       log_subdir="$log_subdir/$size" ;;
   esac
 done
 
@@ -72,6 +231,9 @@ fi
 EXAMPLES_DIR="examples/src/main/scala/org/apache/spark/examples"
 examples_path="$SPARK_HOME/$EXAMPLES_DIR$lib_for_path"
 
+succeeded=0
+failed=0
+
 log "SPARK_HOME = $SPARK_HOME"
 log "examples_path = $examples_path"
 log "example = $example"
@@ -79,17 +241,12 @@ log "example_set = $example_set"
 log "flags = $flags"
 
 if [ $example_set = false ]
-then 
-  # TODO: run all examples
-  examples=$(eval $"ls $examples_path | grep scala")
-  echo "No arguments. I will run everythin in $examples_path"
- ## for ex in $examples 
- ## do
- ##   if [ $lib 
- ##   name="$lib_for_name${ex%.*}"
- ##   echo $name
- ## done
+then
+  run_lib 
 else
   run $example 
 fi
+
+log "succeeded = $succeeded"
+log "failed = $failed"
 

@@ -150,7 +150,9 @@ class DAGScheduler(
    * the shuffle data will be in the MapOutputTracker).
    */
   private[scheduler] val shuffleIdToMapStage = new HashMap[Int, ShuffleMapStage]
-  private[scheduler] val simulator = new Simulator(shuffleIdToMapStage)
+  private[scheduler] val simulator =
+    new Simulator(shuffleIdToMapStage, sc.getConf.get("spark.policy", "NONE"),
+      sc.getConf.getLong("spark.simulator.size", 3L))
   private[scheduler] val jobIdToActiveJob = new HashMap[Int, ActiveJob]
 
   // Stages we need to run whose parents aren't done
@@ -486,11 +488,16 @@ class DAGScheduler(
     val waitingForVisit = new Stack[RDD[_]]
     def visit(rdd: RDD[_]) {
       if (!visited(rdd)) {
-        logDag("    {id: " + rdd.id + ",")
+        logDag("    {rdd id: " + rdd.id + ",")
         logDag("     name: " + rdd + ",")
         logDag("     storageLevel: " + rdd.getStorageLevel + ",")
         logDag("     partitions_number: " + rdd.getNumPartitions + ",")
-        logDag("     paths: " + rdd.getPathsCounters(jobId, stage.id) + ",")
+        val pol = sc.getConf.get("spark.policy", "NONE")
+        if (pol.equals("LRC") || pol.equals("All")) {
+          logDag("     paths: " + rdd.getPathsCounters(jobId, stage.id) + ",")
+          logDag("     referencies : " + rdd.getRefCountersByStage(jobId, stage.id))
+          logDag("     referencies counter total : " + rdd.refCounters(jobId))
+        }
         logDag("     deps: [ ")
         visited += rdd
         for (i <- 0 to (rdd.dependencies.length-1)) {
@@ -518,7 +525,7 @@ class DAGScheduler(
         case _ : ShuffleMapStage => "ShuffleMapStage"
     }
     logDag("{")
-    logDag("  id: " + stage.id + ",")
+    logDag("  stage id: " + stage.id + ",")
     logDag("  name: " + stage + ",")
     logDag("  final_rdd_id: " + stage.rdd.id + ",")
     logDag("  stage type: " + stageType + ",")
@@ -533,9 +540,7 @@ class DAGScheduler(
     missing.toList
   }
 
-  private def logDag(str: String) = logWarning("|| DAGINFO || " + str)
-
-  private def countReverseDependencies(job: ActiveJob): Unit = {
+  private def countReferencies(job: ActiveJob): Unit = {
     val jobId = job.jobId
     val stageIds = jobIdToStageIds(jobId)
     for (stageId <- stageIds) {
@@ -548,14 +553,15 @@ class DAGScheduler(
           for (dep <- rdd.dependencies) {
             dep match {
               case shufDep: ShuffleDependency[_, _, _] =>
-                dep.rdd.updateDepCounters(jobId, stageId, true)
+                dep.rdd.updateRefCounters(jobId, stageId, true)
               case narrowDep: NarrowDependency[_] =>
-                waitingForVisit.push(narrowDep.rdd)
-                dep.rdd.updateDepCounters(jobId, stageId, false)
+                waitingForVisit.push(dep.rdd)
+                dep.rdd.updateRefCounters(jobId, stageId, false)
             }
           }
         }
       }
+      stage.rdd.initRefCounters(jobId, stageId)
       waitingForVisit.push(stage.rdd)
       while (waitingForVisit.nonEmpty) {
         visit(waitingForVisit.pop())
@@ -573,7 +579,7 @@ class DAGScheduler(
       def visit(rdd: RDD[_]) {
         if (!visited(rdd)) {
           visited += rdd
-          val n = rdd.getPathsCounters(jobId, stageId)._1
+          val n = rdd.getPathsCounters(jobId, stageId)
           for (dep <- rdd.dependencies) {
             dep match {
               case shufDep: ShuffleDependency[_, _, _] =>
@@ -994,8 +1000,12 @@ class DAGScheduler(
     finalStage.setActiveJob(job)
     val stageIds = jobIdToStageIds(jobId).toArray
     val stageInfos = stageIds.flatMap(id => stageIdToStage.get(id).map(_.latestInfo))
-    countReverseDependencies(job)
-    countPaths(job)
+    val pol = sc.getConf.get("spark.policy", "NONE")
+    if (pol.equals("LRC") || pol.equals("All")) {
+      countReferencies(job)
+      countPaths(job)
+    }
+    val st = job.finalStage
     listenerBus.post(
       SparkListenerJobStart(job.jobId, jobSubmissionTime, stageInfos, properties))
     submitStage(finalStage)
@@ -1043,7 +1053,6 @@ class DAGScheduler(
       markMapStageJobAsFinished(job, mapOutputTracker.getStatistics(dependency))
     }
   }
-
 
   /** Submits stage, but first recursively submits any missing parents. */
   private def submitStage(stage: Stage) {

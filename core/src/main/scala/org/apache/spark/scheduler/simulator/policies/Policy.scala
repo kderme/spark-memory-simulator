@@ -19,22 +19,34 @@ package org.apache.spark.scheduler.simulator.policies
 
 import org.apache.spark.rdd.RDD
 import org.apache.spark.scheduler.ActiveJob
-import org.apache.spark.scheduler.simulator.Simulator
+import org.apache.spark.scheduler.simulator.{Simulation, Simulator}
 import org.apache.spark.storage.BlockId
 
 trait Policy[C] {
+
+  private[simulator] val name: String
 
   /**
    * Some Policies may need initialization. For those that don't a dummy default
    * implementation is given
    */
-  private[simulator] def init(sim: Simulator, _job: ActiveJob): Unit = {
+  private[simulator] def init(_simulation: Simulation): Unit = {
+  }
+
+  private[simulator] def initJob(_job: ActiveJob): Unit = {
+  }
+
+  private[simulator] def printEntries: String = {
+    ""
   }
 
   /** Get the block from its id */
   private[simulator] def get(rdd: RDD[_]): Option[C]
 
-  /** Insert a block */
+  /**
+   * Insert a block. When calling this function, we must be sure that the size of the content
+   * is not bigger than the total size of the memory.
+   */
   private[simulator] def put(rdd: RDD[_], content: C): Unit
 
   private[simulator] def evictBlocksToFreeSpace(space: Long): Long

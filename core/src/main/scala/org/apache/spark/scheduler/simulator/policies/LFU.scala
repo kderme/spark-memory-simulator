@@ -25,6 +25,8 @@ import org.apache.spark.scheduler.simulator.SizeAble
 
 class LFU[C <: SizeAble] extends Policy[C] {
 
+  val name = "LFU"
+
   private val entries = new LinkedHashMap[Int, LFUContent[C]]()
 
   override private[simulator] def get(rdd: RDD[_]): Option[C] = {

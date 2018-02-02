@@ -22,144 +22,51 @@ import scala.collection.mutable.{HashMap, HashSet, Stack}
 import org.apache.spark.{NarrowDependency, ShuffleDependency}
 import org.apache.spark.internal.Logging
 import org.apache.spark.rdd.RDD
-import org.apache.spark.scheduler.{ActiveJob, DAGScheduler, ShuffleMapStage, Stage}
+import org.apache.spark.scheduler.{ActiveJob, ShuffleMapStage, Stage}
 import org.apache.spark.scheduler.simulator.policies._
-import org.apache.spark.storage.StorageLevel
 
-private[scheduler]
-class Simulator(
+/**
+ * A Simulator is the module that talks with the DagScheduler.
+ * The Simulator may have many Simulations i.e. each with different policy.
+ * Each Simulation keeps track of each own memory.
+ */
+private[scheduler] class Simulator(
     private[scheduler] val shuffleIdToMapStage: HashMap[Int, ShuffleMapStage],
-    // This is inspired by, but has nothing to do with org.apache.spark.memory.MemoryManager.
-    private[scheduler] val memory: MemoryManager[DefaultContent])
+        // This is inspired by, but has nothing to do with org.apache.spark.memory.MemoryManager.
+    private val policyConf: String,
+    private val memSize: Long)
   extends Logging {
 
-  def this(shuffleIdToMapStage: HashMap[Int, ShuffleMapStage]) = {
-    this(shuffleIdToMapStage, new MemoryManager(3L, new LRU[DefaultContent]))
+  private[scheduler] val policies: Array[Policy[SizeAble]] =
+    choosePolicy[SizeAble](policyConf)
+
+  private[scheduler] val memories: Array[MemoryManager[SizeAble]] =
+    policies.map(pol => new MemoryManager(memSize, pol))
+
+  private[scheduler] val simulations =
+    memories.map(new Simulation(this, _))
+
+  /** Simulates a new job */
+  private[scheduler] def run(job: ActiveJob): Unit = {
+    simulations.foreach(_.run(job))
   }
 
-  def this(dagScheduler: DAGScheduler) = {
-    this(dagScheduler.shuffleIdToMapStage,
-      new MemoryManager(3L, new LRU[DefaultContent]))
-  }
-
-  private var hits = 0
-
-  private var misses = 0
-
-  private var diskHits = 0
-
-  private var narrowDependencies = 0
-
-  private var shuffleDpendencies = 0
-
-  /* We assume infinite disk size */
-  private[scheduler] val disk = new HashSet[Int]
-
-  private[scheduler] val waitingStages = new HashSet[Stage]
-
-  private[scheduler] def run(job: ActiveJob) = {
-    logSimulation("Starting for job = " + job.jobId)
-
-    memory.policy.init(this, job)
-    // Some Policies have special needs before starting.
-    memory.policy match {
-      case b : Belady[_] =>
-          logSimulation("Belady Sequence: " + b.sequence.map(_.id))
-      case _ => ()
-    }
-    submitStage(job.finalStage)
-
-    logSimulation("Statistics for " + job.jobId + ":")
-    logSimulation("hits = " + hits)
-    logSimulation("misses = " + misses)
-    logSimulation("diskHits = " + diskHits)
-    logSimulation("narrowDependencies = " + narrowDependencies)
-    logSimulation("shuffleDpendencies = " + shuffleDpendencies)
-    logSimulation("Finished for job = " + job.jobId)
-  }
-
-  /**
-   * This is like org.apache.spark.storage.rdd.RDD.compute, which runs on Workers.
-   * A better simulation would take into consideration the implementation of compute for each RDD,
-   * as RDD is an abstract class.
-   */
-  private def compute(rdd: RDD[_]): Unit = {
-    for (dep <- rdd.dependencies) {
-      dep match {
-        case shufDep: ShuffleDependency[_, _, _] =>
-          shuffleDpendencies += 1
-        case narrowDep: NarrowDependency[_] =>
-          narrowDependencies += 1
-          iterator(narrowDep.rdd)
-      }
-    }
-    // TODO. If an RDD is read by the filesystem or parallelized, its cost should be
-    // counted here.
-  }
-
-  /**
-   * This is like org.apache.spark.storage.rdd.Task.runTask, which runs on Workers.
-   */
-  private def runTask(stage: Stage) = iterator(stage.rdd)
-
-  /**
-   * This is like org.apache.spark.storage.rdd.RDD.iterator, which runs on Workers.
-   */
-  private def iterator(rdd: RDD[_]) = {
-    if (rdd.getStorageLevel != StorageLevel.NONE) {
-      getOrCompute(rdd)
-    } else {
-      compute(rdd)
+  private def choosePolicy[C <: SizeAble](policy: String): Array[Policy[C]] = {
+    policy match {
+      case "LRU" => Array(new LRU[C])
+      case "LFU" => Array(new LFU[C])
+      case "FIFO" => Array(new FIFO[C])
+      case "Belady" => Array(new Belady[C](this))
+      case "LRC" => Array(new LRC[C])
+      case "All" => Array(new LRU[C], new LFU[C], new FIFO[C], new Belady[C](this), new LRC[C])
+      case "NONE" => Array()
     }
   }
 
   /**
-   * This is like org.apache.spark.storage.BlockManager.getOrCompute, which runs on Workers.
-   */
-  private def getOrCompute(rdd: RDD[_]): Unit = {
-    if (rdd.getStorageLevel.useMemory) {
-      memory.get(rdd) match {
-        case Some(block) =>
-          hits += 1
-          return
-        case None =>
-          misses += 1
-      }
-    }
-    if (rdd.getStorageLevel.useDisk && disk.contains(rdd.id)) {
-      diskHits += 1
-      return
-    }
-
-    compute(rdd)
-
-    if (rdd.getStorageLevel.useMemory) {
-      // Assume for now size = 1
-      memory.put(rdd, new DefaultContent(rdd.dependencies.size.toLong))
-    }
-    if (rdd.getStorageLevel.useDisk) {
-      // This is not how it`s done in spark (when computed it`s only added in memory.
-      // But we do it here that way for simplicity.
-      disk.add(rdd.id)
-    }
-  }
-
-  /**
-   * This is like org.apache.spark.scheduler.Dagscheduler.submitStage, which runs on Master.
-   */
-  private def submitStage(stage: Stage) {
-    logSimulation("submitStage(" + stage + ")")
-    val missing = getMissingParentStages(stage).sortBy(_.id)
-    logSimulation("missing: " + missing)
-    for (parent <- missing) {
-      submitStage(parent)
-    }
-    runTask(stage)
-  }
-
-  /**
-   * This is like org.apache.spark.scheduler.Dagscheduler.getMissingParentStages,
-   * which runs on Master.
+   * This is like Dagscheduler.getMissingParentStages which runs on Master.
+   * We keep it here and not in the Simulation, because it does not depent on
+   * the actual simulation/excecution but instead only on the dag.
    */
   private[simulator] def getMissingParentStages(stage: Stage): List[Stage] = {
     val missing = new HashSet[Stage]
@@ -175,9 +82,7 @@ class Simulator(
           dep match {
             case shufDep: ShuffleDependency[_, _, _] =>
               val mapStage = getShuffleMapStage(shufDep, stage.firstJobId)
-              if (!mapStage.isAvailable) {
                 missing += mapStage
-              }
             case narrowDep: NarrowDependency[_] =>
               waitingForVisit.push(narrowDep.rdd)
           }
@@ -192,20 +97,16 @@ class Simulator(
   }
 
   /**
-   * This is like org.apache.spark.scheduler.Dagscheduler.getOrCreateShuffleMapStage,
-   * which runs on Master.
+   * This is like Dagscheduler.getOrCreateShuffleMapStage, which runs on Master.
+   * Again this only depends on the dag.
    */
   private[scheduler] def getShuffleMapStage(
-       shuffleDep: ShuffleDependency[_, _, _],
-       firstJobId: Int): ShuffleMapStage = {
+                                             shuffleDep: ShuffleDependency[_, _, _],
+                                             firstJobId: Int): ShuffleMapStage = {
     // Stage should be found here. If not let it crash.
     shuffleIdToMapStage.get(shuffleDep.shuffleId).get
   }
 
-  private[scheduler] def logSimulation(msg: String): Unit = logWarning("|| SIMULATION || " ++ msg)
-
-}
-
-object Simulator {
-
+  private[simulator] def log(msg: String) =
+    logSimulation(msg )
 }

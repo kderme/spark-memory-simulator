@@ -17,25 +17,44 @@
 
 package org.apache.spark.scheduler.simulator.policies
 
-import scala.collection.mutable.{ArrayBuffer, HashMap}
+import scala.collection.mutable.{ArrayBuffer, LinkedHashMap}
 
+import org.apache.spark.internal.Logging
 import org.apache.spark.rdd.RDD
 import org.apache.spark.scheduler.ActiveJob
 import org.apache.spark.scheduler.simulator.{Simulator, SizeAble}
 
-class LRC [C <: SizeAble] extends Policy[C]{
+class LRC [C <: SizeAble] extends Policy[C] with Logging {
+
+  val name = "LRC"
 
   private[scheduler] var job: ActiveJob = null
 
-  val entries: HashMap[Int, LRCContent[C]] = new HashMap[Int, LRCContent[C]]
+  val entries = new LinkedHashMap[RDD[_], LRCContent[C]]
 
-  override private[simulator] def init(_simulator: Simulator, _job: ActiveJob): Unit = {
-    job = _job
+  override private[simulator] def printEntries: String = {
+    entries.map({case (rdd, c) => (rdd.id, (c.frequency, c.references, c.content.getSize))}) + ""
   }
 
-  /** Get the block from its id */
+  /** Each time a new job comes we delete the */
+  override private[simulator] def initJob(_job: ActiveJob): Unit = {
+    job = _job
+    entries.foreach { entry =>
+      val rdd = entry._1
+      val value: LRCContent[C] = entry._2
+      value.frequency = 0
+      rdd.refCounters.get(job.jobId) match {
+        case None => value.references = 0
+        case Some(ref) =>
+          value.references = ref
+      }
+    }
+    ()
+  }
+
+  /** Get the block from its id. But after updating its frequence. */
   override private[simulator] def get(rdd: RDD[_]) = {
-    entries.get(rdd.id) match {
+    entries.get(rdd) match {
       // make this one-liner somehow.
       case None => None
       case Some(a) =>
@@ -47,39 +66,41 @@ class LRC [C <: SizeAble] extends Policy[C]{
   /** Insert a block */
   override private[simulator] def put(rdd: RDD[_], content: C): Unit = {
     val a = new LRCContent[C](1, rdd.refCounters(job.jobId), content)
-    entries.put(rdd.id, a)
+    entries.put(rdd, a)
   }
 
   override private[simulator] def evictBlocksToFreeSpace(space: Long) = {
     var freedMemory = 0L
-    val selectedBlocks = new ArrayBuffer[Int]
     while (freedMemory < space && entries.nonEmpty) {
-      val blockId = getLRC
-      val size = entries.get(blockId).get.content.getSize
-      selectedBlocks += blockId
-      freedMemory += size
+      getLRC match {
+        case None => ()
+        case Some(rdd) =>
+          val size = entries.get (rdd).get.content.getSize
+          entries.remove (rdd)
+          freedMemory += size
+      }
     }
-    selectedBlocks.foreach { entries.remove(_) }
     freedMemory
   }
 
-  /** Will return a invalid key if entries are empty */
-  private def getLRC = {
-    var key = 0
+  /** Will return null if entries are empty */
+  private def getLRC: Option[RDD[_]] = {
+    var key: RDD[_] = null
     var minCount = Integer.MAX_VALUE
-    for((k, entry) <- entries) {
+    for((rdd, entry) <- entries) {
       val future = entry.references - entry.frequency
       if (future < minCount) {
         minCount = future
-        key = k
+        key = rdd
       }
     }
-    key
+    Option(key)
   }
 }
 
+// references must change for each job.
 class LRCContent[C] (fr: Int, ref: Int, cont: C) {
   private[policies] var frequency = fr
-  private[policies] val references = ref
+  private[policies] var references = ref
   private[policies] val content = cont
 }
