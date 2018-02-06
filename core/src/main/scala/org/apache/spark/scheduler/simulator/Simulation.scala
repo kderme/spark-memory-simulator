@@ -17,32 +17,36 @@
 
 package org.apache.spark.scheduler.simulator
 
-import scala.collection.mutable.{HashSet}
+import scala.collection.mutable.HashSet
 
 import org.apache.spark.{NarrowDependency, ShuffleDependency}
 import org.apache.spark.internal.Logging
 import org.apache.spark.rdd.RDD
 import org.apache.spark.scheduler.{ActiveJob, Stage}
+import org.apache.spark.scheduler.simulator.scheduler.Scheduler
 import org.apache.spark.storage.StorageLevel
 
 private[simulator] class Simulation (
   simulator: Simulator,
-  memory: MemoryManager[SizeAble]) extends Logging {
+  memory: MemoryManager[SizeAble],
+  scheduler: Scheduler) extends Logging {
 
+  memory.policy.simulator = simulator
+  memory.policy.simulation = this
+  scheduler.simulation = this
+  scheduler.getMissing = simulator.getMissingParentStages
+
+  var real = true
   // rdds that are the results of Stages are cache implicitely in disk by spark.
   // We keep track of them as some Stages may be skipped
   // More:
   // stackoverflow.com/questions/34580662/what-does-stage-skipped-mean-in-apache-spark-web-ui
   // Spark equivalently uses Stage.findMissingPartitions in DagScheduler.submitMissingTasks
-  private[simulator] val completedRDDS = new HashSet[RDD[_]]
-
-  private[simulator] def copyCompleted = {
-    completedRDDS.clone
-  }
+  private[simulator] var completedRDDS = new HashSet[RDD[_]]
 
   private var activeJob: ActiveJob = null
   /* We assume infinite disk size */
-  private val disk: HashSet[Int] = new HashSet[Int]
+  private[simulator] var disk: HashSet[Int] = new HashSet[Int]
 
   private var hits = 0
 
@@ -56,28 +60,40 @@ private[simulator] class Simulation (
 
   memory.policy.init(this)
 
-  private[scheduler] def run(job: ActiveJob) = {
+  private[scheduler] def simulate(job: ActiveJob, log: Boolean = true): Any = {
     activeJob = job
-    simulator.log("{")
-    simulator.log("  jobid = " + job.jobId)
-    simulator.log("  policy = " + memory.policy.name)
-
+    if (real) {
+      simulator.log("{")
+      simulator.log("  jobid = " + job.jobId)
+      simulator.log("  policy = " + memory.policy.name)
+      simulator.log("  memory capacity = " + memory.maxMemory)
+    }
     // Some Policies have special needs before starting a job.
     // For example Belady needs to make a prediction of the pattern.
     memory.policy.initJob(job)
+    try {
+      scheduler.submitStage(job.finalStage)
+    }
+    catch {
+      case oovm: SimulationOufOfVirtualMemory =>
+        simulator.log("  No results. Simulation failed ")
+        return
+    }
 
-    submitStage(job.finalStage)
+    if (real) {
+      simulator.log("  hits = " + hits)
+      simulator.log("  misses = " + misses)
+      simulator.log("  diskHits = " + diskHits)
+      simulator.log("  narrowDependencies = " + narrowDependencies)
+      simulator.log("  shuffleDpendencies = " + shuffleDpendencies)
+      simulator.log("  entries = " + memory.printEntries)
+      simulator.log("  memory used = " + memory.memoryUsed)
+      simulator.log("}")
+    }
+  }
 
-    simulator.log("  Incremental Results = {")
-    simulator.log("    hits = " + hits)
-    simulator.log("    misses = " + misses)
-    simulator.log("    diskHits = " + diskHits)
-    simulator.log("    narrowDependencies = " + narrowDependencies)
-    simulator.log("    shuffleDpendencies = " + shuffleDpendencies)
-    simulator.log("    entries = " + memory.printEntries)
-    simulator.log("    memory used = " + memory.memoryUsed)
-    simulator.log("  }")
-    simulator.log("}")
+  private[simulator] def getSequence = {
+    memory.sequence
   }
 
   // Below things that run on EXECUTOR.
@@ -87,7 +103,7 @@ private[simulator] class Simulation (
    * A better simulation would take into consideration the implementation of compute for each RDD,
    * as RDD is an abstract class.
    */
-  private def compute(rdd: RDD[_]): Unit = {
+  private[simulator] def compute(rdd: RDD[_]): Unit = {
     for (dep <- rdd.dependencies) {
       dep match {
         case shufDep: ShuffleDependency[_, _, _] =>
@@ -108,11 +124,16 @@ private[simulator] class Simulation (
   private def getOrCompute(rdd: RDD[_]): Unit = {
     if (rdd.getStorageLevel.useMemory) {
       memory.get(rdd) match {
-        case Some(block) =>
-          hits += 1
-          return
+        case Some(content) =>
+
+         hits += content.parts
+          misses = misses + rdd.getNumPartitions - content.parts
+          if (rdd.getNumPartitions == content.parts) {
+            // if we have 0 misses, no need to continue.
+            return
+          }
         case None =>
-          misses += 1
+          misses += rdd.getNumPartitions
       }
     }
     if (rdd.getStorageLevel.useDisk && disk.contains(rdd.id)) {
@@ -123,7 +144,8 @@ private[simulator] class Simulation (
 
     if (rdd.getStorageLevel.useMemory) {
       val size = rdd.dependencies.size.toLong
-      memory.put(rdd, new DefaultContent(1))
+      // TODO approprate sizePerPart.
+      memory.put(rdd, new DefaultContent(rdd.getNumPartitions))
     }
     if (rdd.getStorageLevel.useDisk) {
       disk.add(rdd.id)
@@ -156,7 +178,7 @@ private[simulator] class Simulation (
    * Before actualy running a Stage we check whether its rdd was already computed
    * by a different Stage (cached implicitely in disk).
    */
-  private def submitTask(stage: Stage) = {
+  private[simulator] def submitTask(stage: Stage) = {
     if (completedRDDS.contains(stage.rdd)) {
 //      simulator.log("&& skipping stage " + stage.id +" (rdd " + stage.rdd.id + " is completed)")
     }
@@ -164,17 +186,5 @@ private[simulator] class Simulation (
       simulator.log("&& running stage " + stage.id)
       runTask(stage)
     }
-  }
-
-  /**
-   * This is like Dagscheduler.submitStage.
-   * Here we follow a DFS approach for the scheduling of the stages.
-   */
-  private def submitStage(stage: Stage) {
-    val missing = simulator.getMissingParentStages(stage).sortBy(_.id)
-    for (parent <- missing) {
-      submitStage(parent)
-    }
-    submitTask(stage)
   }
 }

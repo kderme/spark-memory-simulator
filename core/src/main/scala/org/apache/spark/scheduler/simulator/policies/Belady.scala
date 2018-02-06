@@ -18,23 +18,21 @@
 package org.apache.spark.scheduler.simulator.policies
 
 import scala.collection.mutable.{ArrayBuffer, HashSet, LinkedHashMap, MutableList}
+import scala.language.existentials
+
 import org.apache.spark.{NarrowDependency, ShuffleDependency}
 import org.apache.spark.internal.Logging
 import org.apache.spark.rdd.RDD
 import org.apache.spark.scheduler.{ActiveJob, Stage}
-import org.apache.spark.scheduler.simulator.{Simulation, SimulationException, Simulator, SizeAble}
+import org.apache.spark.scheduler.simulator._
+import org.apache.spark.scheduler.simulator.scheduler.SparkScheduler
 import org.apache.spark.storage.StorageLevel
 
-class Belady [C <: SizeAble](
-    simulator: Simulator) extends Policy[C] with Logging {
+class Belady [C <: SizeAble] extends Policy[C] with Logging {
 
   val name = "Belady"
 
-  private var simulation: Simulation = null
-
-  private[scheduler] var job: ActiveJob = null
-
-  val entries: LinkedHashMap[RDD[_], C] = new LinkedHashMap[RDD[_], C]
+  private val entries: LinkedHashMap[RDD[_], C] = new LinkedHashMap[RDD[_], C]
 
   /** This queue has the order of the requests */
   private[simulator] var sequence: MutableList[RDD[_]] = null
@@ -43,15 +41,12 @@ class Belady [C <: SizeAble](
     simulation = _simulation
   }
 
-  override private[simulator] def initJob(_job: ActiveJob): Unit = {
-    job = _job
-    val predictor = new Predictor(
-      simulator,
-      entries.keySet.to[HashSet],
-      simulation.copyCompleted)
-    sequence = new MutableList[RDD[_]]
-    predictor.submitStage(job.finalStage, sequence)
-    simulator.log("  Belady Sequence = " + sequence.map(_.id))
+  override private[simulator] def initJob(job: ActiveJob): Unit = {
+    val simulaption = predictor
+    simulaption.simulate(job, false)
+    sequence = simulaption.getSequence
+
+    simulator.log("  Predicted Sequence = " + sequence.map(_.id))
   }
 
   override private[simulator] def printEntries: String = {
@@ -60,10 +55,10 @@ class Belady [C <: SizeAble](
 
   /** Get a block. We should always get the predicted sequence. */
   override private[simulator] def get(rdd: RDD[_]) = {
-    if (sequence.head != rdd) {
-      throw new SimulationException("Expected " + sequence.head.id + "but got " + rdd.id)
-    }
-    sequence.drop(1)
+//    if (sequence.head != rdd) {
+//      throw new SimulationException("Expected " + sequence.head.id + "but got " + rdd.id)
+//    }
+    sequence = sequence.tail
     entries.get(rdd)
   }
 
@@ -72,43 +67,100 @@ class Belady [C <: SizeAble](
     entries.put(rdd, content)
   }
 
-  override private[simulator] def evictBlocksToFreeSpace(space: Long) = {
-    var freedMemory = 0L
-    val selectedBlocks = new ArrayBuffer[RDD[_]]
-    // We append the unused blocks with the sequence of used
-    // and start evicting from the unused.
-    val ls: MutableList[RDD[_]] = entries.keySet.filter(!sequence.contains(_)).to[MutableList]
-    val ordered = ls ++ sequence
-    simulator.log("  " + ordered.map(_.id) + "")
-    val iterator = ordered.iterator
-    while (freedMemory < space && iterator.hasNext) {
-      val rdd: RDD[_] = iterator.next()
-      entries.get(rdd) match {
-        case Some(content) =>
-          val size = content.getSize
-          selectedBlocks += rdd
-          freedMemory += size
-        case None =>
+  override private[simulator] def evictBlocksToFreeSpace(target: Long) = {
+    // stale includes things that are in memory but not in future sequence.
+    val stale = entries.keySet.filter(!sequence.contains(_)).to[MutableList]
+    // willBeUsed includes things that are in memory, in the order that they will be used.
+    val willBeUsed = sequence.filter(entries.contains(_))
+    val unique = new MutableList[RDD[_]]()
+    willBeUsed.foreach { rdd =>
+      if (!unique.contains(rdd)) {
+        unique += rdd
       }
     }
-    selectedBlocks.foreach { rdd =>
-      // breaks the sequence in two.
-      val (a, b) = sequence.span(_ != rdd)
-      changeFuture(rdd.id)
-      entries.remove(rdd)
+    // the following reverse is the idea of Belady.
+    val ordered = stale ++ unique.reverse
+    assert(stale.intersect(willBeUsed).isEmpty,
+      "Stale and willBeUsed Lists should Not intersect!")
+    simulator.log(" &&  " + ordered.map(_.id) + "")
+    val iterator = ordered.iterator
+    select(iterator, target: Long)
+  }
+
+  private[simulator] def select(iterator: Iterator[RDD[_]], target: Long): Long = {
+    var freedMemory = 0L
+    val selectedBlocks = new ArrayBuffer[Selected]
+    while (freedMemory < target && iterator.hasNext) {
+      val rdd = iterator.next()
+      // if it is already selected, that means that this rdd was dublicated in
+      // the future sequence. No need to enter again (although it wouldn`t cause problems).
+      if (!selectedBlocks.contains(rdd)) {
+        entries.get(rdd) match {
+        case Some(content) =>
+          freedMemory += content.deleteParts(target - freedMemory)
+          // we don'`t delete inside the loop as we have an iterator.
+          if (content.parts == 0) selectedBlocks += Selected(rdd, true)
+          else {
+            // if something is not entirely wiped, it should be selected
+            // to change the sequence, but not removed from entries.
+            selectedBlocks += Selected(rdd, false)
+            simulator.assert(
+              freedMemory >= target, "Content is not empty but target was not reached")
+          }
+        case None =>
+          throw new SimulationException("Everything in ordered list should be in entries")
+        }
+      }
     }
+    removeAndChangeFuture(selectedBlocks)
     freedMemory
   }
 
-  /** TODO */
-  private def changeFuture(id: Int): Unit = {
-    simulator.log("Belady changing the future.")
+  private def removeAndChangeFuture (selectedBlocks: ArrayBuffer[Selected]): Unit = {
+    // maybe assert that selectedBlocks has no dublicates.
+    simulator.log("   Selected blocks = " + selectedBlocks.map(_.rdd.id))
+    selectedBlocks.foreach { selected =>
+      val rdd = selected.rdd
+      if(selected.remove) {
+        entries.remove(rdd)
+      }
+      val (a, b) = sequence.span(_ != rdd)
+      if (!b.isEmpty) {
+        sequence = a ++ MutableList(b.head) ++ createSubsequence(rdd) ++ b.tail
+      }
+      simulator.log("  Predicted Sequence = " + sequence.map(_.id))
+    }
+  }
 
-    ()
+  private def createSubsequence(rdd: RDD[_]): MutableList[RDD[_]] = {
+    val simulaption = predictor
+    simulaption.compute(rdd)
+    simulaption.getSequence
+  }
+
+  private def predictor: Simulation = {
+    simulator.log("Predicting..")
+    // This is a dummy policy we must give to the internal simulator.
+    // The internal simulator has infinite memory so the policy will never be used.
+    val internalPolicy = new Dummy[SizeAble]()
+    // This memory is assumed to have infinite size.
+    val internalMemory = new MemoryManager[SizeAble](Long.MaxValue, internalPolicy)
+    // This is a simulation inside a simulation.
+    // TODO find a way to take automatically the scheduler that the real simulation work
+    // TODO (same implementation different instance)
+    val simulaption = new Simulation(simulator, internalMemory, new SparkScheduler)
+    // This copies the current memory state.
+    entries.foreach(entry => internalPolicy.entries.put(entry._1, entry._2))
+    // This copies the current disk state.
+    simulaption.disk = simulation.disk.clone()
+    // This copies the current completed rdds (that are implicitely cached).
+    simulaption.completedRDDS = simulation.completedRDDS.clone()
+    simulaption.real = false
+    simulaption
   }
 }
 
-class Predictor(
+class Predictor[C <: SizeAble](
   simulator: Simulator,
   cached: HashSet[RDD[_]],
   completed: HashSet[RDD[_]]
@@ -134,7 +186,6 @@ class Predictor(
   private def getOrCompute(rdd: RDD[_], sequence: MutableList[RDD[_]]) = {
     if (rdd.getStorageLevel != StorageLevel.NONE) {
       sequence += rdd
-      // simulator.log("SEQ: " + rdd.id)
       if (!cached.contains(rdd)) {
         compute(rdd, sequence)
         cached += rdd
@@ -184,3 +235,5 @@ class Predictor(
     submitTask(stage, sequence)
   }
 }
+
+case class Selected(rdd: RDD[_], remove: Boolean)

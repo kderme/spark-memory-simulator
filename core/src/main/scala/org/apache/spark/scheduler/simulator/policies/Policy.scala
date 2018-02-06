@@ -26,11 +26,13 @@ trait Policy[C] {
 
   private[simulator] val name: String
 
-  /**
-   * Some Policies may need initialization. For those that don't a dummy default
-   * implementation is given
-   */
+  // All nulls must be initiated at the initialization of Simulation.
+  private[simulator] var simulator: Simulator = null
+
+  private[simulator] var simulation: Simulation = null
+
   private[simulator] def init(_simulation: Simulation): Unit = {
+    simulation = _simulation
   }
 
   private[simulator] def initJob(_job: ActiveJob): Unit = {

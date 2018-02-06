@@ -20,7 +20,7 @@ package org.apache.spark.scheduler.simulator.policies
 import scala.collection.mutable._
 
 import org.apache.spark.rdd.RDD
-import org.apache.spark.scheduler.simulator.SizeAble
+import org.apache.spark.scheduler.simulator.{SimulationException, SizeAble}
 
 
 class LFU[C <: SizeAble] extends Policy[C] {
@@ -45,16 +45,19 @@ class LFU[C <: SizeAble] extends Policy[C] {
     entries.put(rdd.id, a)
   }
 
-  override private[simulator] def evictBlocksToFreeSpace(space: Long) = {
+  override private[simulator] def evictBlocksToFreeSpace(target: Long) = {
     var freedMemory = 0L
-    val selectedBlocks = new ArrayBuffer[Int]
-    while (freedMemory < space && entries.nonEmpty) {
+    while (freedMemory < target && entries.nonEmpty) {
       val blockId = getLFU
-      val size = entries.get(blockId).get.content.getSize
-      selectedBlocks += blockId
-      freedMemory += size
+      val content = entries.get(blockId).get.content
+      freedMemory += content.deleteParts(target - freedMemory)
+      // here we have to remove in the loop. Else getLFU would always give
+      // the same result.
+      if (content.parts == 0) entries.remove(blockId)
+      else if (freedMemory < target) {
+        throw new SimulationException("content is not empty but target was not reached")
+      }
     }
-    selectedBlocks.foreach { entries.remove(_) }
     freedMemory
   }
 

@@ -22,7 +22,8 @@ import scala.collection.mutable.{ArrayBuffer, LinkedHashMap}
 import org.apache.spark.internal.Logging
 import org.apache.spark.rdd.RDD
 import org.apache.spark.scheduler.ActiveJob
-import org.apache.spark.scheduler.simulator.{Simulator, SizeAble}
+import org.apache.spark.scheduler.simulator._
+import org.apache.spark.scheduler.simulator.scheduler.SparkScheduler
 
 class LRC [C <: SizeAble] extends Policy[C] with Logging {
 
@@ -39,6 +40,11 @@ class LRC [C <: SizeAble] extends Policy[C] with Logging {
   /** Each time a new job comes we delete the */
   override private[simulator] def initJob(_job: ActiveJob): Unit = {
     job = _job
+    // We need also to do an internal simulaption here to see if
+    // which rdds will be used.
+    val simulaption = predictor
+    simulaption.simulate(job, false)
+    val used = simulaption.getSequence.to[Set]
     entries.foreach { entry =>
       val rdd = entry._1
       val value: LRCContent[C] = entry._2
@@ -46,7 +52,8 @@ class LRC [C <: SizeAble] extends Policy[C] with Logging {
       rdd.refCounters.get(job.jobId) match {
         case None => value.references = 0
         case Some(ref) =>
-          value.references = ref
+          if (used.contains(rdd)) value.references = ref
+          else value.references = 0
       }
     }
     ()
@@ -95,6 +102,28 @@ class LRC [C <: SizeAble] extends Policy[C] with Logging {
       }
     }
     Option(key)
+  }
+
+  private def predictor: Simulation = {
+    simulator.log("Predicting..")
+    // This is a dummy policy we must give to the internal simulator.
+    // The internal simulator has infinite memory so the policy will never be used.
+    // In this dummy policy we cache nothing, to see all the available rdds.
+    val internalPolicy = new Dummy[SizeAble](false)
+    // This memory is assumed to have infinite size.
+    val internalMemory = new MemoryManager[SizeAble](Long.MaxValue, internalPolicy)
+    // This is a simulation inside a simulation.
+    // TODO find a way to take automatically the scheduler that the real simulation work
+    // TODO (same implementation different instance)
+    val simulaption = new Simulation(simulator, internalMemory, new SparkScheduler)
+    // This copies the current memory state.
+    entries.foreach(entry => internalPolicy.entries.put(entry._1, entry._2.content))
+    // This copies the current disk state.
+    simulaption.disk = simulation.disk.clone()
+    // This copies the current completed rdds (that are implicitely cached).
+    simulaption.completedRDDS = simulation.completedRDDS.clone()
+    simulaption.real = false
+    simulaption
   }
 }
 

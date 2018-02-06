@@ -24,42 +24,42 @@ import org.apache.spark.internal.Logging
 import org.apache.spark.rdd.RDD
 import org.apache.spark.scheduler.{ActiveJob, ShuffleMapStage, Stage}
 import org.apache.spark.scheduler.simulator.policies._
+import org.apache.spark.scheduler.simulator.scheduler.SparkScheduler
 
 /**
  * A Simulator is the module that talks with the DagScheduler.
  * The Simulator may have many Simulations i.e. each with different policy.
- * Each Simulation keeps track of each own memory.
+ * Each Simulation keeps track of each own memory and Simulations are totaly independent.
  */
 private[scheduler] class Simulator(
     private[scheduler] val shuffleIdToMapStage: HashMap[Int, ShuffleMapStage],
-        // This is inspired by, but has nothing to do with org.apache.spark.memory.MemoryManager.
     private val policyConf: String,
-    private val memSize: Long)
+    private val memSizes: String)
   extends Logging {
 
-  private[scheduler] val policies: Array[Policy[SizeAble]] =
-    choosePolicy[SizeAble](policyConf)
-
-  private[scheduler] val memories: Array[MemoryManager[SizeAble]] =
-    policies.map(pol => new MemoryManager(memSize, pol))
+  val ss: Array[String] = memSizes.split("-")
+  val range: List[Int] = (ss(0).toInt to ss(1).toInt by ss(2).toInt).toList
+  val arr = range.toArray
+  val memories: Array[MemoryManager[SizeAble]] = arr.flatMap(size =>
+    choosePolicy[SizeAble](policyConf).map(pol => new MemoryManager(size, pol)))
 
   private[scheduler] val simulations =
-    memories.map(new Simulation(this, _))
+    memories.map(new Simulation(this, _, new SparkScheduler))
 
   /** Simulates a new job */
   private[scheduler] def run(job: ActiveJob): Unit = {
-    simulations.foreach(_.run(job))
+    simulations.foreach(_.simulate(job))
   }
 
-  private def choosePolicy[C <: SizeAble](policy: String): Array[Policy[C]] = {
+  private def choosePolicy[C <: SizeAble](policy: String): List[Policy[C]] = {
     policy match {
-      case "LRU" => Array(new LRU[C])
-      case "LFU" => Array(new LFU[C])
-      case "FIFO" => Array(new FIFO[C])
-      case "Belady" => Array(new Belady[C](this))
-      case "LRC" => Array(new LRC[C])
-      case "All" => Array(new LRU[C], new LFU[C], new FIFO[C], new Belady[C](this), new LRC[C])
-      case "NONE" => Array()
+      case "LRU" => List(new LRU[C])
+      case "LFU" => List(new LFU[C])
+      case "FIFO" => List(new FIFO[C])
+      case "Belady" => List(new Belady[C])
+      case "LRC" => List(new LRC[C])
+      case "All" => List(new LRU[C], new LFU[C], new FIFO[C], new Belady[C], new LRC[C])
+      case "NONE" => List()
     }
   }
 
@@ -109,4 +109,8 @@ private[scheduler] class Simulator(
 
   private[simulator] def log(msg: String) =
     logSimulation(msg )
+
+  private[simulator] def assert(flag: Boolean, cause: String) = {
+    if (!flag) throw new SimulationException(cause)
+  }
 }

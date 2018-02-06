@@ -22,7 +22,7 @@ import java.util.LinkedHashMap
 import scala.collection.mutable.ArrayBuffer
 
 import org.apache.spark.rdd.RDD
-import org.apache.spark.scheduler.simulator.{SimulationOufOfVirtualMemory, SizeAble}
+import org.apache.spark.scheduler.simulator.{SimulationException, SimulationOufOfVirtualMemory, SizeAble}
 
 // The "<: SizeAble" is a type constraint that ensures that we can find the size of
 // the content C by applying getSize.
@@ -63,19 +63,23 @@ class LRU[C <: SizeAble] (private[simulator] val isItLRU: Boolean) extends Polic
   }
 
   /** This is like org.apache.spark.storage.memory.MemoryStore.evictBlocksToFreeSpace */
-  override private[simulator] def evictBlocksToFreeSpace(space: Long): Long = {
+  override private[simulator] def evictBlocksToFreeSpace(target: Long): Long = {
     var freedMemory = 0L
     val iterator = entries.entrySet().iterator()
     val selectedBlocks = new ArrayBuffer[Int]
-    while (freedMemory < space && iterator.hasNext) {
+    while (freedMemory < target && iterator.hasNext) {
       val pair = iterator.next()
       val blockId = pair.getKey
-      // this is where the type constraint is used.
-      val size = pair.getValue.getSize
-      selectedBlocks += blockId
-      freedMemory += size
+      val content = pair.getValue
+      assert(!selectedBlocks.contains(blockId), "Dublicated " + blockId)
+      freedMemory += content.deleteParts(target - freedMemory)
+      // we don'`t delete inside the loop as we have an iterator.
+      if (content.parts == 0) selectedBlocks += blockId
+      else if (freedMemory < target) {
+        throw new SimulationException("content is not empty but target was not reached")
+      }
     }
-    selectedBlocks.foreach { entries.remove(_) }
+    selectedBlocks.foreach(entries.remove(_))
     freedMemory
   }
 }
