@@ -151,8 +151,8 @@ class DAGScheduler(
    */
   private[scheduler] val shuffleIdToMapStage = new HashMap[Int, ShuffleMapStage]
   private[scheduler] val simulator =
-    new Simulator(shuffleIdToMapStage, sc.getConf.get("spark.policy", "NONE"),
-      sc.getConf.get("spark.simulator.size", "2-24-2"))
+    new Simulator(shuffleIdToMapStage, sc.getConf.get("spark.simulator.policy", "NONE"),
+      sc.getConf.get("spark.simulator.size", "2-24-2"), sc.getConf.get("spark.app.name"))
   private[scheduler] val jobIdToActiveJob = new HashMap[Int, ActiveJob]
 
   // Stages we need to run whose parents aren't done
@@ -492,7 +492,7 @@ class DAGScheduler(
         logDag("     name: " + rdd + ",")
         logDag("     storageLevel: " + rdd.getStorageLevel + ",")
         logDag("     partitions_number: " + rdd.getNumPartitions + ",")
-        val pol = sc.getConf.get("spark.policy", "NONE")
+        val pol = sc.getConf.get("spark.simulator.policy", "NONE")
         if (pol.equals("LRC") || pol.equals("All")) {
           logDag("     paths: " + rdd.getPathsCounters(jobId, stage.id) + ",")
           logDag("     referencies : " + rdd.getRefCountersByStage(jobId, stage.id))
@@ -1000,7 +1000,7 @@ class DAGScheduler(
     finalStage.setActiveJob(job)
     val stageIds = jobIdToStageIds(jobId).toArray
     val stageInfos = stageIds.flatMap(id => stageIdToStage.get(id).map(_.latestInfo))
-    val pol = sc.getConf.get("spark.policy", "NONE")
+    val pol = sc.getConf.get("spark.simulator.policy", "NONE")
     if (pol.equals("LRC") || pol.equals("All")) {
       countReferencies(job)
       countPaths(job)
@@ -1078,11 +1078,6 @@ class DAGScheduler(
     }
   }
 
-  private def simulate(jobId: Int) = {
-    // TODO check if this indeed ensures non parallelism.
-    simulator.synchronized{simulator.run(jobIdToActiveJob(jobId))}
-  }
-
   /** Called when stage's parents are available and we can now do its task. */
   private def submitMissingTasks(stage: Stage, jobId: Int) {
     logDebug("submitMissingTasks(" + stage + ")")
@@ -1105,7 +1100,7 @@ class DAGScheduler(
       case s: ResultStage =>
         outputCommitCoordinator.stageStart(
           stage = s.id, maxPartitionId = s.rdd.partitions.length - 1)
-        simulate(jobId)
+        simulator.submitJob(jobIdToActiveJob(jobId))
     }
     val taskIdToLocations: Map[Int, Seq[TaskLocation]] = try {
       stage match {
@@ -1809,6 +1804,7 @@ class DAGScheduler(
   }
 
   def stop() {
+    simulator.logFinish(numTotalJobs)
     messageScheduler.shutdownNow()
     eventProcessLoop.stop()
     taskScheduler.stop()

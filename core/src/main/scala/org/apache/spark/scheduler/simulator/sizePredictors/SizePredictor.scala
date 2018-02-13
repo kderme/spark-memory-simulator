@@ -15,14 +15,14 @@
  * limitations under the License.
  */
 
-package org.apache.spark.scheduler.simulator.scheduler
+package org.apache.spark.scheduler.simulator.sizePredictors
 
-import org.apache.spark.scheduler.Stage
-import org.apache.spark.scheduler.simulator.SimulationException
+import org.apache.spark.rdd.RDD
 
-private[simulator] class Dummy extends Scheduler {
+abstract class SizePredictor {
+  private[simulator] var id = -1
 
-  override private[simulator] def submitStage(stage: Stage): Unit = {
-    throw new SimulationException("Dummy Scheduler should never have to schedule Stage")
-  }
+  private[simulator] def predict(rdd: RDD[_])
+
+  private[simulator] val name: String
 }

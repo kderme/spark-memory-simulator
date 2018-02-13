@@ -15,29 +15,16 @@
  * limitations under the License.
  */
 
-package org.apache.spark.scheduler.simulator.scheduler
+package org.apache.spark.scheduler.simulator.sizePredictors
 
-import scala.collection.mutable.{HashSet, MutableList}
+import org.apache.spark.rdd.RDD
+import org.apache.spark.scheduler.simulator.SimulationException
 
-import org.apache.spark.scheduler.Stage
+class DummySizePredictor extends SizePredictor {
 
-private[simulator] class SparkScheduler extends Scheduler {
-
-  val waitingStages = new HashSet[Stage]
-  var ready = new MutableList[Stage]
-
-  override private[simulator] def submitStage (stage: Stage): Unit = {
-    while (ready.isEmpty) {
-      val stage = ready.head
-      submitTask(stage)
-      ready = ready.tail
-    }
-
-    val parents = getParents(stage).sortBy(_.id)
-    for (parent <- parents) {
-      submitStage(parent)
-    }
-    // sequence += stage
-    ready += stage
+  override private[simulator] def predict(rdd: RDD[_]): Unit = {
+    throw new SimulationException("Dummy size Predictor should never predict")
   }
+
+  override private[simulator] val name = "Dummy"
 }

@@ -17,27 +17,29 @@
 
 package org.apache.spark.scheduler.simulator.scheduler
 
-import scala.collection.mutable.{HashSet, MutableList}
+import scala.collection.mutable
 
+import org.apache.spark.internal.Logging
 import org.apache.spark.scheduler.Stage
 
-private[simulator] class SparkScheduler extends Scheduler {
+class DFSScheduler extends Scheduler with Logging {
 
-  val waitingStages = new HashSet[Stage]
-  var ready = new MutableList[Stage]
+  val finished = new mutable.HashSet[Stage]
 
   override private[simulator] def submitStage (stage: Stage): Unit = {
-    while (ready.isEmpty) {
-      val stage = ready.head
-      submitTask(stage)
-      ready = ready.tail
-    }
-
     val parents = getParents(stage).sortBy(_.id)
     for (parent <- parents) {
-      submitStage(parent)
+      if (simulation.completedRDDS.contains(parent.rdd)) {
+        logWarning("  skipping stage " + stage.id +
+          " and all fathers (rdd " + stage.rdd.id + " is completed)")
+      }
+      else {
+        if (!finished.contains(parent)) {
+          submitStage(parent)
+        }
+      }
     }
-    // sequence += stage
-    ready += stage
+    submitTask(stage)
+    finished += stage
   }
 }

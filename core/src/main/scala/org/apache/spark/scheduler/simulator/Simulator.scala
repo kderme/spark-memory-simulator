@@ -17,38 +17,78 @@
 
 package org.apache.spark.scheduler.simulator
 
+import scala.collection.mutable
 import scala.collection.mutable.{HashMap, HashSet, Stack}
+import scala.collection.mutable.MutableList
 
 import org.apache.spark.{NarrowDependency, ShuffleDependency}
 import org.apache.spark.internal.Logging
 import org.apache.spark.rdd.RDD
 import org.apache.spark.scheduler.{ActiveJob, ShuffleMapStage, Stage}
 import org.apache.spark.scheduler.simulator.policies._
-import org.apache.spark.scheduler.simulator.scheduler.SparkScheduler
+import org.apache.spark.scheduler.simulator.scheduler.{DFSScheduler, SparkScheduler}
+import org.apache.spark.scheduler.simulator.sizePredictors.EasyPredictor
 
 /**
  * A Simulator is the module that talks with the DagScheduler.
  * The Simulator may have many Simulations i.e. each with different policy.
  * Each Simulation keeps track of each own memory and Simulations are totaly independent.
  */
-private[scheduler] class Simulator(
+private[scheduler] class Simulator (
     private[scheduler] val shuffleIdToMapStage: HashMap[Int, ShuffleMapStage],
     private val policyConf: String,
-    private val memSizes: String)
+    private val memSizes: String,
+    private val appName: String)
   extends Logging {
+
+  var simulationId = 0
+
+  private def getAndIncrement: Int = {
+    val id = simulationId
+    simulationId += 1
+    id
+  }
+
+  var jobs = new MutableList[ActiveJob]
 
   val ss: Array[String] = memSizes.split("-")
   val range: List[Int] = (ss(0).toInt to ss(1).toInt by ss(2).toInt).toList
-  val arr = range.toArray
-  val memories: Array[MemoryManager[SizeAble]] = arr.flatMap(size =>
-    choosePolicy[SizeAble](policyConf).map(pol => new MemoryManager(size, pol)))
+  val sizes = range.toArray
+  val memories: Array[MemoryManager[SizeAble]] = sizes.flatMap(size =>
+    choosePolicy[SizeAble](policyConf).map(new MemoryManager(size, _)))
+
+  assert(memories.distinct.length == memories.length, "Memories not distinct")
 
   private[scheduler] val simulations =
-    memories.map(new Simulation(this, _, new SparkScheduler))
+    memories.map(new Simulation(getAndIncrement, this, _,
+                 new DFSScheduler, new EasyPredictor, true))
+
+  val validSimulations = mutable.Map[Simulation, Boolean]()
+  simulations.foreach(validSimulations(_) = true)
+
+  logStart
 
   /** Simulates a new job */
-  private[scheduler] def run(job: ActiveJob): Unit = {
-    simulations.foreach(_.simulate(job))
+  private[scheduler] def submitJob(job: ActiveJob): Unit = {
+    if (!jobs.isEmpty) {
+      log("  ,")
+    }
+    val valids = simulations.filter(validSimulations(_))
+    if(!valids.isEmpty) {
+      val lastSimulation = valids.last
+      valids.foreach { simulation =>
+        if (validSimulations(simulation)) {
+          val res = simulation.simulate(job, true)
+          if (!res) {
+            validSimulations(simulation) = false
+          }
+        }
+        if (simulation != lastSimulation) {
+          log("  ,")
+        }
+      }
+    }
+    jobs += job
   }
 
   private def choosePolicy[C <: SizeAble](policy: String): List[Policy[C]] = {
@@ -68,7 +108,7 @@ private[scheduler] class Simulator(
    * We keep it here and not in the Simulation, because it does not depent on
    * the actual simulation/excecution but instead only on the dag.
    */
-  private[simulator] def getMissingParentStages(stage: Stage): List[Stage] = {
+  private[simulator] def getParentStages(stage: Stage): List[Stage] = {
     val missing = new HashSet[Stage]
     val visited = new HashSet[RDD[_]]
     // We are manually maintaining a stack here to prevent StackOverflowError
@@ -107,10 +147,29 @@ private[scheduler] class Simulator(
     shuffleIdToMapStage.get(shuffleDep.shuffleId).get
   }
 
-  private[simulator] def log(msg: String) =
+  private[scheduler] def logStart: Unit = {
+    log("{")
+    log("  \"appName\" : " + toJsonString(appName) + ",")
+    log("  \"scheduler\" : " + "\"add scheduler\",")
+    log("  \"trying sizes\" : %s".format(sizes.mkString("[", ",", "],")))
+    log("  \"trying policies\" : " + toJsonString(policyConf) + ",")
+    log("  \"trying total simulations\" : " + simulations.length + ",")
+    log("  \"simulations\" : [")
+  }
+
+  private[scheduler] def logFinish(numTotalJobs: Int) = {
+    log("  ],")
+    log("  \"Final Job Id\" : " + (numTotalJobs - 1))
+    log("}")
+  }
+
+  private[scheduler] def log(msg: String) =
     logSimulation(msg )
 
   private[simulator] def assert(flag: Boolean, cause: String) = {
     if (!flag) throw new SimulationException(cause)
   }
+
+  private[simulator] def toJsonString (str: String) =
+    "\"" + str + "\""
 }

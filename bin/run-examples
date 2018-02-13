@@ -134,8 +134,8 @@ function run {
   if [ $log = true ]; then
     handle_output
   fi
-  dangerous=("graphx.ComprehensiveExample" "graphx.PageRankExample")
-#  dangerous=()
+#  dangerous=("graphx.ComprehensiveExample" "graphx.PageRankExample")
+  dangerous=()
   containsElement "$1" "${dangerous[@]}"
   if [ $? -eq 0 ]; then
     log "Dangerous found: $1"
@@ -162,6 +162,13 @@ function run {
     rm "$output"
     fail
   fi
+  if [ $log = true ];
+  then
+   if [ $draw = true ];
+     then
+       $SPARK_HOME/bin/graphs.py $output
+     fi
+  fi
 }
 
 function run_lib {
@@ -186,13 +193,14 @@ policy_set=false
 output_path=""
 flags="--master=spark://kostas-X580VD:7077"
 log=true
+draw=false
 
 ask_before_running=false
 create_dir=false
 override=false
 recover=false
 
-while getopts 'l:h:o:x:s:p:z:na' flag; do
+while getopts 'l:h:o:x:s:p:z:nad' flag; do
   case "${flag}" in
     l) lib="${OPTARG}" ;;
     h) SPARK_HOME="${OPTARG}" ;;
@@ -206,12 +214,13 @@ while getopts 'l:h:o:x:s:p:z:na' flag; do
        policy_set=true
        policy="${OPTARG}"
        log_subdir="$log_subdir/$policy"
-       flags="$flags --conf spark.policy=$policy" ;;
+       flags="$flags --conf spark.simulator.policy=$policy" ;;
     n) log=false ;;
     a) ask_before_running=true ;;
     z) size="${OPTARG}"
        flags="$flags --conf spark.simulator.size=$size"
        log_subdir="$log_subdir/$size" ;;
+    d) draw=true ;;
   esac
 done
 

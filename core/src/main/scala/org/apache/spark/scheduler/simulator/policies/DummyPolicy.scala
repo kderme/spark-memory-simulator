@@ -23,7 +23,7 @@ import org.apache.spark.internal.Logging
 import org.apache.spark.rdd.RDD
 import org.apache.spark.scheduler.simulator.{SimulationException, SizeAble}
 
-class Dummy [C <: SizeAble] (cache: Boolean = true) extends Policy[C] with Logging {
+class DummyPolicy [C <: SizeAble](cache: Boolean = true) extends Policy[C] with Logging {
 
   private[simulator] val entries: LinkedHashMap[RDD[_], C] = new LinkedHashMap[RDD[_], C]
 

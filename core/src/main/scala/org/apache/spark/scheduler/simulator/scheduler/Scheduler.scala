@@ -26,12 +26,18 @@ import org.apache.spark.storage.StorageLevel
 abstract class Scheduler {
 
   // All nulls must be initiated at the initialization of Simulation.
-  private[simulator] var getMissing: Stage => List[Stage] = null
+  private[simulator] var getParents: Stage => List[Stage] = null
 
   private[simulator] var simulation: Simulation = null
 
   private[simulator] val sequence = new MutableList[Stage]()
 
   private[simulator] def submitStage(stage: Stage): Unit
+
+  private[simulator] def submitTask(stage: Stage) = {
+    sequence += stage
+    simulation.submitTask(stage)
+  }
+
 
 }

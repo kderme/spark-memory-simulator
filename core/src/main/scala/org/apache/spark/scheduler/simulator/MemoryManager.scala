@@ -40,7 +40,7 @@ class MemoryManager[C <: SizeAble](
   private[simulator] var sequence = new MutableList[RDD[_]]()
 
   private[simulator] def get(rdd: RDD[_]): Option[C] = {
-    logWarning("Get " + rdd.id + " (" + memoryUsed + ")")
+//    logWarning("Get " + rdd.id + " (" + memoryUsed + ")")
     sequence += rdd
     policy.get(rdd)
   }
@@ -104,6 +104,7 @@ private[simulator] class DefaultContent (
   private [simulator] var parts: Int) extends SizeAble {
 
   def this(_size: Long) = this(_size, 1, 1)
+  def this(_parts: Int, _size: Long) = this(_size, _parts, _parts)
 }
 
 private[simulator] class SimulationOufOfVirtualMemory(cause: String)

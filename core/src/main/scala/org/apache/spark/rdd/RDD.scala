@@ -158,15 +158,18 @@ abstract class RDD[T: ClassTag](
   }
 
   /* Some more expressive type synonyms for Int. */
+  type SimId = Int
   type JobId = Int
   type StageId = Int
   type Counter = Int
 
-  private[spark] var pathsCounter = new HashMap[JobId, HashMap[StageId, (Counter, Int)]]
+  private[spark] val simInfos = new HashMap[SimId, SimInfos]
 
-  private[spark] var refCountersByStage = new HashMap[JobId, HashMap[StageId, (Counter, Counter)]]
+  private[spark] val pathsCounter = new HashMap[JobId, HashMap[StageId, (Counter, Int)]]
 
-  private[spark] var refCounters = new HashMap[JobId, Counter]
+  private[spark] val refCountersByStage = new HashMap[JobId, HashMap[StageId, (Counter, Counter)]]
+
+  private[spark] val refCounters = new HashMap[JobId, Counter]
 
   private[spark] def getPathsCounters(jobId: Int, stageId: Int): Counter = {
     pathsCounter(jobId)(stageId)._1
@@ -1992,3 +1995,7 @@ object RDD {
     new DoubleRDDFunctions(rdd.map(x => num.toDouble(x)))
   }
 }
+
+private[spark] case class SimInfos(totalParts: Int, sizePerPart: Long)
+private[spark] case class SimInfosSkewed
+  (totalParts: Int, sizePerPart: Map[Int, Long])

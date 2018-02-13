@@ -20,13 +20,12 @@ package org.apache.spark.scheduler.simulator.policies
 import scala.collection.mutable.{ArrayBuffer, HashSet, LinkedHashMap, MutableList}
 import scala.language.existentials
 
-import org.apache.spark.{NarrowDependency, ShuffleDependency}
 import org.apache.spark.internal.Logging
 import org.apache.spark.rdd.RDD
 import org.apache.spark.scheduler.{ActiveJob, Stage}
 import org.apache.spark.scheduler.simulator._
-import org.apache.spark.scheduler.simulator.scheduler.SparkScheduler
-import org.apache.spark.storage.StorageLevel
+import org.apache.spark.scheduler.simulator.scheduler.{DFSScheduler, SparkScheduler}
+import org.apache.spark.scheduler.simulator.sizePredictors.DummySizePredictor
 
 class Belady [C <: SizeAble] extends Policy[C] with Logging {
 
@@ -46,7 +45,7 @@ class Belady [C <: SizeAble] extends Policy[C] with Logging {
     simulaption.simulate(job, false)
     sequence = simulaption.getSequence
 
-    simulator.log("  Predicted Sequence = " + sequence.map(_.id))
+    logWarning("  Predicted Sequence = " + sequence.map(_.id))
   }
 
   override private[simulator] def printEntries: String = {
@@ -55,9 +54,9 @@ class Belady [C <: SizeAble] extends Policy[C] with Logging {
 
   /** Get a block. We should always get the predicted sequence. */
   override private[simulator] def get(rdd: RDD[_]) = {
-//    if (sequence.head != rdd) {
-//      throw new SimulationException("Expected " + sequence.head.id + "but got " + rdd.id)
-//    }
+    if (sequence.head != rdd) {
+      throw new SimulationException("Expected " + sequence.head.id + "but got " + rdd.id)
+    }
     sequence = sequence.tail
     entries.get(rdd)
   }
@@ -82,7 +81,6 @@ class Belady [C <: SizeAble] extends Policy[C] with Logging {
     val ordered = stale ++ unique.reverse
     assert(stale.intersect(willBeUsed).isEmpty,
       "Stale and willBeUsed Lists should Not intersect!")
-    simulator.log(" &&  " + ordered.map(_.id) + "")
     val iterator = ordered.iterator
     select(iterator, target: Long)
   }
@@ -118,7 +116,6 @@ class Belady [C <: SizeAble] extends Policy[C] with Logging {
 
   private def removeAndChangeFuture (selectedBlocks: ArrayBuffer[Selected]): Unit = {
     // maybe assert that selectedBlocks has no dublicates.
-    simulator.log("   Selected blocks = " + selectedBlocks.map(_.rdd.id))
     selectedBlocks.foreach { selected =>
       val rdd = selected.rdd
       if(selected.remove) {
@@ -128,7 +125,6 @@ class Belady [C <: SizeAble] extends Policy[C] with Logging {
       if (!b.isEmpty) {
         sequence = a ++ MutableList(b.head) ++ createSubsequence(rdd) ++ b.tail
       }
-      simulator.log("  Predicted Sequence = " + sequence.map(_.id))
     }
   }
 
@@ -139,100 +135,24 @@ class Belady [C <: SizeAble] extends Policy[C] with Logging {
   }
 
   private def predictor: Simulation = {
-    simulator.log("Predicting..")
+    logWarning("Predicting..")
     // This is a dummy policy we must give to the internal simulator.
     // The internal simulator has infinite memory so the policy will never be used.
-    val internalPolicy = new Dummy[SizeAble]()
+    val internalPolicy = new DummyPolicy[SizeAble]()
     // This memory is assumed to have infinite size.
     val internalMemory = new MemoryManager[SizeAble](Long.MaxValue, internalPolicy)
     // This is a simulation inside a simulation.
     // TODO find a way to take automatically the scheduler that the real simulation work
     // TODO (same implementation different instance)
-    val simulaption = new Simulation(simulator, internalMemory, new SparkScheduler)
+    val simulaption = new Simulation(simulation.id, simulator, internalMemory,
+      new DFSScheduler, new sizePredictors.DummySizePredictor, false)
     // This copies the current memory state.
     entries.foreach(entry => internalPolicy.entries.put(entry._1, entry._2))
     // This copies the current disk state.
     simulaption.disk = simulation.disk.clone()
     // This copies the current completed rdds (that are implicitely cached).
     simulaption.completedRDDS = simulation.completedRDDS.clone()
-    simulaption.real = false
     simulaption
-  }
-}
-
-class Predictor[C <: SizeAble](
-  simulator: Simulator,
-  cached: HashSet[RDD[_]],
-  completed: HashSet[RDD[_]]
-  ) {
-
-  /**
-   * This is like org.apache.spark.storage.rdd.RDD.compute, which runs on Workers.
-   */
-  private def compute(rdd: RDD[_], sequence: MutableList[RDD[_]]): Unit = {
-    for (dep <- rdd.dependencies) {
-      dep match {
-        case shufDep: ShuffleDependency[_, _, _] =>
-          ()
-        case narrowDep: NarrowDependency[_] =>
-          iterator(narrowDep.rdd, sequence)
-      }
-    }
-  }
-
-  /**
-   * This is like org.apache.spark.storage.rdd.RDD.iterator, which runs on Workers.
-   */
-  private def getOrCompute(rdd: RDD[_], sequence: MutableList[RDD[_]]) = {
-    if (rdd.getStorageLevel != StorageLevel.NONE) {
-      sequence += rdd
-      if (!cached.contains(rdd)) {
-        compute(rdd, sequence)
-        cached += rdd
-      }
-    }
-    else {
-      compute(rdd, sequence)
-    }
-  }
-
-  /**
-   * This is like RDD.iterator.
-   */
-  private def iterator(rdd: RDD[_], sequence: MutableList[RDD[_]]) = {
-    if (rdd.getStorageLevel != StorageLevel.NONE) {
-      getOrCompute(rdd, sequence)
-    } else {
-      compute(rdd, sequence)
-    }
-  }
-
-  private def runTask(stage: Stage, sequence: MutableList[RDD[_]]) = {
-    // simulator.log("BB: run task " + stage.id)
-    iterator(stage.rdd, sequence)
-    completed += stage.rdd
-  }
-
-  /**
-   * This is like org.apache.spark.storage.rdd.Task.runTask, which runs on Workers.
-   */
-  private def submitTask(stage: Stage, sequence: MutableList[RDD[_]]) = {
-    // simulator.log("BB: run stage " + stage.id)
-    if (!completed.contains(stage.rdd)) {
-      runTask(stage, sequence)
-    }
-  }
-
-  /**
-   * This is like org.apache.spark.scheduler.Dagscheduler.submitStage, which runs on Master.
-   */
-  private[policies] def submitStage(stage: Stage, sequence: MutableList[RDD[_]]): Unit = {
-    // simulator.log("BB: stage " + stage.id)
-    val missing = simulator.getMissingParentStages(stage).sortBy(_.id)
-    for (parent <- missing) {
-      submitStage(parent, sequence)
-    }
-    submitTask(stage, sequence)
   }
 }
 

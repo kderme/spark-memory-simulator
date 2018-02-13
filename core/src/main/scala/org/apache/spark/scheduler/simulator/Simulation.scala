@@ -17,26 +17,31 @@
 
 package org.apache.spark.scheduler.simulator
 
-import scala.collection.mutable.HashSet
+import scala.collection.mutable.{HashSet, MutableList}
 
 import org.apache.spark.{NarrowDependency, ShuffleDependency}
 import org.apache.spark.internal.Logging
 import org.apache.spark.rdd.RDD
-import org.apache.spark.scheduler.{ActiveJob, Stage}
+import org.apache.spark.scheduler.{ActiveJob, ShuffleMapStage, Stage}
 import org.apache.spark.scheduler.simulator.scheduler.Scheduler
+import org.apache.spark.scheduler.simulator.sizePredictors.SizePredictor
 import org.apache.spark.storage.StorageLevel
 
 private[simulator] class Simulation (
+  private[simulator] val id: Int,
   simulator: Simulator,
   memory: MemoryManager[SizeAble],
-  scheduler: Scheduler) extends Logging {
+  scheduler: Scheduler,
+  sizePredictor: SizePredictor,
+  real: Boolean) extends Logging {
 
   memory.policy.simulator = simulator
   memory.policy.simulation = this
   scheduler.simulation = this
-  scheduler.getMissing = simulator.getMissingParentStages
+  scheduler.getParents = simulator.getParentStages
+  sizePredictor.id = id
 
-  var real = true
+  var valid = true
   // rdds that are the results of Stages are cache implicitely in disk by spark.
   // We keep track of them as some Stages may be skipped
   // More:
@@ -49,24 +54,40 @@ private[simulator] class Simulation (
   private[simulator] var disk: HashSet[Int] = new HashSet[Int]
 
   private var hits = 0
-
   private var misses = 0
-
   private var diskHits = 0
-
   private var narrowDependencies = 0
-
   private var shuffleDpendencies = 0
 
   memory.policy.init(this)
 
-  private[scheduler] def simulate(job: ActiveJob, log: Boolean = true): Any = {
+  /** call setId before simulate. */
+  private[scheduler] def simulate(jobs: MutableList[ActiveJob], log: Boolean): Any = {
+    val lastJob = jobs.last
+    jobs.foreach { job =>
+      simulate(job, job == lastJob)
+    }
+  }
+
+  private[scheduler] def simulate(job: ActiveJob, log: Boolean = true): Boolean = {
+    if (!valid) {
+      throw new SimulationException("Called invalidated simulation")
+    }
     activeJob = job
+    logWarning("Simulating job " + job.jobId)
+
+    if(real) {
+      // predict is recursive, so it should take care of all new rdds in this job.
+      sizePredictor.predict(job.finalStage.rdd)
+    }
+
     if (real) {
-      simulator.log("{")
-      simulator.log("  jobid = " + job.jobId)
-      simulator.log("  policy = " + memory.policy.name)
-      simulator.log("  memory capacity = " + memory.maxMemory)
+      simulator.log("  {")
+      simulator.log("    \"simulation id\" : " + id + ",")
+      simulator.log("    \"jobid\" : " + job.jobId + ",")
+      simulator.log("    \"policy\" : " + simulator.toJsonString(memory.policy.name) + ",")
+      simulator.log("    \"memory capacity\" : " + memory.maxMemory + ",")
+      simulator.log("    \"size predictor\" : " + simulator.toJsonString(sizePredictor.name) + ",")
     }
     // Some Policies have special needs before starting a job.
     // For example Belady needs to make a prediction of the pattern.
@@ -76,20 +97,24 @@ private[simulator] class Simulation (
     }
     catch {
       case oovm: SimulationOufOfVirtualMemory =>
-        simulator.log("  No results. Simulation failed ")
-        return
+        logWarning(oovm.getMessage)
+        simulator.log("    \"valid\": false " + ",")
+        simulator.log("  }")
+        valid = false
+        return false
     }
-
+    logWarning("  entries = " + memory.printEntries)
+    logWarning("  memory used = " + memory.memoryUsed)
     if (real) {
-      simulator.log("  hits = " + hits)
-      simulator.log("  misses = " + misses)
-      simulator.log("  diskHits = " + diskHits)
-      simulator.log("  narrowDependencies = " + narrowDependencies)
-      simulator.log("  shuffleDpendencies = " + shuffleDpendencies)
-      simulator.log("  entries = " + memory.printEntries)
-      simulator.log("  memory used = " + memory.memoryUsed)
-      simulator.log("}")
+      simulator.log("    \"hits\" : " + hits + ",")
+      simulator.log("    \"misses\" : " + misses + ",")
+      simulator.log("    \"diskHits\" : " + diskHits + ",")
+      simulator.log("    \"narrow dependencies\" : " + narrowDependencies + ",")
+      simulator.log("    \"shuffled dependencies\" : " + shuffleDpendencies + ",")
+      simulator.log("    \"valid\": true ")
+      simulator.log("  }")
     }
+    return true
   }
 
   private[simulator] def getSequence = {
@@ -126,14 +151,15 @@ private[simulator] class Simulation (
       memory.get(rdd) match {
         case Some(content) =>
 
-         hits += content.parts
-          misses = misses + rdd.getNumPartitions - content.parts
-          if (rdd.getNumPartitions == content.parts) {
+          hits += content.parts
+          misses = misses + content.totalParts - content.parts
+          if (content.totalParts == content.parts) {
             // if we have 0 misses, no need to continue.
             return
           }
         case None =>
-          misses += rdd.getNumPartitions
+          // TODO
+          misses += rdd.simInfos(id).totalParts
       }
     }
     if (rdd.getStorageLevel.useDisk && disk.contains(rdd.id)) {
@@ -145,7 +171,8 @@ private[simulator] class Simulation (
     if (rdd.getStorageLevel.useMemory) {
       val size = rdd.dependencies.size.toLong
       // TODO approprate sizePerPart.
-      memory.put(rdd, new DefaultContent(rdd.getNumPartitions))
+      memory.put(rdd, new DefaultContent(
+        rdd.simInfos(id).totalParts, rdd.simInfos(id).sizePerPart))
     }
     if (rdd.getStorageLevel.useDisk) {
       disk.add(rdd.id)
@@ -166,9 +193,13 @@ private[simulator] class Simulation (
   /**
    * This is like Task.runTask.
    */
-  private def runTask(stage: Stage): Boolean = {
+  private def runTask(stage: Stage) = {
     iterator(stage.rdd)
-    completedRDDS.add(stage.rdd)
+    stage match {
+      // only results of shufleMapStage are cached implicitely.
+      case s: ShuffleMapStage => completedRDDS.add(stage.rdd)
+      case s: Stage =>
+    }
   }
 
   // Below things that run on MASTER
@@ -180,10 +211,10 @@ private[simulator] class Simulation (
    */
   private[simulator] def submitTask(stage: Stage) = {
     if (completedRDDS.contains(stage.rdd)) {
-//      simulator.log("&& skipping stage " + stage.id +" (rdd " + stage.rdd.id + " is completed)")
+        logWarning("  skipping stage " + stage.id +" (rdd " + stage.rdd.id + " is completed)")
     }
     else {
-      simulator.log("&& running stage " + stage.id)
+      logWarning("  running stage " + stage.id)
       runTask(stage)
     }
   }

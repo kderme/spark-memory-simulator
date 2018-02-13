@@ -15,29 +15,22 @@
  * limitations under the License.
  */
 
-package org.apache.spark.scheduler.simulator.scheduler
+package org.apache.spark.scheduler.simulator.sizePredictors
 
-import scala.collection.mutable.{HashSet, MutableList}
+import org.apache.spark.internal.Logging
+import org.apache.spark.rdd.{RDD, SimInfos}
+import org.apache.spark.scheduler.simulator._
 
-import org.apache.spark.scheduler.Stage
+private[simulator] class EasyPredictor extends SizePredictor with Logging {
 
-private[simulator] class SparkScheduler extends Scheduler {
+  private[simulator] val name: String = "Easy Predictor"
 
-  val waitingStages = new HashSet[Stage]
-  var ready = new MutableList[Stage]
-
-  override private[simulator] def submitStage (stage: Stage): Unit = {
-    while (ready.isEmpty) {
-      val stage = ready.head
-      submitTask(stage)
-      ready = ready.tail
+  private[simulator] def predict(rdd: RDD[_]) = {
+    if (!rdd.simInfos.contains(id)) {
+      rdd.simInfos.put(id, SimInfos(1, 1L))
+      for (dep <- rdd.dependencies) {
+        predict(dep.rdd)
+      }
     }
-
-    val parents = getParents(stage).sortBy(_.id)
-    for (parent <- parents) {
-      submitStage(parent)
-    }
-    // sequence += stage
-    ready += stage
   }
 }

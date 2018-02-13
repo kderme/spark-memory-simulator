@@ -17,27 +17,12 @@
 
 package org.apache.spark.scheduler.simulator.scheduler
 
-import scala.collection.mutable.{HashSet, MutableList}
-
 import org.apache.spark.scheduler.Stage
+import org.apache.spark.scheduler.simulator.SimulationException
 
-private[simulator] class SparkScheduler extends Scheduler {
+private[simulator] class DummyScheduler extends Scheduler {
 
-  val waitingStages = new HashSet[Stage]
-  var ready = new MutableList[Stage]
-
-  override private[simulator] def submitStage (stage: Stage): Unit = {
-    while (ready.isEmpty) {
-      val stage = ready.head
-      submitTask(stage)
-      ready = ready.tail
-    }
-
-    val parents = getParents(stage).sortBy(_.id)
-    for (parent <- parents) {
-      submitStage(parent)
-    }
-    // sequence += stage
-    ready += stage
+  override private[simulator] def submitStage(stage: Stage): Unit = {
+    throw new SimulationException("Dummy Scheduler should never have to schedule Stage")
   }
 }
