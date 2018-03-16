@@ -21,24 +21,27 @@ import scala.collection.mutable.LinkedHashMap
 
 import org.apache.spark.internal.Logging
 import org.apache.spark.rdd.RDD
-import org.apache.spark.scheduler.simulator.{SimulationException, SizeAble}
+import org.apache.spark.scheduler.simulator.{SimulationException}
 
-class DummyPolicy [C <: SizeAble](cache: Boolean = true) extends Policy[C] with Logging {
+class DummyPolicy (cache: Boolean = true) extends Policy with Logging {
 
-  private[simulator] val entries: LinkedHashMap[RDD[_], C] = new LinkedHashMap[RDD[_], C]
+  private[simulator] val entries: LinkedHashMap[RDD[_], Content] =
+    new LinkedHashMap[RDD[_], Content]
 
   override private[simulator] val name = "Dummmy"
 
   /** Get the block from its id */
-  override private[simulator] def get(rdd: RDD[_]) = entries.get(rdd)
+  override private[simulator] def get(rdd: RDD[_],
+                                      lastCachedRDD: Option[RDD[_]]) = entries.get(rdd)
 
   /** Insert a block. */
-  override private[simulator] def put(rdd: RDD[_], content: C): Unit =
+  override private[simulator] def put(rdd: RDD[_], content: Content,
+                                      lastCachedRDD: Option[RDD[_]]): Unit =
     if (cache) {
       entries.put(rdd, content)
     }
 
-  override private[simulator] def evictBlocksToFreeSpace(space: Long) = {
+  override private[simulator] def evictBlocksToFreeSpace(space: Double) = {
     throw new SimulationException("Dummy policy should never have to evict")
   }
 }

@@ -151,8 +151,11 @@ class DAGScheduler(
    */
   private[scheduler] val shuffleIdToMapStage = new HashMap[Int, ShuffleMapStage]
   private[scheduler] val simulator =
-    new Simulator(shuffleIdToMapStage, sc.getConf.get("spark.simulator.policy", "NONE"),
-      sc.getConf.get("spark.simulator.size", "2-24-2"), sc.getConf.get("spark.app.name"))
+    new Simulator(shuffleIdToMapStage, sc.getConf.get("spark.app.name"),
+      sc.getConf.get("spark.simulator.scheduler", "DFSScheduler"),
+      sc.getConf.get("spark.simulator.sizepredictor", "easy"),
+      sc.getConf.get("spark.simulator.policy", "NONE"),
+      sc.getConf.get("spark.simulator.size", "2-24-2"))
   private[scheduler] val jobIdToActiveJob = new HashMap[Int, ActiveJob]
 
   // Stages we need to run whose parents aren't done

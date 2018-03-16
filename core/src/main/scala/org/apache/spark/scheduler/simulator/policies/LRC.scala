@@ -25,13 +25,13 @@ import org.apache.spark.scheduler.ActiveJob
 import org.apache.spark.scheduler.simulator._
 import org.apache.spark.scheduler.simulator.scheduler.DFSScheduler
 
-class LRC [C <: SizeAble] extends Policy[C] with Logging {
+class LRC extends Policy with Logging {
 
   val name = "LRC"
 
   private[scheduler] var job: ActiveJob = null
 
-  val entries = new LinkedHashMap[RDD[_], LRCContent[C]]
+  val entries = new LinkedHashMap[RDD[_], LRCContent]
 
   override private[simulator] def printEntries: String = {
     entries.map({case (rdd, c) => (rdd.id, (c.frequency, c.references, c.content.getSize))}) + ""
@@ -40,14 +40,14 @@ class LRC [C <: SizeAble] extends Policy[C] with Logging {
   /** Each time a new job comes we delete the */
   override private[simulator] def initJob(_job: ActiveJob): Unit = {
     job = _job
-    // We need also to do an internal simulaption here to see if
+    // We need also to do an internal simulaption here to see
     // which rdds will be used.
     val simulaption = predictor
     simulaption.simulate(job, false)
     val used = simulaption.getSequence.to[Set]
     entries.foreach { entry =>
       val rdd = entry._1
-      val value: LRCContent[C] = entry._2
+      val value: LRCContent = entry._2
       value.frequency = 0
       rdd.refCounters.get(job.jobId) match {
         case None => value.references = 0
@@ -60,7 +60,7 @@ class LRC [C <: SizeAble] extends Policy[C] with Logging {
   }
 
   /** Get the block from its id. But after updating its frequence. */
-  override private[simulator] def get(rdd: RDD[_]) = {
+  override private[simulator] def get(rdd: RDD[_], lastCachedRDD: Option[RDD[_]]) = {
     entries.get(rdd) match {
       // make this one-liner somehow.
       case None => None
@@ -71,20 +71,21 @@ class LRC [C <: SizeAble] extends Policy[C] with Logging {
   }
 
   /** Insert a block */
-  override private[simulator] def put(rdd: RDD[_], content: C): Unit = {
-    val a = new LRCContent[C](1, rdd.refCounters(job.jobId), content)
+  override private[simulator] def put(rdd: RDD[_], content: Content,
+                                      lastCachedRDD: Option[RDD[_]]): Unit = {
+    val a = new LRCContent(1, rdd.refCounters(job.jobId), content)
     entries.put(rdd, a)
   }
 
-  override private[simulator] def evictBlocksToFreeSpace(space: Long) = {
-    var freedMemory = 0L
-    while (freedMemory < space && entries.nonEmpty) {
+  override private[simulator] def evictBlocksToFreeSpace(target: Double) = {
+    var freedMemory = 0D
+    while (freedMemory < target && entries.nonEmpty) {
       getLRC match {
         case None => ()
         case Some(rdd) =>
-          val size = entries.get (rdd).get.content.getSize
-          entries.remove (rdd)
-          freedMemory += size
+          val content = entries.get (rdd).get.content
+          freedMemory += content.deleteParts(target - freedMemory)
+          if (content.parts == 0) entries.remove(rdd)
       }
     }
     freedMemory
@@ -109,14 +110,11 @@ class LRC [C <: SizeAble] extends Policy[C] with Logging {
     // This is a dummy policy we must give to the internal simulator.
     // The internal simulator has infinite memory so the policy will never be used.
     // In this dummy policy we cache nothing, to see all the available rdds.
-    val internalPolicy = new DummyPolicy[SizeAble](false)
-    // This memory is assumed to have infinite size.
-    val internalMemory = new MemoryManager[SizeAble](Long.MaxValue, internalPolicy)
+    val internalPolicy = new DummyPolicy(false)
     // This is a simulation inside a simulation.
-    // TODO find a way to take automatically the scheduler that the real simulation work
-    // TODO (same implementation different instance)
-    val simulaption = new Simulation(simulation.id, simulator, internalMemory,
-      new DFSScheduler, new sizePredictors.DummySizePredictor, false)
+    val simulaption = new Simulation(simulator, simulation.id,
+      Utils.toSchedulers(simulation.scheduler.name),
+      new sizePredictors.DummySizePredictor, Double.MaxValue, internalPolicy, false)
     // This copies the current memory state.
     entries.foreach(entry => internalPolicy.entries.put(entry._1, entry._2.content))
     // This copies the current disk state.
@@ -128,7 +126,7 @@ class LRC [C <: SizeAble] extends Policy[C] with Logging {
 }
 
 // references must change for each job.
-class LRCContent[C] (fr: Int, ref: Int, cont: C) {
+class LRCContent (fr: Int, ref: Int, cont: Content) {
   private[policies] var frequency = fr
   private[policies] var references = ref
   private[policies] val content = cont

@@ -23,11 +23,11 @@ import org.apache.spark.scheduler.simulator._
 
 private[simulator] class EasyPredictor extends SizePredictor with Logging {
 
-  private[simulator] val name: String = "Easy Predictor"
+  def name: String = "easy"
 
   private[simulator] def predict(rdd: RDD[_]) = {
     if (!rdd.simInfos.contains(id)) {
-      rdd.simInfos.put(id, SimInfos(1, 1L))
+      rdd.simInfos.put(id, SimInfos(1, 1D))
       for (dep <- rdd.dependencies) {
         predict(dep.rdd)
       }

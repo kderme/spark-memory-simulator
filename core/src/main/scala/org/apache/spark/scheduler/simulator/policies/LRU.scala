@@ -22,11 +22,11 @@ import java.util.LinkedHashMap
 import scala.collection.mutable.ArrayBuffer
 
 import org.apache.spark.rdd.RDD
-import org.apache.spark.scheduler.simulator.{SimulationException, SimulationOufOfVirtualMemory, SizeAble}
+import org.apache.spark.scheduler.simulator.{SimulationException}
 
 // The "<: SizeAble" is a type constraint that ensures that we can find the size of
 // the content C by applying getSize.
-class LRU[C <: SizeAble] (private[simulator] val isItLRU: Boolean) extends Policy[C]  {
+class LRU (private[simulator] val isItLRU: Boolean) extends  Policy {
 
   val name = "LRU"
 
@@ -35,7 +35,7 @@ class LRU[C <: SizeAble] (private[simulator] val isItLRU: Boolean) extends Polic
   }
 
   /** LinkedHashMap works like FIFO if isItLRU = false and like LRU if isItLRU = true */
-  private val entries = new LinkedHashMap[Int, C](32, 0.75f, isItLRU)
+  private val entries = new LinkedHashMap[Int, Content](32, 0.75f, isItLRU)
 
   override private[simulator] def printEntries: String = {
     var str = "["
@@ -43,8 +43,7 @@ class LRU[C <: SizeAble] (private[simulator] val isItLRU: Boolean) extends Polic
     while (iterator.hasNext) {
       val pair = iterator.next()
       val size = pair.getValue.getSize
-      str = "(" + str + pair.getKey + ", "
-      str = str + size + ")"
+      str = str + "(" + pair.getKey + ", " + pair.getValue.toCaseClass + ")"
       if (iterator.hasNext) {
         str += ", "
       }
@@ -53,19 +52,22 @@ class LRU[C <: SizeAble] (private[simulator] val isItLRU: Boolean) extends Polic
     str
   }
 
-  override private[simulator] def get(rdd: RDD[_]): Option[C] = {
+  override private[simulator] def get(rdd: RDD[_],
+                                      lastCachedRDD: Option[RDD[_]]): Option[Content] = {
     Option(entries.get(rdd.id))
   }
 
-  override private[simulator] def put(rdd: RDD[_], content: C): Unit = {
+  override private[simulator] def put(rdd: RDD[_], content: Content,
+                                      lastCachedRDD: Option[RDD[_]]): Unit = {
     entries.put(rdd.id, content)
     return ()
   }
 
   /** This is like org.apache.spark.storage.memory.MemoryStore.evictBlocksToFreeSpace */
-  override private[simulator] def evictBlocksToFreeSpace(target: Long): Long = {
-    var freedMemory = 0L
+  override private[simulator] def evictBlocksToFreeSpace(target: Double): Double = {
+    var freedMemory = 0D
     val iterator = entries.entrySet().iterator()
+    // these are the blocks, completely erased.
     val selectedBlocks = new ArrayBuffer[Int]
     while (freedMemory < target && iterator.hasNext) {
       val pair = iterator.next()

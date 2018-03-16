@@ -22,6 +22,8 @@ import org.apache.spark.scheduler.simulator.SimulationException
 
 private[simulator] class DummyScheduler extends Scheduler {
 
+  def name: String = "Dummy_Scheduler"
+
   override private[simulator] def submitStage(stage: Stage): Unit = {
     throw new SimulationException("Dummy Scheduler should never have to schedule Stage")
   }

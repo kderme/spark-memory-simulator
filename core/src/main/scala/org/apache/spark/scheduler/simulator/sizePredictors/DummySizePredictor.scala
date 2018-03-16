@@ -26,5 +26,5 @@ class DummySizePredictor extends SizePredictor {
     throw new SimulationException("Dummy size Predictor should never predict")
   }
 
-  override private[simulator] val name = "Dummy"
+  override private[simulator] def name = "dummy"
 }

@@ -20,10 +20,12 @@ package org.apache.spark.scheduler.simulator.scheduler
 import scala.collection.mutable.MutableList
 
 import org.apache.spark.scheduler.Stage
-import org.apache.spark.scheduler.simulator.{DefaultContent, Simulation, Simulator}
+import org.apache.spark.scheduler.simulator.{Simulation, Simulator}
 import org.apache.spark.storage.StorageLevel
 
 abstract class Scheduler {
+
+  def name: String
 
   // All nulls must be initiated at the initialization of Simulation.
   private[simulator] var getParents: Stage => List[Stage] = null
@@ -38,6 +40,8 @@ abstract class Scheduler {
     sequence += stage
     simulation.submitTask(stage)
   }
+
+
 
 
 }

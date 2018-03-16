@@ -1,5 +1,26 @@
 #!/usr/bin/env bash
 
+EXAMPLES_DIR="examples/src/main/scala/org/apache/spark/examples"
+MAIN_LOG_DIR="all_logs"
+log_subdir="policies"
+
+lib=""
+example=""
+example_set=false
+output_path_set=false
+policy_set=false
+output_path=""
+all_predictors_conf="--conf spark.simulator.sizepredictor=fine-1-8_fine-2-4_fine-4-2_fine-8-1"
+flags="--master=spark://kostas-X580VD:7077 --conf spark.simulator.size=8-120-8 "
+graphs_output_fold="by1_policies-7"
+log=true
+draw=false
+
+ask_before_running=false
+create_dir=false
+override=false
+recover=false
+
 function log {
   echo "[run-examples]: $1" 
 }
@@ -166,7 +187,7 @@ function run {
   then
    if [ $draw = true ];
      then
-       $SPARK_HOME/bin/graphs.py $output
+       $SPARK_HOME/bin/graphs.py $graphs_output_fold $output
      fi
   fi
 }
@@ -180,25 +201,6 @@ function run_lib {
       run $name
     done
 }
-
-EXAMPLES_DIR="examples/src/main/scala/org/apache/spark/examples"
-MAIN_LOG_DIR="all_logs"
-log_subdir="policies"
-
-lib=""
-example=""
-example_set=false
-output_path_set=false
-policy_set=false
-output_path=""
-flags="--master=spark://kostas-X580VD:7077"
-log=true
-draw=false
-
-ask_before_running=false
-create_dir=false
-override=false
-recover=false
 
 while getopts 'l:h:o:x:s:p:z:nad' flag; do
   case "${flag}" in

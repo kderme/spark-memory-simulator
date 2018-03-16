@@ -17,19 +17,15 @@
 
 package org.apache.spark.scheduler.simulator.policies
 
-import scala.collection.mutable.{ArrayBuffer, HashSet, LinkedHashMap, MutableList}
-import scala.language.existentials
+import scala.collection.mutable._
 
 import org.apache.spark.internal.Logging
-import org.apache.spark.rdd.RDD
-import org.apache.spark.scheduler.{ActiveJob, Stage}
+import org.apache.spark.rdd.{RDD, SimInfos}
+import org.apache.spark.scheduler.ActiveJob
 import org.apache.spark.scheduler.simulator._
-import org.apache.spark.scheduler.simulator.scheduler.{DFSScheduler, SparkScheduler}
-import org.apache.spark.scheduler.simulator.sizePredictors.DummySizePredictor
 
-class Belady (isBelady: Boolean = true) extends Policy with Logging {
-
-  val name = if (isBelady) "Belady" else "NotBelady"
+class Cost1 extends Policy with Logging {
+  override private[simulator] val name = "Cost1"
 
   private val entries: LinkedHashMap[RDD[_], Content] = new LinkedHashMap[RDD[_], Content]
 
@@ -41,7 +37,7 @@ class Belady (isBelady: Boolean = true) extends Policy with Logging {
   }
 
   override private[simulator] def initJob(job: ActiveJob): Unit = {
-    val simulaption = predictor
+    val simulaption = predictor(false)
     simulaption.simulate(job, false)
     sequence = simulaption.getSequence
 
@@ -54,9 +50,9 @@ class Belady (isBelady: Boolean = true) extends Policy with Logging {
 
   /** Get a block. We should always get the predicted sequence. */
   override private[simulator] def get(rdd: RDD[_], lastCachedRDD: Option[RDD[_]]) = {
-//    if (sequence.head != rdd) {
-//      throw new SimulationException("Expected " + sequence.head.id + "but got " + rdd.id)
-//    }
+    //    if (sequence.head != rdd) {
+    //      throw new SimulationException("Expected " + sequence.head.id + "but got " + rdd.id)
+    //    }
     if (!sequence.isEmpty) {
       sequence = sequence.tail
     }
@@ -69,18 +65,21 @@ class Belady (isBelady: Boolean = true) extends Policy with Logging {
     entries.put(rdd, content)
   }
 
-  private def randomizeMaybe(list: MutableList[RDD[_]]): MutableList[RDD[_]] = {
-    if (!isBelady) scala.util.Random.shuffle(list)
-    else {
-      list
-    }
+  def cost(rdd: RDD[_]): Int = {
+    val costSimulation = predictor(true)
+    costSimulation.compute(rdd, rdd.simInfos(simulation.id).totalParts, None, false)
+    costSimulation.getCost
+  }
+
+  private def orderByCosts(list: MutableList[RDD[_]]): MutableList[RDD[_]] = {
+    list.map(rdd => (rdd, cost(rdd))).sortBy(_._2).map(_._1)
   }
 
   override private[simulator] def evictBlocksToFreeSpace(target: Double) = {
     // stale includes things that are in memory but not in future sequence.
     val stale = entries.keySet.filter(!sequence.contains(_)).to[MutableList]
     // willBeUsed includes things that are in memory, in the order that they will be used.
-    val willBeUsed = randomizeMaybe(sequence.filter(entries.contains(_)))
+    val willBeUsed = orderByCosts(sequence.filter(entries.contains(_)))
     val unique = new MutableList[RDD[_]]()
     willBeUsed.foreach { rdd =>
       if (!unique.contains(rdd)) {
@@ -104,19 +103,19 @@ class Belady (isBelady: Boolean = true) extends Policy with Logging {
       // the future sequence. No need to enter again (although it wouldn`t cause problems).
       if (!selectedBlocks.contains(rdd)) {
         entries.get(rdd) match {
-        case Some(content) =>
-          freedMemory += content.deleteParts(target - freedMemory)
-          // we don'`t delete inside the loop as we have an iterator.
-          if (content.parts == 0) selectedBlocks += Selected(rdd, true)
-          else {
-            // if something is not entirely wiped, it should be selected
-            // to change the sequence, but not removed from entries.
-            selectedBlocks += Selected(rdd, false)
-            simulator.assert(
-              freedMemory >= target, "Content is not empty but target was not reached")
-          }
-        case None =>
-          throw new SimulationException("Everything in ordered list should be in entries")
+          case Some(content) =>
+            freedMemory += content.deleteParts(target - freedMemory)
+            // we don'`t delete inside the loop as we have an iterator.
+            if (content.parts == 0) selectedBlocks += Selected(rdd, true)
+            else {
+              // if something is not entirely wiped, it should be selected
+              // to change the sequence, but not removed from entries.
+              selectedBlocks += Selected(rdd, false)
+              simulator.assert(
+                freedMemory >= target, "Content is not empty but target was not reached")
+            }
+          case None =>
+            throw new SimulationException("Everything in ordered list should be in entries")
         }
       }
     }
@@ -139,12 +138,12 @@ class Belady (isBelady: Boolean = true) extends Policy with Logging {
   }
 
   private def createSubsequence(rdd: RDD[_]): MutableList[RDD[_]] = {
-    val simulaption = predictor
+    val simulaption = predictor(false)
     simulaption.compute(rdd, rdd.simInfos(simulation.id).totalParts, None, false)
     simulaption.getSequence
   }
 
-  private def predictor: Simulation = {
+  private def predictor(addNeededInMemory: Boolean): Simulation = {
     logWarning("Predicting..")
     // This is a dummy policy we must give to the internal simulator.
     // The internal simulator has infinite memory so the policy will never be used.
@@ -155,6 +154,14 @@ class Belady (isBelady: Boolean = true) extends Policy with Logging {
       new sizePredictors.DummySizePredictor, Double.MaxValue, internalPolicy, false)
     // This copies the current memory state.
     entries.foreach(entry => internalPolicy.entries.put(entry._1, entry._2))
+    if(addNeededInMemory) {
+      val id = simulation.id
+      sequence.foreach(rdd => {
+        val simInfos: SimInfos = rdd.simInfos(id)
+        internalPolicy.entries.put(rdd,
+          new Content(simInfos.totalParts, simInfos.sizePerPart))
+      })
+    }
     // This copies the current disk state.
     simulaption.disk = simulation.disk.clone()
     // This copies the current completed rdds (that are implicitely cached).
@@ -162,5 +169,3 @@ class Belady (isBelady: Boolean = true) extends Policy with Logging {
     simulaption
   }
 }
-
-case class Selected(rdd: RDD[_], remove: Boolean)

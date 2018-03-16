@@ -23,20 +23,25 @@ import org.apache.spark.{NarrowDependency, ShuffleDependency}
 import org.apache.spark.internal.Logging
 import org.apache.spark.rdd.RDD
 import org.apache.spark.scheduler.{ActiveJob, ShuffleMapStage, Stage}
+import org.apache.spark.scheduler.simulator.policies.{Content, Policy}
 import org.apache.spark.scheduler.simulator.scheduler.Scheduler
 import org.apache.spark.scheduler.simulator.sizePredictors.SizePredictor
 import org.apache.spark.storage.StorageLevel
 
 private[simulator] class Simulation (
+  private[simulator] val simulator: Simulator,
   private[simulator] val id: Int,
-  simulator: Simulator,
-  memory: MemoryManager[SizeAble],
-  scheduler: Scheduler,
-  sizePredictor: SizePredictor,
+  private[simulator] val scheduler: Scheduler,
+  private[simulator] val sizePredictor: SizePredictor,
+  private[simulator] val size: Double,
+  private[simulator] val policy: Policy,
   real: Boolean) extends Logging {
+
+  val memory: MemoryManager = new MemoryManager(size, policy)
 
   memory.policy.simulator = simulator
   memory.policy.simulation = this
+  memory.id = id
   scheduler.simulation = this
   scheduler.getParents = simulator.getParentStages
   sizePredictor.id = id
@@ -61,11 +66,27 @@ private[simulator] class Simulation (
 
   memory.policy.init(this)
 
+  private[simulator] def getCost = {
+    narrowDependencies + 10*shuffleDpendencies
+  }
+
   /** call setId before simulate. */
   private[scheduler] def simulate(jobs: MutableList[ActiveJob], log: Boolean): Any = {
     val lastJob = jobs.last
     jobs.foreach { job =>
       simulate(job, job == lastJob)
+    }
+  }
+
+  private[scheduler] def logStart: Unit = {
+    if (real) {
+      simulator.log("    \"" + id + "\" : {")
+      simulator.log("      \"scheduler\" : " + simulator.toJsonString(scheduler.name) + ",")
+      simulator.log("      \"size predictor\" : " +
+        simulator.toJsonString(sizePredictor.name) + ",")
+      simulator.log("      \"memory capacity\" : " + memory.maxMemory + ",")
+      simulator.log("      \"policy\" : " + simulator.toJsonString(memory.policy.name))
+      simulator.log("    }")
     }
   }
 
@@ -82,12 +103,10 @@ private[simulator] class Simulation (
     }
 
     if (real) {
+      logWarning("|| Memory: " + id + " ||JOB = " + job.jobId)
       simulator.log("  {")
       simulator.log("    \"simulation id\" : " + id + ",")
       simulator.log("    \"jobid\" : " + job.jobId + ",")
-      simulator.log("    \"policy\" : " + simulator.toJsonString(memory.policy.name) + ",")
-      simulator.log("    \"memory capacity\" : " + memory.maxMemory + ",")
-      simulator.log("    \"size predictor\" : " + simulator.toJsonString(sizePredictor.name) + ",")
     }
     // Some Policies have special needs before starting a job.
     // For example Belady needs to make a prediction of the pattern.
@@ -103,8 +122,6 @@ private[simulator] class Simulation (
         valid = false
         return false
     }
-    logWarning("  entries = " + memory.printEntries)
-    logWarning("  memory used = " + memory.memoryUsed)
     if (real) {
       simulator.log("    \"hits\" : " + hits + ",")
       simulator.log("    \"misses\" : " + misses + ",")
@@ -128,14 +145,17 @@ private[simulator] class Simulation (
    * A better simulation would take into consideration the implementation of compute for each RDD,
    * as RDD is an abstract class.
    */
-  private[simulator] def compute(rdd: RDD[_]): Unit = {
+  private[simulator] def compute(rdd: RDD[_], threads: Int,
+                                 lastCachedRDD: Option[RDD[_]], change: Boolean): Unit = {
     for (dep <- rdd.dependencies) {
+      val newLastCachedRDD = if (change) Some(rdd) else lastCachedRDD
       dep match {
         case shufDep: ShuffleDependency[_, _, _] =>
-          shuffleDpendencies += 1
+          shuffleDpendencies += threads
         case narrowDep: NarrowDependency[_] =>
-          narrowDependencies += 1
-          iterator(narrowDep.rdd)
+          narrowDependencies += threads
+          // here we assume that all rdds have same size.
+          iterator(narrowDep.rdd, threads, newLastCachedRDD)
       }
     }
     // TODO. If an RDD is read by the filesystem or parallelized, its cost should be
@@ -146,33 +166,47 @@ private[simulator] class Simulation (
    * This is like BlockManager.getOrCompute.
    * This is the function that actually uses the memory (get/put).
    */
-  private def getOrCompute(rdd: RDD[_]): Unit = {
+  private def getOrCompute(rdd: RDD[_], threads: Int, lastCachedRDD: Option[RDD[_]]): Unit = {
+    assert(threads <= rdd.simInfos(id).totalParts,
+      "More threads than blocks (" + threads + ", " + rdd.simInfos(id).totalParts + ")")
+    assert(threads > 0)
+    // threadsLeft left should be lower than threads.
+    var threadsLeft = threads
     if (rdd.getStorageLevel.useMemory) {
-      memory.get(rdd) match {
+      memory.get(rdd, lastCachedRDD) match {
         case Some(content) =>
 
-          hits += content.parts
-          misses = misses + content.totalParts - content.parts
-          if (content.totalParts == content.parts) {
+          // mean value of hypergeometric distribution (link below broken in 2 lines).
+          // https://en.wikipedia.org/wiki/Hypergeometric_distribution#Multivariate_
+          // hypergeometric_distribution
+          // TODO maybe round to closest ??
+          val newHits = content.parts * threads / content.totalParts
+          hits += newHits
+          threadsLeft = threads - newHits
+          misses += threadsLeft
+          if (threadsLeft == 0) {
             // if we have 0 misses, no need to continue.
             return
           }
         case None =>
           // TODO
-          misses += rdd.simInfos(id).totalParts
+          misses += threads
       }
     }
     if (rdd.getStorageLevel.useDisk && disk.contains(rdd.id)) {
       diskHits += 1
       return
     }
-    compute(rdd)
+    assert(threadsLeft <= threads, "Left more than came")
+    assert(threadsLeft > 0)
+    // The change of lastCachedRDD happens in compute.
+    compute(rdd, threadsLeft, lastCachedRDD, true)
 
     if (rdd.getStorageLevel.useMemory) {
-      val size = rdd.dependencies.size.toLong
+      val size = rdd.dependencies.size.toDouble
       // TODO approprate sizePerPart.
-      memory.put(rdd, new DefaultContent(
-        rdd.simInfos(id).totalParts, rdd.simInfos(id).sizePerPart))
+      memory.put(rdd, new Content(rdd.simInfos(id).totalParts, rdd.simInfos(id).sizePerPart),
+        lastCachedRDD)
     }
     if (rdd.getStorageLevel.useDisk) {
       disk.add(rdd.id)
@@ -182,11 +216,12 @@ private[simulator] class Simulation (
   /**
    * This is like RDD.iterator.
    */
-  private def iterator(rdd: RDD[_]) = {
+  private def iterator(rdd: RDD[_], threads: Int, lastCachedRDD: Option[RDD[_]]) = {
+    logWarning("|| Memory: " + id + " ||  iterator = " + rdd.id)
     if (rdd.getStorageLevel != StorageLevel.NONE) {
-      getOrCompute(rdd)
+      getOrCompute(rdd, threads, lastCachedRDD)
     } else {
-      compute(rdd)
+      compute(rdd, threads, lastCachedRDD, false)
     }
   }
 
@@ -194,7 +229,8 @@ private[simulator] class Simulation (
    * This is like Task.runTask.
    */
   private def runTask(stage: Stage) = {
-    iterator(stage.rdd)
+    val rdd = stage.rdd
+    iterator(rdd, rdd.simInfos(id).totalParts, None)
     stage match {
       // only results of shufleMapStage are cached implicitely.
       case s: ShuffleMapStage => completedRDDS.add(stage.rdd)
@@ -214,7 +250,8 @@ private[simulator] class Simulation (
         logWarning("  skipping stage " + stage.id +" (rdd " + stage.rdd.id + " is completed)")
     }
     else {
-      logWarning("  running stage " + stage.id)
+      logWarning("|| Memory: " + id + " ||  STAGE = " + stage.id)
+      logWarning("|| Memory: " + id + " ||  STAGE RDD = " + stage.rdd.id)
       runTask(stage)
     }
   }

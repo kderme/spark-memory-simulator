@@ -24,10 +24,14 @@ import org.apache.spark.scheduler.Stage
 
 class DFSScheduler extends Scheduler with Logging {
 
+  def name: String = "DFSScheduler"
+
   val finished = new mutable.HashSet[Stage]
 
   override private[simulator] def submitStage (stage: Stage): Unit = {
-    val parents = getParents(stage).sortBy(_.id)
+    val parents1 = getParents(stage)
+    assert(parents1 != null, "Null Parents")
+    val parents = parents1.sortBy(_.id)
     for (parent <- parents) {
       if (simulation.completedRDDS.contains(parent.rdd)) {
         logWarning("  skipping stage " + stage.id +

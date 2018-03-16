@@ -20,16 +20,16 @@ package org.apache.spark.scheduler.simulator.policies
 import scala.collection.mutable._
 
 import org.apache.spark.rdd.RDD
-import org.apache.spark.scheduler.simulator.{SimulationException, SizeAble}
+import org.apache.spark.scheduler.simulator.{SimulationException}
 
-
-class LFU[C <: SizeAble] extends Policy[C] {
+class LFU extends Policy {
 
   val name = "LFU"
 
-  private val entries = new LinkedHashMap[Int, LFUContent[C]]()
+  private val entries = new LinkedHashMap[Int, LFUContent]()
 
-  override private[simulator] def get(rdd: RDD[_]): Option[C] = {
+  override private[simulator] def get(rdd: RDD[_],
+                                      lastCachedRDD: Option[RDD[_]]): Option[Content] = {
     // entries.get(blockId).flatMap(_.content)
     entries.get(rdd.id) match {
         // make this one-liner somehow.
@@ -40,13 +40,14 @@ class LFU[C <: SizeAble] extends Policy[C] {
     }
   }
 
-  override private[simulator] def put(rdd: RDD[_], content: C): Unit = {
-    val a = new LFUContent[C](1, content)
+  override private[simulator] def put(rdd: RDD[_], content: Content,
+                                      lastCachedRDD: Option[RDD[_]]): Unit = {
+    val a = new LFUContent(1, content)
     entries.put(rdd.id, a)
   }
 
-  override private[simulator] def evictBlocksToFreeSpace(target: Long) = {
-    var freedMemory = 0L
+  override private[simulator] def evictBlocksToFreeSpace(target: Double) = {
+    var freedMemory = 0D
     while (freedMemory < target && entries.nonEmpty) {
       val blockId = getLFU
       val content = entries.get(blockId).get.content
@@ -73,9 +74,13 @@ class LFU[C <: SizeAble] extends Policy[C] {
     }
     key
   }
+
+  override private[simulator] def printEntries: String = {
+    entries.map({case (rdd, c) => (rdd, c.content.toCaseClass)}) + ""
+  }
 }
 
-class LFUContent[C] (fr: Int, cont: C) {
+class LFUContent (fr: Int, cont: Content) {
   private[policies] var frequency = fr
   private[policies] val content = cont
 }

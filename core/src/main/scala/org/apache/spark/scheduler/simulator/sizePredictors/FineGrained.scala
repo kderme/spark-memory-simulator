@@ -20,24 +20,31 @@ package org.apache.spark.scheduler.simulator.sizePredictors
 import org.apache.spark.Dependency
 import org.apache.spark.rdd.{RDD, SimInfos}
 
-class FineGrained(defaultParts: Int, defaultSize: Long) extends SizePredictor {
+private[simulator] class FineGrained(defaultParts: Int,
+                  defaultSize: Double) extends SizePredictor {
 
-  override private[simulator] val name = "Fine Grained Size Predictor"
+  override def name: String = "fine-" + defaultParts + "-" + defaultSize
 
+/*
   def createFromParents(rdd: RDD[_], infos: Map[Dependency[_], SimInfos]): SimInfos = {
-    if (rdd.getNumPartitions > 0) {
+    if (rdd.dependencies.length > 0) {
       val deps = infos.keys
       val fatherPartitions = deps.map(_.rdd.getNumPartitions).sum
       val fatherParts = deps.map(_.rdd.simInfos(id).totalParts).sum
       val fatherSize = deps.map(_.rdd.simInfos(id).sizePerPart).sum
       val totalParts = (fatherParts * rdd.getNumPartitions) / fatherPartitions
       // TODO in cases like filter or first etc.
-      val size = fatherSize / fatherParts
+      val size = fatherSize / (1D * fatherParts)
       SimInfos(totalParts, size)
     }
     else {
-      SimInfos(defaultParts, defaultSize)
+      SimInfos(defaultParts(rdd), defaultSize(rdd))
     }
+  }
+*/
+
+  def createFromParents(rdd: RDD[_], infos: Map[Dependency[_], SimInfos]): SimInfos = {
+    SimInfos(defaultParts, defaultSize)
   }
 
   override private[simulator] def predict(rdd: RDD[_]): Unit = {
@@ -55,6 +62,8 @@ class FineGrained(defaultParts: Int, defaultSize: Long) extends SizePredictor {
       }
     }
     predictRec(rdd)
+    print("Predicted-------------------------------------------")
+    print(rdd.simInfos(id))
     ()
   }
 }

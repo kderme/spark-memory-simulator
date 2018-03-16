@@ -17,12 +17,14 @@
 
 package org.apache.spark.scheduler.simulator.policies
 
+import scala.collection.mutable
+
 import org.apache.spark.rdd.RDD
 import org.apache.spark.scheduler.ActiveJob
-import org.apache.spark.scheduler.simulator.{Simulation, Simulator}
+import org.apache.spark.scheduler.simulator.{SimInfo, Simulation, Simulator}
 import org.apache.spark.storage.BlockId
 
-trait Policy[C] {
+trait Policy{
 
   private[simulator] val name: String
 
@@ -43,15 +45,37 @@ trait Policy[C] {
   }
 
   /** Get the block from its id */
-  private[simulator] def get(rdd: RDD[_]): Option[C]
+  private[simulator] def get(rdd: RDD[_], lastCachedRDD: Option[RDD[_]]): Option[Content]
 
   /**
    * Insert a block. When calling this function, we must be sure that the size of the content
    * is not bigger than the total size of the memory.
    */
-  private[simulator] def put(rdd: RDD[_], content: C): Unit
+  private[simulator] def put(rdd: RDD[_], content: Content,
+                             lastCachedRDD: Option[RDD[_]]): Unit
 
-  private[simulator] def evictBlocksToFreeSpace(space: Long): Long
-
+  private[simulator] def evictBlocksToFreeSpace(space: Double): Double
 }
 
+private[simulator] class Content (
+  private[simulator] val sizePerPart: Double,
+  private[simulator] val totalParts: Int,
+  private[simulator] var parts: Int) {
+
+  private[simulator] def this(totalParts: Int, sizePerPart: Double) = {
+    this(sizePerPart, totalParts, totalParts)
+  }
+
+  private[simulator] def deleteParts(target: Double) : Double = {
+    var freedMemory = 0D
+    while (freedMemory < target && parts > 0) {
+      parts -= 1
+      freedMemory += sizePerPart
+    }
+    freedMemory
+  }
+
+  private [simulator] def getSize: Double = sizePerPart * parts
+  private[simulator] def toCaseClass: SimInfo =
+    SimInfo(parts, totalParts, sizePerPart)
+}

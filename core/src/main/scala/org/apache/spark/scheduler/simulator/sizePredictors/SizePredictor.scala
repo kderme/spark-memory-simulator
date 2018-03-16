@@ -24,5 +24,5 @@ abstract class SizePredictor {
 
   private[simulator] def predict(rdd: RDD[_])
 
-  private[simulator] val name: String
+  private[simulator] def name: String
 }

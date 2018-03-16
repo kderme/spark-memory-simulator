@@ -1996,6 +1996,6 @@ object RDD {
   }
 }
 
-private[spark] case class SimInfos(totalParts: Int, sizePerPart: Long)
+private[spark] case class SimInfos(totalParts: Int, sizePerPart: Double)
 private[spark] case class SimInfosSkewed
-  (totalParts: Int, sizePerPart: Map[Int, Long])
+  (totalParts: Int, sizePerPart: Map[Int, Double])

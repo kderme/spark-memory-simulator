@@ -23,47 +23,54 @@ import org.apache.spark.internal.Logging
 import org.apache.spark.rdd.RDD
 import org.apache.spark.scheduler.simulator.policies._
 
-/*
- * C is the parametric content of a block, which has the constraint SizeAble.
- * This ensures that no matter what the content is, we must be able to take the
- * size of the block from it.
- */
 private[scheduler]
-class MemoryManager[C <: SizeAble](
-   private[simulator] var maxMemory: Long,
-   private[simulator] val policy: Policy[C]
+class MemoryManager(
+   private[simulator] var maxMemory: Double,
+   private[simulator] val policy: Policy
  ) extends Logging {
 
+  var id = -1
+
   /** The size of the used storage memory */
-  private[simulator] var memoryUsed: Long = 0L
+  private[simulator] var memoryUsed: Double = 0D
 
   private[simulator] var sequence = new MutableList[RDD[_]]()
 
-  private[simulator] def get(rdd: RDD[_]): Option[C] = {
+  private[simulator] def get(rdd: RDD[_], lastCachedRDD: Option[RDD[_]]): Option[Content] = {
 //    logWarning("Get " + rdd.id + " (" + memoryUsed + ")")
+    logWarning("|| Memory: " + id + " || " + "    GET " + rdd.id + " " + rdd.simInfos.get(id))
     sequence += rdd
-    policy.get(rdd)
+    policy.get(rdd, lastCachedRDD)
   }
 
-  private[simulator] def put(rdd: RDD[_], content: C): Boolean = {
-    logWarning("Put " + rdd.id + " (" + memoryUsed + ")")
+  private[simulator] def put(rdd: RDD[_], content: Content,
+                             lastCachedRDD: Option[RDD[_]]): Boolean = {
     val size = content.getSize
-    if (!fits(size)) {
+    printMemoryState()
+    logWarning("|| Memory: " + id + " || " + "    PUT " + rdd.id + " " + rdd.simInfos.get(id))
+    if (size > maxMemory - memoryUsed) {
       logWarning("not fit")
       if (oversized(size)) {
         // Should an exception be thrown here? Or just skip caching?
-        throw new SimulationOufOfVirtualMemory(
-          "rdd.id has size " + size + " while maxMemory = " + maxMemory)
+        // Spark skips caching, if a block is too big for memory.
+        // throw new SimulationOufOfVirtualMemory(
+        // "rdd.id has size " + size + " while maxMemory = " + maxMemory)
+        printMemoryState()
+        return false
       }
-      val evicted = policy.evictBlocksToFreeSpace(size)
-      if (evicted < size) {
-        throw new SimulationException(
-        " Policy " + policy.name + "evicted" + evicted + "instead of " + size)
-      }
+      val a = 0
+      val evicted = policy.evictBlocksToFreeSpace(size - maxMemory + memoryUsed)
       memoryUsed -= evicted
+      if (size > maxMemory - memoryUsed) {
+        throw new SimulationException(
+        " Policy " + policy.name + "evicted" + evicted + "instead of " +
+          (size - maxMemory + memoryUsed))
+      }
     }
-    policy.put(rdd, content)
+    // if we reached here, rdd fits in memory.
+    policy.put(rdd, content, lastCachedRDD)
     memoryUsed += size
+    printMemoryState()
     true
   }
 
@@ -71,45 +78,24 @@ class MemoryManager[C <: SizeAble](
     policy.printEntries
   }
 
-  private def fits(size: Long): Boolean = {
+  private def fits(size: Double): Boolean = {
     size <= maxMemory - memoryUsed
   }
 
-  private def oversized(size: Long): Boolean = {
+  private def oversized(size: Double): Boolean = {
     size > maxMemory
   }
-}
 
-abstract private[simulator] class SizeAble {
-  private[simulator] val sizePerPart: Long
-  private[simulator] val totalParts: Int
-  private[simulator] var parts: Int
-  private[simulator] def deleteParts(target: Long) : Long = {
-    var freedMemory = 0L
-    while (freedMemory < target && parts > 0) {
-      parts -= 1
-      freedMemory += sizePerPart
-    }
-    freedMemory
-  }
-  private [simulator] def getSize = sizePerPart * parts
-  private[simulator] def toDefaultContent[C <: SizeAble](content: C): DefaultContent = {
-    new DefaultContent(content.getSize)
+  private def printMemoryState(): Unit = {
+    logWarning("|| Memory: " + id + " || " + "      STATE = " + memoryUsed + "/" + maxMemory)
+    logWarning("|| Memory: " + id + " || " + "      ENTRIES = " + printEntries)
   }
 }
 
-private[simulator] class DefaultContent (
-  private [simulator] val sizePerPart: Long,
-  private [simulator] val totalParts: Int,
-  private [simulator] var parts: Int) extends SizeAble {
-
-  def this(_size: Long) = this(_size, 1, 1)
-  def this(_parts: Int, _size: Long) = this(_size, _parts, _parts)
-}
+case class SimInfo(parts: Int, totalParts: Int, sizePerPart: Double)
 
 private[simulator] class SimulationOufOfVirtualMemory(cause: String)
   extends Exception("Out of Virtual Memory: " + cause)
 
 private[simulator] class SimulationException(cause: String)
   extends Exception(cause)
-

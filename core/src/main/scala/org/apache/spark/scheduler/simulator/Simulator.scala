@@ -25,9 +25,9 @@ import org.apache.spark.{NarrowDependency, ShuffleDependency}
 import org.apache.spark.internal.Logging
 import org.apache.spark.rdd.RDD
 import org.apache.spark.scheduler.{ActiveJob, ShuffleMapStage, Stage}
-import org.apache.spark.scheduler.simulator.policies._
-import org.apache.spark.scheduler.simulator.scheduler.{DFSScheduler, SparkScheduler}
-import org.apache.spark.scheduler.simulator.sizePredictors.EasyPredictor
+import org.apache.spark.scheduler.simulator.policies.Policy
+import org.apache.spark.scheduler.simulator.scheduler.{DFSScheduler, Scheduler, SparkScheduler}
+import org.apache.spark.scheduler.simulator.sizePredictors._
 
 /**
  * A Simulator is the module that talks with the DagScheduler.
@@ -36,9 +36,11 @@ import org.apache.spark.scheduler.simulator.sizePredictors.EasyPredictor
  */
 private[scheduler] class Simulator (
     private[scheduler] val shuffleIdToMapStage: HashMap[Int, ShuffleMapStage],
+    private val appName: String,
+    private val schedulerConf: String,
+    private val sizePredictorConf: String,
     private val policyConf: String,
-    private val memSizes: String,
-    private val appName: String)
+    private val sizeConf: String)
   extends Logging {
 
   var simulationId = 0
@@ -51,22 +53,33 @@ private[scheduler] class Simulator (
 
   var jobs = new MutableList[ActiveJob]
 
-  val ss: Array[String] = memSizes.split("-")
-  val range: List[Int] = (ss(0).toInt to ss(1).toInt by ss(2).toInt).toList
-  val sizes = range.toArray
-  val memories: Array[MemoryManager[SizeAble]] = sizes.flatMap(size =>
-    choosePolicy[SizeAble](policyConf).map(new MemoryManager(size, _)))
+  val schedulers: Array[String] = schedulerConf.split("_").distinct
 
-  assert(memories.distinct.length == memories.length, "Memories not distinct")
+  val sizePredictors: Array[String] = sizePredictorConf.split("_").distinct
 
-  private[scheduler] val simulations =
-    memories.map(new Simulation(getAndIncrement, this, _,
-                 new DFSScheduler, new EasyPredictor, true))
+  val policies: Array[String] = policyConf.split("_").flatMap{
+    _ match {
+      case "All" => List("LRU", "LFU", "FIFO", "Belady", "NotBelady", "LRC", "Random")
+      case c => List(c)
+    }
+  }.distinct
+
+  val sizes: Array[Double] = sizeConf.split("_").flatMap{ rule: String =>
+    val ss = rule.split("-")
+    (ss(0).toDouble to ss(1).toDouble by ss(2).toDouble).toList
+  }.distinct
+
+  // nested flatMap smell like Monads.
+  val simulations = schedulers.flatMap(scheduler => sizePredictors.flatMap(
+    sizePredictor => sizes.flatMap(size => policies.map(policy =>
+    new Simulation(this, getAndIncrement, Utils.toSchedulers(scheduler),
+      Utils.toSizePredictor(sizePredictor), size, Utils.toPolicy(policy), true))
+  )))
 
   val validSimulations = mutable.Map[Simulation, Boolean]()
   simulations.foreach(validSimulations(_) = true)
 
-  logStart
+  logStart(policies)
 
   /** Simulates a new job */
   private[scheduler] def submitJob(job: ActiveJob): Unit = {
@@ -89,18 +102,6 @@ private[scheduler] class Simulator (
       }
     }
     jobs += job
-  }
-
-  private def choosePolicy[C <: SizeAble](policy: String): List[Policy[C]] = {
-    policy match {
-      case "LRU" => List(new LRU[C])
-      case "LFU" => List(new LFU[C])
-      case "FIFO" => List(new FIFO[C])
-      case "Belady" => List(new Belady[C])
-      case "LRC" => List(new LRC[C])
-      case "All" => List(new LRU[C], new LFU[C], new FIFO[C], new Belady[C], new LRC[C])
-      case "NONE" => List()
-    }
   }
 
   /**
@@ -147,13 +148,22 @@ private[scheduler] class Simulator (
     shuffleIdToMapStage.get(shuffleDep.shuffleId).get
   }
 
-  private[scheduler] def logStart: Unit = {
+  private[scheduler] def logStart(policies: Array[String]): Unit = {
     log("{")
     log("  \"appName\" : " + toJsonString(appName) + ",")
-    log("  \"scheduler\" : " + "\"add scheduler\",")
+    log("  \"trying schedulers\" : " + toJsonString(schedulerConf) + ",")
+    log("  \"trying size predictors\" : " + toJsonString(sizePredictorConf) + ",")
     log("  \"trying sizes\" : %s".format(sizes.mkString("[", ",", "],")))
-    log("  \"trying policies\" : " + toJsonString(policyConf) + ",")
+    log("  \"trying policies\" : %s".format(policies.map(toJsonString).mkString("[", ",", "],")))
     log("  \"trying total simulations\" : " + simulations.length + ",")
+    log("  \"simulations conf\" : {")
+    simulations.foreach { sim =>
+      sim.logStart
+      if(sim.id != simulationId - 1) {
+        log("    ,")
+      }
+    }
+    log("  },")
     log("  \"simulations\" : [")
   }
 

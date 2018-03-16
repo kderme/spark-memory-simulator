@@ -23,6 +23,8 @@ import org.apache.spark.scheduler.Stage
 
 private[simulator] class SparkScheduler extends Scheduler {
 
+  def name: String = "SparkScheduler"
+
   val waitingStages = new HashSet[Stage]
   var ready = new MutableList[Stage]
 
