@@ -17,7 +17,10 @@
 
 package org.apache.spark.scheduler.simulator.policies
 
+import java.util.LinkedHashMap
+
 import scala.collection.mutable.{ArrayBuffer, HashSet, LinkedHashMap, MutableList}
+import scala.collection.mutable
 import scala.language.existentials
 
 import org.apache.spark.internal.Logging
@@ -27,11 +30,35 @@ import org.apache.spark.scheduler.simulator._
 import org.apache.spark.scheduler.simulator.scheduler.{DFSScheduler, SparkScheduler}
 import org.apache.spark.scheduler.simulator.sizePredictors.DummySizePredictor
 
-class Belady (isBelady: Boolean = true) extends Policy with Logging {
+class Belady (isBelady: Boolean = true, isLRU: Boolean = false) extends Policy with Logging {
 
-  val name = if (isBelady) "Belady" else "NotBelady"
+  val name =
+  if (isBelady) {
+    "Belady"
+  }
+  else if (isLRU) {
+    "BeladyLRU"
+  }
+  else {
+    "RandomNeeded"
+  }
 
-  private val entries: LinkedHashMap[RDD[_], Content] = new LinkedHashMap[RDD[_], Content]
+  private val entries =
+    new  scala.collection.mutable.LinkedHashMap[RDD[_], Content]
+
+  /** scala.mutable.LinkedHashMap is FIFO. Here we simulate LRU */
+  private[simulator] def get(rdd: RDD[_]): Option[Content] = {
+    entries.remove(rdd) match {
+      case None => None
+      case Some(c) =>
+        entries.put(rdd, c)
+        Some(c)
+    }
+    // for {
+    //   c <- entries.remove(rdd)
+    //   _ <- entries.put(rdd, c)
+    // } yield c
+  }
 
   /** This queue has the order of the requests */
   private[simulator] var sequence: MutableList[RDD[_]] = null
@@ -45,7 +72,7 @@ class Belady (isBelady: Boolean = true) extends Policy with Logging {
     simulaption.simulate(job, false)
     sequence = simulaption.getSequence
 
-    logWarning("  Predicted Sequence = " + sequence.map(_.id))
+    simulation.log("  Predicted Sequence = " + sequence.map(_.id))
   }
 
   override private[simulator] def printEntries: String = {
@@ -60,7 +87,7 @@ class Belady (isBelady: Boolean = true) extends Policy with Logging {
     if (!sequence.isEmpty) {
       sequence = sequence.tail
     }
-    entries.get(rdd)
+    get(rdd)
   }
 
   /** Insert a block */
@@ -70,9 +97,22 @@ class Belady (isBelady: Boolean = true) extends Policy with Logging {
   }
 
   private def randomizeMaybe(list: MutableList[RDD[_]]): MutableList[RDD[_]] = {
-    if (!isBelady) scala.util.Random.shuffle(list)
-    else {
+    if (isBelady) {
       list
+    }
+    else if (isLRU) {
+      val set = list.toSet
+      val ls = new mutable.MutableList[RDD[_]]
+      val it = entries.keysIterator
+      for (rdd <- it) {
+        if (set.contains(rdd)) {
+          ls += rdd
+        }
+      }
+      ls
+    }
+    else {
+      scala.util.Random.shuffle(list)
     }
   }
 
@@ -136,6 +176,7 @@ class Belady (isBelady: Boolean = true) extends Policy with Logging {
         sequence = a ++ MutableList(b.head) ++ createSubsequence(rdd) ++ b.tail
       }
     }
+    simulation.log("  Predicted Sequence = " + sequence.map(_.id))
   }
 
   private def createSubsequence(rdd: RDD[_]): MutableList[RDD[_]] = {

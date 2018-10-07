@@ -25,6 +25,7 @@ import org.apache.spark.scheduler.simulator.policies._
 
 private[scheduler]
 class MemoryManager(
+   simulation: Simulation,
    private[simulator] var maxMemory: Double,
    private[simulator] val policy: Policy
  ) extends Logging {
@@ -38,7 +39,7 @@ class MemoryManager(
 
   private[simulator] def get(rdd: RDD[_], lastCachedRDD: Option[RDD[_]]): Option[Content] = {
 //    logWarning("Get " + rdd.id + " (" + memoryUsed + ")")
-    logWarning("|| Memory: " + id + " || " + "    GET " + rdd.id + " " + rdd.simInfos.get(id))
+    simulation.log("    GET " + rdd.id + " " + rdd.simInfos.get(id))
     sequence += rdd
     policy.get(rdd, lastCachedRDD)
   }
@@ -46,8 +47,8 @@ class MemoryManager(
   private[simulator] def put(rdd: RDD[_], content: Content,
                              lastCachedRDD: Option[RDD[_]]): Boolean = {
     val size = content.getSize
+    simulation.log("    PUT " + rdd.id + " " + rdd.simInfos.get(id))
     printMemoryState()
-    logWarning("|| Memory: " + id + " || " + "    PUT " + rdd.id + " " + rdd.simInfos.get(id))
     if (size > maxMemory - memoryUsed) {
       logWarning("not fit")
       if (oversized(size)) {
@@ -87,8 +88,8 @@ class MemoryManager(
   }
 
   private def printMemoryState(): Unit = {
-    logWarning("|| Memory: " + id + " || " + "      STATE = " + memoryUsed + "/" + maxMemory)
-    logWarning("|| Memory: " + id + " || " + "      ENTRIES = " + printEntries)
+    simulation.log("      STATE = " + memoryUsed + "/" + maxMemory)
+    simulation.log("      ENTRIES = " + printEntries)
   }
 }
 

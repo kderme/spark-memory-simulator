@@ -19,7 +19,7 @@
 package org.apache.spark.scheduler.simulator
 
 import org.apache.spark.scheduler.simulator.policies._
-import org.apache.spark.scheduler.simulator.scheduler.{DFSScheduler, Scheduler}
+import org.apache.spark.scheduler.simulator.scheduler.{DFSScheduler, Scheduler, SparkScheduler}
 import org.apache.spark.scheduler.simulator.sizePredictors.{EasyPredictor, FineGrained, SizePredictor}
 
 private[simulator] object Utils {
@@ -30,14 +30,18 @@ private[simulator] object Utils {
       case "FIFO" => new FIFO
       case "Belady" => new Belady
       case "LRC" => new LRC
-      case "NotBelady" => new Belady(false)
+      case "RandomNeeded" => new Belady(false, false)
+      case "BeladyLRU" => new Belady(false, true)
       case "Random" => new Random
       case "Cost1" => new Cost1
     }
   }
 
   private[simulator] def toSchedulers(scheduler: String): Scheduler = {
-    new DFSScheduler
+    scheduler match {
+      case "dfs" => new DFSScheduler
+      case "spark" => new SparkScheduler
+    }
   }
 
   private[simulator] def toSizePredictor(predictor: String): SizePredictor = {

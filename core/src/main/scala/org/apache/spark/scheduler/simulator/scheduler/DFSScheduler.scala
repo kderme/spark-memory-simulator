@@ -24,7 +24,7 @@ import org.apache.spark.scheduler.Stage
 
 class DFSScheduler extends Scheduler with Logging {
 
-  def name: String = "DFSScheduler"
+  def name: String = "dfs"
 
   val finished = new mutable.HashSet[Stage]
 

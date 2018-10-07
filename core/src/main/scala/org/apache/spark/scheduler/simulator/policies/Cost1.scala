@@ -29,6 +29,20 @@ class Cost1 extends Policy with Logging {
 
   private val entries: LinkedHashMap[RDD[_], Content] = new LinkedHashMap[RDD[_], Content]
 
+  /** scala.mutable.LinkedHashMap is FIFO. Here we simulate LRU */
+  private[simulator] def get(rdd: RDD[_]): Option[Content] = {
+    entries.remove(rdd) match {
+      case None => None
+      case Some(c) =>
+        entries.put(rdd, c)
+        Some(c)
+    }
+    // for {
+    //   c <- entries.remove(rdd)
+    //   _ <- entries.put(rdd, c)
+    // } yield c
+  }
+
   /** This queue has the order of the requests */
   private[simulator] var sequence: MutableList[RDD[_]] = null
 
@@ -41,7 +55,7 @@ class Cost1 extends Policy with Logging {
     simulaption.simulate(job, false)
     sequence = simulaption.getSequence
 
-    logWarning("  Predicted Sequence = " + sequence.map(_.id))
+    simulation.log("  Predicted Sequence = " + sequence.map(_.id))
   }
 
   override private[simulator] def printEntries: String = {
@@ -56,7 +70,7 @@ class Cost1 extends Policy with Logging {
     if (!sequence.isEmpty) {
       sequence = sequence.tail
     }
-    entries.get(rdd)
+    get(rdd)
   }
 
   /** Insert a block */
@@ -72,13 +86,15 @@ class Cost1 extends Policy with Logging {
   }
 
   private def orderByCosts(list: MutableList[RDD[_]]): MutableList[RDD[_]] = {
-    list.map(rdd => (rdd, cost(rdd))).sortBy(_._2).map(_._1)
+    val costs = list.map(rdd => (rdd, cost(rdd))).sortBy(_._2).reverse
+    simulation.log("      Costs = " + costs.map({case (q, w) => (q.id, w)}) + "")
+    costs.map(_._1)
   }
 
   override private[simulator] def evictBlocksToFreeSpace(target: Double) = {
     // stale includes things that are in memory but not in future sequence.
     val stale = entries.keySet.filter(!sequence.contains(_)).to[MutableList]
-    // willBeUsed includes things that are in memory, in the order that they will be used.
+    // willBeUsed includes things that are in memory, sorted by costs
     val willBeUsed = orderByCosts(sequence.filter(entries.contains(_)))
     val unique = new MutableList[RDD[_]]()
     willBeUsed.foreach { rdd =>
@@ -86,7 +102,7 @@ class Cost1 extends Policy with Logging {
         unique += rdd
       }
     }
-    // the following reverse is the idea of Belady.
+    // reverse-reversed.
     val ordered = stale ++ unique.reverse
     assert(stale.intersect(willBeUsed).isEmpty,
       "Stale and willBeUsed Lists should Not intersect!")
@@ -135,6 +151,7 @@ class Cost1 extends Policy with Logging {
         sequence = a ++ MutableList(b.head) ++ createSubsequence(rdd) ++ b.tail
       }
     }
+    simulation.log("  Predicted Sequence = " + sequence.map(_.id))
   }
 
   private def createSubsequence(rdd: RDD[_]): MutableList[RDD[_]] = {

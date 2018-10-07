@@ -10,9 +10,10 @@ example_set=false
 output_path_set=false
 policy_set=false
 output_path=""
-all_predictors_conf="--conf spark.simulator.sizepredictor=fine-1-8_fine-2-4_fine-4-2_fine-8-1"
-flags="--master=spark://kostas-X580VD:7077 --conf spark.simulator.size=8-120-8 "
-graphs_output_fold="by1_policies-7"
+all_predictors_conf="--conf spark.simulator.sizepredictor=easy"
+sch_conf="--conf spark.simulator.scheduler=dfs_spark"
+flags="--master=spark://kostas-X580VD:7077 --conf spark.simulator.size=16-16-1 --conf spark.simulator.sizepredictor=easy $sch_conf"
+graphs_output_fold="schedulers"
 log=true
 draw=false
 
@@ -131,7 +132,11 @@ function run {
   ## if $1 is mlib.xyz then ex is mlib/xyz
   echo "--------------------------- $1 -------------------------------------"
   path=$(eval $"echo $1 | tr . /")
-  cmd="$SPARK_HOME/bin/run-example $flags $1"
+  line=$( cat bin/usage.txt | grep $1)
+  args=${line#*=}
+  echo $line
+  echo $args
+  cmd="$SPARK_HOME/bin/run-example $flags $1 $args"
   log "Running: $cmd"
   if [ $ask_before_running = true ]; then        
     read -p "[run-examples]: Skip? " -n 1 -r

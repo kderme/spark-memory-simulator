@@ -37,7 +37,7 @@ private[simulator] class Simulation (
   private[simulator] val policy: Policy,
   real: Boolean) extends Logging {
 
-  val memory: MemoryManager = new MemoryManager(size, policy)
+  val memory: MemoryManager = new MemoryManager(this, size, policy)
 
   memory.policy.simulator = simulator
   memory.policy.simulation = this
@@ -71,11 +71,15 @@ private[simulator] class Simulation (
   }
 
   /** call setId before simulate. */
-  private[scheduler] def simulate(jobs: MutableList[ActiveJob], log: Boolean): Any = {
+  private[scheduler] def simulate(jobs: MutableList[ActiveJob], shouldLog: Boolean): Any = {
     val lastJob = jobs.last
     jobs.foreach { job =>
       simulate(job, job == lastJob)
     }
+  }
+
+  def log(str: String): Unit = {
+    if (real) logWarning("|| Memory: " + id + " || " + str)
   }
 
   private[scheduler] def logStart: Unit = {
@@ -90,7 +94,7 @@ private[simulator] class Simulation (
     }
   }
 
-  private[scheduler] def simulate(job: ActiveJob, log: Boolean = true): Boolean = {
+  private[scheduler] def simulate(job: ActiveJob, shouldLog: Boolean = true): Boolean = {
     if (!valid) {
       throw new SimulationException("Called invalidated simulation")
     }
@@ -103,7 +107,7 @@ private[simulator] class Simulation (
     }
 
     if (real) {
-      logWarning("|| Memory: " + id + " ||JOB = " + job.jobId)
+      log("JOB = " + job.jobId)
       simulator.log("  {")
       simulator.log("    \"simulation id\" : " + id + ",")
       simulator.log("    \"jobid\" : " + job.jobId + ",")
@@ -217,7 +221,7 @@ private[simulator] class Simulation (
    * This is like RDD.iterator.
    */
   private def iterator(rdd: RDD[_], threads: Int, lastCachedRDD: Option[RDD[_]]) = {
-    logWarning("|| Memory: " + id + " ||  iterator = " + rdd.id)
+    // log("  iterator = " + rdd.id)
     if (rdd.getStorageLevel != StorageLevel.NONE) {
       getOrCompute(rdd, threads, lastCachedRDD)
     } else {
@@ -250,8 +254,7 @@ private[simulator] class Simulation (
         logWarning("  skipping stage " + stage.id +" (rdd " + stage.rdd.id + " is completed)")
     }
     else {
-      logWarning("|| Memory: " + id + " ||  STAGE = " + stage.id)
-      logWarning("|| Memory: " + id + " ||  STAGE RDD = " + stage.rdd.id)
+      log("  STAGE = " + stage.id + " (STAGE RDD = " + stage.rdd.id + ")")
       runTask(stage)
     }
   }

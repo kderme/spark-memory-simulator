@@ -59,7 +59,8 @@ private[scheduler] class Simulator (
 
   val policies: Array[String] = policyConf.split("_").flatMap{
     _ match {
-      case "All" => List("LRU", "LFU", "FIFO", "Belady", "NotBelady", "LRC", "Random")
+      case "NONE" => List()
+      case "All" => List("LRU", "LFU", "FIFO", "Belady", "RandomNeeded", "LRC", "Random")
       case c => List(c)
     }
   }.distinct
@@ -181,5 +182,5 @@ private[scheduler] class Simulator (
   }
 
   private[simulator] def toJsonString (str: String) =
-    "\"" + str + "\""
+    "\"" + str.split(" ")(0) + "\""
 }

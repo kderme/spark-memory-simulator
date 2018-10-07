@@ -152,7 +152,7 @@ class DAGScheduler(
   private[scheduler] val shuffleIdToMapStage = new HashMap[Int, ShuffleMapStage]
   private[scheduler] val simulator =
     new Simulator(shuffleIdToMapStage, sc.getConf.get("spark.app.name"),
-      sc.getConf.get("spark.simulator.scheduler", "DFSScheduler"),
+      sc.getConf.get("spark.simulator.scheduler", "dfs"),
       sc.getConf.get("spark.simulator.sizepredictor", "easy"),
       sc.getConf.get("spark.simulator.policy", "NONE"),
       sc.getConf.get("spark.simulator.size", "2-24-2"))
@@ -1044,7 +1044,7 @@ class DAGScheduler(
     val jobSubmissionTime = clock.getTimeMillis()
     jobIdToActiveJob(jobId) = job
     activeJobs += job
-    finalStage.addActiveJob(job)
+    finalStage.addActiveJob(job = job)
     val stageIds = jobIdToStageIds(jobId).toArray
     val stageInfos = stageIds.flatMap(id => stageIdToStage.get(id).map(_.latestInfo))
     listenerBus.post(

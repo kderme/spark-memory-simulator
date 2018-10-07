@@ -131,7 +131,7 @@ def toGraphs2(dict):
       dict1 = dict[app][scheduler][predictor]
       policies = dict1.keys()
       for metric in Metrics:
-    ##    plt.gca().set_color_cycle(['red', 'green', 'blue', 'yellow'])
+#        plt.gca().set_color_cycle(['red', 'green', 'yellow', 'blue'])
         for policy in policies:
           tuples = dict1[policy][metric]
           x1, x2 = unzip(tuples)
@@ -148,6 +148,7 @@ def toGraphs2(dict):
         plt.clf()
 
       metric = 'hit-ratio'
+#      plt.gca().set_color_cycle(['red', 'green', 'yellow', 'blue'])
       for policy in policies:
         x,x2 = unzip(dict1[policy]['hits'])
         y1,y2 = unzip(dict1[policy]['misses'])
